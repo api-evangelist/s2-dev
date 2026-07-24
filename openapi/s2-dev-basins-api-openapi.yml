@@ -1,0 +1,616 @@
+openapi: 3.1.0
+info:
+  title: S2, the durable streams access-tokens basins API
+  description: Streams as a cloud storage primitive.
+  termsOfService: https://s2.dev/terms
+  contact:
+    email: support@s2.dev
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://a.s2.dev/v1
+security:
+- access_token: []
+tags:
+- name: basins
+  description: Manage basins
+paths:
+  /basins:
+    get:
+      tags:
+      - basins
+      summary: List basins.
+      operationId: list_basins
+      parameters:
+      - name: prefix
+        in: query
+        description: Filter to basins whose names begin with this prefix.
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: start_after
+        in: query
+        description: Filter to basins whose names lexicographically start after this string.
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: limit
+        in: query
+        description: Number of results, up to a maximum of 1000.
+        required: false
+        schema:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBasinsResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+    post:
+      tags:
+      - basins
+      summary: Create a basin.
+      operationId: create_basin
+      parameters:
+      - name: s2-request-token
+        in: header
+        description: Client-specified request token for idempotent retries.
+        required: false
+        schema:
+          $ref: '#/components/schemas/RequestToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBasinRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasinInfo'
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasinInfo'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+  /basins/{basin}:
+    get:
+      tags:
+      - basins
+      summary: Get basin configuration.
+      operationId: get_basin_config
+      parameters:
+      - name: basin
+        in: path
+        description: Basin name.
+        required: true
+        schema:
+          $ref: '#/components/schemas/BasinNameStr'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasinConfig'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+    put:
+      tags:
+      - basins
+      summary: Ensure a basin.
+      operationId: ensure_basin
+      parameters:
+      - name: basin
+        in: path
+        description: Basin name.
+        required: true
+        schema:
+          $ref: '#/components/schemas/BasinNameStr'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: 'null'
+              - $ref: '#/components/schemas/EnsureBasinRequest'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasinInfo'
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasinInfo'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+    delete:
+      tags:
+      - basins
+      summary: Delete a basin.
+      operationId: delete_basin
+      parameters:
+      - name: basin
+        in: path
+        description: Basin name.
+        required: true
+        schema:
+          $ref: '#/components/schemas/BasinNameStr'
+      responses:
+        '202':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+    patch:
+      tags:
+      - basins
+      summary: Reconfigure a basin.
+      operationId: reconfigure_basin
+      parameters:
+      - name: basin
+        in: path
+        description: Basin name.
+        required: true
+        schema:
+          $ref: '#/components/schemas/BasinNameStr'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasinReconfiguration'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasinConfig'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+components:
+  schemas:
+    EnsureBasinRequest:
+      type: object
+      properties:
+        config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/BasinConfig'
+            description: Basin configuration.
+        location:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/LocationName'
+            description: 'Basin location.
+
+              If omitted when creating, uses the default location for the account.
+
+              This cannot be changed.'
+    TimestampingReconfiguration:
+      type: object
+      properties:
+        mode:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingMode'
+            description: Timestamping mode for appends that influences how timestamps are handled.
+        uncapped:
+          type:
+          - boolean
+          - 'null'
+          description: Allow client-specified timestamps to exceed the arrival time.
+    BasinInfo:
+      type: object
+      required:
+      - name
+      - created_at
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: Creation time in RFC 3339 format.
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Deletion time in RFC 3339 format, if the basin is being deleted.
+        location:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/LocationName'
+            description: Basin location.
+        name:
+          $ref: '#/components/schemas/BasinNameStr'
+          description: Basin name.
+    RequestToken:
+      type: string
+      maxLength: 36
+    ListBasinsResponse:
+      type: object
+      required:
+      - basins
+      - has_more
+      properties:
+        basins:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasinInfo'
+          description: Matching basins.
+          maxItems: 1000
+        has_more:
+          type: boolean
+          description: Indicates that there are more basins that match the criteria.
+    StorageClass:
+      type: string
+      enum:
+      - standard
+      - express
+    LocationName:
+      type: string
+      maxLength: 64
+      minLength: 1
+    TimestampingConfig:
+      type: object
+      properties:
+        mode:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingMode'
+            description: Timestamping mode for appends that influences how timestamps are handled.
+        uncapped:
+          type:
+          - boolean
+          - 'null'
+          description: 'Allow client-specified timestamps to exceed the arrival time.
+
+            If this is `false` or not set, client timestamps will be capped at the arrival time.'
+    BasinReconfiguration:
+      type: object
+      properties:
+        create_stream_on_append:
+          type:
+          - boolean
+          - 'null'
+          description: Create a stream on append.
+        create_stream_on_read:
+          type:
+          - boolean
+          - 'null'
+          description: Create a stream on read.
+        default_stream_config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StreamReconfiguration'
+            description: Basin configuration.
+        stream_cipher:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/EncryptionAlgorithm'
+            description: Encryption algorithm to apply to newly created streams in the basin.
+    InfiniteRetention:
+      type: object
+    BasinConfig:
+      type: object
+      properties:
+        create_stream_on_append:
+          type: boolean
+          description: Create stream on append if it doesn't exist, using the default stream configuration.
+          default: false
+        create_stream_on_read:
+          type: boolean
+          description: Create stream on read if it doesn't exist, using the default stream configuration.
+          default: false
+        default_stream_config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StreamConfig'
+            description: Default stream configuration.
+        stream_cipher:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/EncryptionAlgorithm'
+            description: Encryption algorithm to apply to newly created streams in the basin.
+    DeleteOnEmptyReconfiguration:
+      type: object
+      properties:
+        min_age_secs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Minimum age in seconds before an empty stream can be deleted.
+
+            Set to 0 to disable delete-on-empty (don''t delete automatically).'
+          minimum: 0
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    CreateBasinRequest:
+      type: object
+      required:
+      - basin
+      properties:
+        basin:
+          $ref: '#/components/schemas/BasinNameStr'
+          description: 'Basin name which must be globally unique.
+
+            It can be between 8 and 48 bytes in length, and comprise lowercase letters, numbers and hyphens.
+
+            It cannot begin or end with a hyphen.'
+        config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/BasinConfig'
+            description: Basin configuration.
+        location:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/LocationName'
+            description: 'Basin location.
+
+              If omitted when creating, uses the default location for the account.'
+    StreamReconfiguration:
+      type: object
+      properties:
+        delete_on_empty:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DeleteOnEmptyReconfiguration'
+            description: Delete-on-empty configuration.
+        retention_policy:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/RetentionPolicy'
+            description: 'Retention policy for the stream.
+
+              If unspecified, the default is to retain records for 7 days.'
+        storage_class:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StorageClass'
+            description: Storage class for recent writes.
+        timestamping:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingReconfiguration'
+            description: Timestamping behavior.
+    EncryptionAlgorithm:
+      type: string
+      enum:
+      - aegis-256
+      - aes-256-gcm
+    StreamConfig:
+      type: object
+      properties:
+        delete_on_empty:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DeleteOnEmptyConfig'
+            description: Delete-on-empty configuration.
+        retention_policy:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/RetentionPolicy'
+            description: 'Retention policy for the stream.
+
+              If unspecified, the default is to retain records for 7 days.'
+        storage_class:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StorageClass'
+            description: Storage class for recent writes.
+        timestamping:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingConfig'
+            description: Timestamping behavior.
+    TimestampingMode:
+      type: string
+      enum:
+      - client-prefer
+      - client-require
+      - arrival
+    DeleteOnEmptyConfig:
+      type: object
+      properties:
+        min_age_secs:
+          type: integer
+          format: int64
+          description: 'Minimum age in seconds before an empty stream can be deleted.
+
+            Set to 0 (default) to disable delete-on-empty (don''t delete automatically).'
+          minimum: 0
+    RetentionPolicy:
+      oneOf:
+      - type: object
+        description: 'Age in seconds for automatic trimming of records older than this threshold.
+
+          This must be set to a value greater than 0 seconds.'
+        required:
+        - age
+        properties:
+          age:
+            type: integer
+            format: int64
+            description: 'Age in seconds for automatic trimming of records older than this threshold.
+
+              This must be set to a value greater than 0 seconds.'
+            minimum: 0
+      - type: object
+        description: Retain records unless explicitly trimmed.
+        required:
+        - infinite
+        properties:
+          infinite:
+            $ref: '#/components/schemas/InfiniteRetention'
+            description: Retain records unless explicitly trimmed.
+    BasinNameStr:
+      type: string
+      maxLength: 48
+      minLength: 8
+  securitySchemes:
+    access_token:
+      type: http
+      scheme: bearer
+      description: Bearer authentication header of the form `Bearer <token>`, where `<token>` is your access token.

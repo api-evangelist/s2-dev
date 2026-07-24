@@ -1,0 +1,580 @@
+openapi: 3.1.0
+info:
+  title: S2, the durable access-tokens streams API
+  description: Streams as a cloud storage primitive.
+  termsOfService: https://s2.dev/terms
+  contact:
+    email: support@s2.dev
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://a.s2.dev/v1
+security:
+- access_token: []
+tags:
+- name: streams
+  description: Manage streams
+paths:
+  /streams:
+    servers:
+    - url: https://{basin}.b.s2.dev/v1
+      description: Endpoint for the basin
+      variables:
+        basin:
+          default: ''
+          description: Basin name
+    get:
+      tags:
+      - streams
+      summary: List streams.
+      operationId: list_streams
+      parameters:
+      - name: prefix
+        in: query
+        description: Filter to streams whose names begin with this prefix.
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: start_after
+        in: query
+        description: Filter to streams whose names lexicographically start after this string.
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: limit
+        in: query
+        description: Number of results, up to a maximum of 1000.
+        required: false
+        schema:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStreamsResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+    post:
+      tags:
+      - streams
+      summary: Create a stream.
+      operationId: create_stream
+      parameters:
+      - name: s2-request-token
+        in: header
+        description: Client-specified request token for idempotent retries.
+        required: false
+        schema:
+          $ref: '#/components/schemas/RequestToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStreamRequest'
+        required: true
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamInfo'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+  /streams/{stream}:
+    servers:
+    - url: https://{basin}.b.s2.dev/v1
+      description: Endpoint for the basin
+      variables:
+        basin:
+          default: ''
+          description: Basin name
+    get:
+      tags:
+      - streams
+      summary: Get stream configuration.
+      operationId: get_stream_config
+      parameters:
+      - name: stream
+        in: path
+        description: Stream name.
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamNameStr'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamConfig'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+    put:
+      tags:
+      - streams
+      summary: Ensure a stream.
+      operationId: ensure_stream
+      parameters:
+      - name: stream
+        in: path
+        description: Stream name.
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamNameStr'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: 'null'
+              - $ref: '#/components/schemas/StreamConfig'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamInfo'
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamInfo'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+    delete:
+      tags:
+      - streams
+      summary: Delete a stream.
+      operationId: delete_stream
+      parameters:
+      - name: stream
+        in: path
+        description: Stream name.
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamNameStr'
+      responses:
+        '202':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+    patch:
+      tags:
+      - streams
+      summary: Reconfigure a stream.
+      operationId: reconfigure_stream
+      parameters:
+      - name: stream
+        in: path
+        description: Stream name.
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamNameStr'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamReconfiguration'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamConfig'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+components:
+  schemas:
+    StreamReconfiguration:
+      type: object
+      properties:
+        delete_on_empty:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DeleteOnEmptyReconfiguration'
+            description: Delete-on-empty configuration.
+        retention_policy:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/RetentionPolicy'
+            description: 'Retention policy for the stream.
+
+              If unspecified, the default is to retain records for 7 days.'
+        storage_class:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StorageClass'
+            description: Storage class for recent writes.
+        timestamping:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingReconfiguration'
+            description: Timestamping behavior.
+    CreateStreamRequest:
+      type: object
+      required:
+      - stream
+      properties:
+        config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StreamConfig'
+            description: Stream configuration.
+        stream:
+          $ref: '#/components/schemas/StreamNameStr'
+          description: 'Stream name that is unique to the basin.
+
+            It can be between 1 and 512 bytes in length.'
+    EncryptionAlgorithm:
+      type: string
+      enum:
+      - aegis-256
+      - aes-256-gcm
+    StreamConfig:
+      type: object
+      properties:
+        delete_on_empty:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DeleteOnEmptyConfig'
+            description: Delete-on-empty configuration.
+        retention_policy:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/RetentionPolicy'
+            description: 'Retention policy for the stream.
+
+              If unspecified, the default is to retain records for 7 days.'
+        storage_class:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StorageClass'
+            description: Storage class for recent writes.
+        timestamping:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingConfig'
+            description: Timestamping behavior.
+    InfiniteRetention:
+      type: object
+    DeleteOnEmptyConfig:
+      type: object
+      properties:
+        min_age_secs:
+          type: integer
+          format: int64
+          description: 'Minimum age in seconds before an empty stream can be deleted.
+
+            Set to 0 (default) to disable delete-on-empty (don''t delete automatically).'
+          minimum: 0
+    StorageClass:
+      type: string
+      enum:
+      - standard
+      - express
+    RetentionPolicy:
+      oneOf:
+      - type: object
+        description: 'Age in seconds for automatic trimming of records older than this threshold.
+
+          This must be set to a value greater than 0 seconds.'
+        required:
+        - age
+        properties:
+          age:
+            type: integer
+            format: int64
+            description: 'Age in seconds for automatic trimming of records older than this threshold.
+
+              This must be set to a value greater than 0 seconds.'
+            minimum: 0
+      - type: object
+        description: Retain records unless explicitly trimmed.
+        required:
+        - infinite
+        properties:
+          infinite:
+            $ref: '#/components/schemas/InfiniteRetention'
+            description: Retain records unless explicitly trimmed.
+    TimestampingMode:
+      type: string
+      enum:
+      - client-prefer
+      - client-require
+      - arrival
+    DeleteOnEmptyReconfiguration:
+      type: object
+      properties:
+        min_age_secs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Minimum age in seconds before an empty stream can be deleted.
+
+            Set to 0 to disable delete-on-empty (don''t delete automatically).'
+          minimum: 0
+    ListStreamsResponse:
+      type: object
+      required:
+      - streams
+      - has_more
+      properties:
+        has_more:
+          type: boolean
+          description: Indicates that there are more results that match the criteria.
+        streams:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamInfo'
+          description: Matching streams.
+          maxItems: 1000
+    TimestampingReconfiguration:
+      type: object
+      properties:
+        mode:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingMode'
+            description: Timestamping mode for appends that influences how timestamps are handled.
+        uncapped:
+          type:
+          - boolean
+          - 'null'
+          description: Allow client-specified timestamps to exceed the arrival time.
+    TimestampingConfig:
+      type: object
+      properties:
+        mode:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingMode'
+            description: Timestamping mode for appends that influences how timestamps are handled.
+        uncapped:
+          type:
+          - boolean
+          - 'null'
+          description: 'Allow client-specified timestamps to exceed the arrival time.
+
+            If this is `false` or not set, client timestamps will be capped at the arrival time.'
+    StreamNameStr:
+      type: string
+      maxLength: 512
+      minLength: 1
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    StreamInfo:
+      type: object
+      required:
+      - name
+      - created_at
+      properties:
+        cipher:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/EncryptionAlgorithm'
+            description: Encryption algorithm for this stream, if encryption is enabled.
+        created_at:
+          type: string
+          format: date-time
+          description: Creation time in RFC 3339 format.
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Deletion time in RFC 3339 format, if the stream is being deleted.
+        name:
+          $ref: '#/components/schemas/StreamNameStr'
+          description: Stream name.
+    RequestToken:
+      type: string
+      maxLength: 36
+  securitySchemes:
+    access_token:
+      type: http
+      scheme: bearer
+      description: Bearer authentication header of the form `Bearer <token>`, where `<token>` is your access token.

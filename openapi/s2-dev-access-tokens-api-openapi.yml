@@ -1,0 +1,359 @@
+openapi: 3.1.0
+info:
+  title: S2, the durable streams access-tokens API
+  description: Streams as a cloud storage primitive.
+  termsOfService: https://s2.dev/terms
+  contact:
+    email: support@s2.dev
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://a.s2.dev/v1
+security:
+- access_token: []
+tags:
+- name: access-tokens
+  description: Manage access tokens
+paths:
+  /access-tokens:
+    get:
+      tags:
+      - access-tokens
+      summary: List access tokens.
+      operationId: list_access_tokens
+      parameters:
+      - name: prefix
+        in: query
+        description: Filter to access tokens whose IDs begin with this prefix.
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: start_after
+        in: query
+        description: Filter to access tokens whose IDs lexicographically start after this string.
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: limit
+        in: query
+        description: Number of results, up to a maximum of 1000.
+        required: false
+        schema:
+          type: integer
+          default: 1000
+          maximum: 1000
+          minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccessTokensResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+    post:
+      tags:
+      - access-tokens
+      summary: Issue a new access token.
+      operationId: issue_access_token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueAccessTokenRequest'
+        required: true
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueAccessTokenResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+  /access-tokens/{id}:
+    delete:
+      tags:
+      - access-tokens
+      summary: Revoke an access token.
+      operationId: revoke_access_token
+      parameters:
+      - name: id
+        in: path
+        description: Access token ID.
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccessTokenIdStr'
+      responses:
+        '204':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+components:
+  schemas:
+    ReadWritePermissions:
+      type: object
+      properties:
+        read:
+          type: boolean
+          description: Read permission.
+          default: false
+        write:
+          type: boolean
+          description: Write permission.
+          default: false
+    AccessTokenScope:
+      type: object
+      properties:
+        access_tokens:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ResourceSet'
+            description: Token IDs allowed.
+        basins:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ResourceSet'
+            description: Basin names allowed.
+        op_groups:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/PermittedOperationGroups'
+            description: Access permissions at operation group level.
+        ops:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Operation'
+          description: 'Operations allowed for the token.
+
+            A union of allowed operations and groups is used as an effective set of allowed operations.'
+        streams:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ResourceSet'
+            description: Stream names allowed.
+    ListAccessTokensResponse:
+      type: object
+      required:
+      - access_tokens
+      - has_more
+      properties:
+        access_tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessTokenInfo'
+          description: Matching access tokens.
+          maxItems: 1000
+        has_more:
+          type: boolean
+          description: Indicates that there are more access tokens that match the criteria.
+    IssueAccessTokenResponse:
+      type: object
+      required:
+      - access_token
+      properties:
+        access_token:
+          type: string
+          description: Created access token.
+    IssueAccessTokenRequest:
+      type: object
+      required:
+      - id
+      - scope
+      properties:
+        auto_prefix_streams:
+          type: boolean
+          description: 'Namespace streams based on the configured stream-level scope, which must be a prefix.
+
+            Stream name arguments will be automatically prefixed, and the prefix will be stripped when listing streams.'
+          default: false
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: 'Expiration time in RFC 3339 format.
+
+            If not set, the expiration will be set to that of the requestor''s token.'
+        id:
+          $ref: '#/components/schemas/AccessTokenIdStr'
+          description: 'Access token ID.
+
+            It must be unique to the account and between 1 and 96 bytes in length.'
+        scope:
+          $ref: '#/components/schemas/AccessTokenScope'
+          description: Access token scope.
+    Operation:
+      type: string
+      enum:
+      - list-basins
+      - create-basin
+      - delete-basin
+      - reconfigure-basin
+      - get-basin-config
+      - issue-access-token
+      - revoke-access-token
+      - list-access-tokens
+      - list-streams
+      - create-stream
+      - delete-stream
+      - get-stream-config
+      - reconfigure-stream
+      - check-tail
+      - append
+      - read
+      - trim
+      - fence
+      - account-metrics
+      - basin-metrics
+      - stream-metrics
+      - list-locations
+      - get-default-location
+      - set-default-location
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    ResourceSet:
+      oneOf:
+      - type: object
+        title: exact
+        description: 'Match only the resource with this exact name.
+
+          Use an empty string to match no resources.'
+        required:
+        - exact
+        properties:
+          exact:
+            type: string
+            description: 'Match only the resource with this exact name.
+
+              Use an empty string to match no resources.'
+      - type: object
+        title: prefix
+        description: 'Match all resources that start with this prefix.
+
+          Use an empty string to match all resource.'
+        required:
+        - prefix
+        properties:
+          prefix:
+            type: string
+            description: 'Match all resources that start with this prefix.
+
+              Use an empty string to match all resource.'
+    PermittedOperationGroups:
+      type: object
+      properties:
+        account:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ReadWritePermissions'
+            description: Account-level access permissions.
+        basin:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ReadWritePermissions'
+            description: Basin-level access permissions.
+        stream:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ReadWritePermissions'
+            description: Stream-level access permissions.
+    AccessTokenInfo:
+      type: object
+      required:
+      - id
+      - auto_prefix_streams
+      - scope
+      properties:
+        auto_prefix_streams:
+          type: boolean
+          description: Namespace streams based on the configured stream-level scope.
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Expiration time in RFC 3339 format.
+        id:
+          $ref: '#/components/schemas/AccessTokenIdStr'
+          description: Access token ID.
+        scope:
+          $ref: '#/components/schemas/AccessTokenScope'
+          description: Access token scope.
+    AccessTokenIdStr:
+      type: string
+      maxLength: 96
+      minLength: 1
+  securitySchemes:
+    access_token:
+      type: http
+      scheme: bearer
+      description: Bearer authentication header of the form `Bearer <token>`, where `<token>` is your access token.

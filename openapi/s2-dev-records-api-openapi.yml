@@ -1,0 +1,557 @@
+openapi: 3.1.0
+info:
+  title: S2, the durable streams access-tokens records API
+  description: Streams as a cloud storage primitive.
+  termsOfService: https://s2.dev/terms
+  contact:
+    email: support@s2.dev
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://a.s2.dev/v1
+security:
+- access_token: []
+tags:
+- name: records
+  description: Manage records
+paths:
+  /streams/{stream}/records:
+    servers:
+    - url: https://{basin}.b.s2.dev/v1
+      description: Endpoint for the basin
+      variables:
+        basin:
+          default: ''
+          description: Basin name
+    get:
+      tags:
+      - records
+      summary: Read records.
+      operationId: read
+      parameters:
+      - name: stream
+        in: path
+        description: Stream name.
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamNameStr'
+      - name: s2-format
+        in: header
+        description: 'Defines the interpretation of record data (header name, header value, and body) with the JSON content type.
+
+          Use `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.
+
+          Use `base64` for safe transmission with efficient storage of binary data.'
+        required: false
+        schema:
+          $ref: '#/components/schemas/Format'
+      - name: s2-encryption-key
+        in: header
+        description: 'Encryption key material for append and read operations.
+
+          Provide base64-encoded key when stream encryption is enabled.'
+        required: false
+        schema:
+          type: string
+      - name: seq_num
+        in: query
+        description: Start from a sequence number.
+        required: false
+        schema:
+          $ref: '#/components/schemas/u64'
+      - name: timestamp
+        in: query
+        description: Start from a timestamp.
+        required: false
+        schema:
+          $ref: '#/components/schemas/u64'
+      - name: tail_offset
+        in: query
+        description: Start from number of records before the next sequence number.
+        required: false
+        schema:
+          type: integer
+          format: int64
+          minimum: 0
+      - name: clamp
+        in: query
+        description: 'Start reading from the tail if the requested position is beyond it.
+
+          Otherwise, a `416 Range Not Satisfiable` response is returned.'
+        required: false
+        schema:
+          type: boolean
+      - name: count
+        in: query
+        description: 'Record count limit.
+
+          Non-streaming reads are capped by the default limit of 1000 records.'
+        required: false
+        schema:
+          type: integer
+          format: int64
+          minimum: 0
+      - name: bytes
+        in: query
+        description: 'Metered bytes limit.
+
+          Non-streaming reads are capped by the default limit of 1 MiB.'
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+      - name: until
+        in: query
+        description: Exclusive timestamp to read until.
+        required: false
+        schema:
+          $ref: '#/components/schemas/u64'
+      - name: wait
+        in: query
+        description: 'Duration in seconds to wait for new records.
+
+          The default duration is 0 if there is a bound on `count`, `bytes`, or `until`, and otherwise infinite.
+
+          Non-streaming reads are always bounded on `count` and `bytes`, so you can achieve long poll semantics by specifying a non-zero duration up to 60 seconds.
+
+          In the context of an SSE or S2S streaming read, the duration will bound how much time can elapse between records throughout the lifetime of the session.'
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadBatch'
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/ReadEvent'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '416':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TailResponse'
+    post:
+      tags:
+      - records
+      summary: Append records.
+      operationId: append
+      parameters:
+      - name: stream
+        in: path
+        description: Stream name.
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamNameStr'
+      - name: s2-format
+        in: header
+        description: 'Defines the interpretation of record data (header name, header value, and body) with the JSON content type.
+
+          Use `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.
+
+          Use `base64` for safe transmission with efficient storage of binary data.'
+        required: false
+        schema:
+          $ref: '#/components/schemas/Format'
+      - name: s2-encryption-key
+        in: header
+        description: 'Encryption key material for append and read operations.
+
+          Provide base64-encoded key when stream encryption is enabled.'
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppendInput'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppendAck'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '412':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppendConditionFailed'
+  /streams/{stream}/records/tail:
+    servers:
+    - url: https://{basin}.b.s2.dev/v1
+      description: Endpoint for the basin
+      variables:
+        basin:
+          default: ''
+          description: Basin name
+    get:
+      tags:
+      - records
+      summary: Check the tail.
+      operationId: check_tail
+      parameters:
+      - name: stream
+        in: path
+        description: Stream name.
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamNameStr'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TailResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '409':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+components:
+  schemas:
+    AppendInput:
+      type: object
+      description: Payload of an `append` request.
+      required:
+      - records
+      properties:
+        fencing_token:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/FencingToken'
+            description: Enforce a fencing token, which starts out as an empty string that can be overridden by a `fence` command record.
+        match_seq_num:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/u64'
+            description: Enforce that the sequence number assigned to the first record matches.
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppendRecord'
+          description: 'Batch of records to append atomically, which must contain at least one record, and no more than 1000.
+
+            The total size of a batch of records may not exceed 1 MiB of metered bytes.'
+    ReadEvent:
+      oneOf:
+      - type: object
+        title: batch
+        required:
+        - event
+        - data
+        - id
+        properties:
+          data:
+            $ref: '#/components/schemas/ReadBatch'
+          event:
+            type: string
+            enum:
+            - batch
+          id:
+            type: string
+            pattern: ^[0-9]+,[0-9]+,[0-9]+$
+      - type: object
+        title: error
+        required:
+        - event
+        - data
+        properties:
+          data:
+            type: string
+          event:
+            type: string
+            enum:
+            - error
+      - type: object
+        title: ping
+        required:
+        - event
+        - data
+        properties:
+          data:
+            $ref: '#/components/schemas/PingEventData'
+          event:
+            type: string
+            enum:
+            - ping
+    FencingToken:
+      type: string
+      maxLength: 36
+    PingEventData:
+      type: object
+      required:
+      - timestamp
+      - tail
+      properties:
+        tail:
+          $ref: '#/components/schemas/StreamPosition'
+          description: Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
+        timestamp:
+          type: integer
+          format: int64
+          description: Time the ping was emitted, as Unix epoch milliseconds.
+          minimum: 0
+    ReadBatch:
+      type: object
+      required:
+      - records
+      properties:
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/SequencedRecord'
+          description: 'Records that are durably sequenced on the stream, retrieved based on the requested criteria.
+
+            This can only be empty in response to a unary read (i.e. not SSE), if the request cannot be satisfied without violating an explicit bound (`count`, `bytes`, or `until`).'
+        tail:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StreamPosition'
+            description: 'Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
+
+              This will only be present when reading recent records.'
+    u64:
+      type: integer
+      format: int64
+      minimum: 0
+    AppendConditionFailed:
+      oneOf:
+      - type: object
+        title: fencing token
+        description: 'Fencing token did not match.
+
+          The expected fencing token is returned.'
+        required:
+        - fencing_token_mismatch
+        properties:
+          fencing_token_mismatch:
+            $ref: '#/components/schemas/FencingToken'
+            description: 'Fencing token did not match.
+
+              The expected fencing token is returned.'
+      - type: object
+        title: seq num
+        description: 'Sequence number did not match the tail of the stream.
+
+          The expected next sequence number is returned.'
+        required:
+        - seq_num_mismatch
+        properties:
+          seq_num_mismatch:
+            $ref: '#/components/schemas/u64'
+            description: 'Sequence number did not match the tail of the stream.
+
+              The expected next sequence number is returned.'
+      description: Aborted due to a failed condition.
+    Header:
+      type: array
+      items:
+        type: string
+      maxItems: 2
+      minItems: 2
+    AppendAck:
+      type: object
+      description: Success response to an `append` request.
+      required:
+      - start
+      - end
+      - tail
+      properties:
+        end:
+          $ref: '#/components/schemas/StreamPosition'
+          description: 'Sequence number of the last record that was appended `+ 1`, and timestamp of the last record that was appended.
+
+            The difference between `end.seq_num` and `start.seq_num` will be the number of records appended.'
+        start:
+          $ref: '#/components/schemas/StreamPosition'
+          description: Sequence number and timestamp of the first record that was appended.
+        tail:
+          $ref: '#/components/schemas/StreamPosition'
+          description: 'Sequence number that will be assigned to the next record on the stream, and timestamp of the last record on the stream.
+
+            This can be greater than the `end` position in case of concurrent appends.'
+    AppendRecord:
+      type: object
+      description: Record to be appended to a stream.
+      properties:
+        body:
+          type: string
+          description: Body of the record.
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Header'
+          description: Series of name-value pairs for this record.
+        timestamp:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/u64'
+            description: 'Timestamp for this record.
+
+              The service will always ensure monotonicity by adjusting it up if necessary to the maximum observed timestamp.
+
+              Refer to stream timestamping configuration for the finer semantics around whether a client-specified timestamp is required, and whether it will be capped at the arrival time.'
+    StreamPosition:
+      type: object
+      description: Position of a record in a stream.
+      required:
+      - seq_num
+      - timestamp
+      properties:
+        seq_num:
+          $ref: '#/components/schemas/u64'
+          description: Sequence number assigned by the service.
+        timestamp:
+          $ref: '#/components/schemas/u64'
+          description: 'Timestamp, which may be client-specified or assigned by the service.
+
+            If it is assigned by the service, it will represent milliseconds since Unix epoch.'
+    TailResponse:
+      type: object
+      required:
+      - tail
+      properties:
+        tail:
+          $ref: '#/components/schemas/StreamPosition'
+          description: Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    StreamNameStr:
+      type: string
+      maxLength: 512
+      minLength: 1
+    SequencedRecord:
+      type: object
+      description: Record that is durably sequenced on a stream.
+      required:
+      - seq_num
+      - timestamp
+      properties:
+        body:
+          type: string
+          description: Body of the record.
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Header'
+          description: Series of name-value pairs for this record.
+        seq_num:
+          $ref: '#/components/schemas/u64'
+          description: Sequence number assigned by the service.
+        timestamp:
+          $ref: '#/components/schemas/u64'
+          description: Timestamp for this record.
+    Format:
+      type: string
+      enum:
+      - raw
+      - base64
+  securitySchemes:
+    access_token:
+      type: http
+      scheme: bearer
+      description: Bearer authentication header of the form `Bearer <token>`, where `<token>` is your access token.

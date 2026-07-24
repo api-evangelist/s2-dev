@@ -1,0 +1,145 @@
+openapi: 3.1.0
+info:
+  title: S2, the durable streams access-tokens locations API
+  description: Streams as a cloud storage primitive.
+  termsOfService: https://s2.dev/terms
+  contact:
+    email: support@s2.dev
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://a.s2.dev/v1
+security:
+- access_token: []
+tags:
+- name: locations
+  description: Manage locations
+paths:
+  /locations:
+    get:
+      tags:
+      - locations
+      summary: List locations.
+      operationId: list_locations
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LocationInfo'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+  /locations/default:
+    get:
+      tags:
+      - locations
+      summary: Get the default location.
+      operationId: get_default_location
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+    put:
+      tags:
+      - locations
+      summary: Set the default location.
+      operationId: set_default_location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationName'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationInfo'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+        '408':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+components:
+  schemas:
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    LocationInfo:
+      type: object
+      required:
+      - name
+      - is_private
+      properties:
+        is_private:
+          type: boolean
+          description: Location represents a private placement, limited by account.
+        name:
+          $ref: '#/components/schemas/LocationName'
+          description: Location name.
+    LocationName:
+      type: string
+      maxLength: 64
+      minLength: 1
+  securitySchemes:
+    access_token:
+      type: http
+      scheme: bearer
+      description: Bearer authentication header of the form `Bearer <token>`, where `<token>` is your access token.
