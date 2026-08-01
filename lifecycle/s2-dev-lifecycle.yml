@@ -1,0 +1,25 @@
+generated: '2026-07-21'
+method: searched
+source: https://s2.dev/docs + https://status.s2.dev
+versioning:
+  scheme: uri-path
+  current: v1
+  base_path: /v1
+  docs: https://s2.dev/docs/api
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    No formal dated deprecation/sunset policy is published. Product changes are
+    announced on the updates/changelog page; the account endpoint move to
+    a.s2.dev (2026-07-07) is an example of a communicated migration.
+sla:
+  url: https://s2.dev/pricing
+  uptime_target: null
+status_page: https://status.s2.dev
+status_api: https://status.s2.dev/api/v1/summary
+updates_page: https://s2.dev/docs/updates
+deprecated_operations: []
+notes: |
+  No OpenAPI operations are marked deprecated. Status is machine-readable via
+  the status.s2.dev summary API (also linked from the api-catalog linkset).

@@ -1,0 +1,49 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/s2-dev-openapi-original.json + https://s2.dev/docs (resource model)
+entities:
+  - name: account
+    description: Top-level owner of basins, access tokens, billing, and metrics.
+  - name: basin
+    description: A globally named namespace for streams (like a bucket for objects). Has a location and configuration.
+    id_field: basin
+  - name: stream
+    description: An unbounded, durable, ordered sequence of records within a basin.
+    id_field: stream
+  - name: record
+    description: The fundamental unit of stream data — byte-valued headers and body, with a sequence number and timestamp.
+  - name: access_token
+    description: A bearer token scoped by resource sets and operation-group permissions.
+    id_field: id
+    id_constraints: "1-96 chars"
+  - name: location
+    description: A geographic S2 location (e.g. US West, EU North) used to place basins.
+relationships:
+  - from: account
+    to: basin
+    type: has_many
+  - from: account
+    to: access_token
+    type: has_many
+  - from: basin
+    to: stream
+    type: has_many
+    via: basin
+  - from: stream
+    to: record
+    type: has_many
+  - from: basin
+    to: location
+    type: belongs_to
+    via: location
+  - from: access_token
+    to: basin
+    type: scopes
+    via: scope.basins
+  - from: access_token
+    to: stream
+    type: scopes
+    via: scope (auto_prefix_streams)
+notes: >-
+  Hierarchy: account > basin > stream > record. Access tokens are account-level
+  and constrain which basins/streams/operations a bearer may touch.

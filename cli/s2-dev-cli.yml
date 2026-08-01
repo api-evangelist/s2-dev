@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: searched
+source: https://s2.dev/docs/cli/overview
+name: s2
+description: >-
+  First-party command-line interface providing access to the full S2 API —
+  basins, streams, access tokens, and reading/writing records — plus utilities
+  like benchmarking, an interactive TUI mode, and s2-lite. Resources are
+  addressed with S2 URIs of the form s2://{basin}/{stream}.
+install:
+  - method: homebrew
+    command: brew install s2-streamstore/s2/s2
+    source: https://github.com/s2-streamstore/homebrew-s2
+  - method: docs
+    url: https://s2.dev/docs/cli/installation
+command_groups:
+  basin:
+    commands: [create-basin, delete-basin, get-basin-config, reconfigure-basin, list-basins]
+  stream:
+    commands: [create-stream, delete-stream, get-stream-config, reconfigure-stream, list-streams, check-tail, trim, fence]
+  records:
+    commands: [append, read, tail]
+  access-tokens:
+    commands: [issue-access-token, revoke-access-token, list-access-tokens]
+  metrics:
+    commands: [get-account-metrics, get-basin-metrics, get-stream-metrics]
+  locations:
+    commands: [list-locations, get-default-location, set-default-location]
+  utilities:
+    commands: [config, bench, apply, lite]
+notes: >-
+  `apply` applies a declarative spec (infrastructure-as-code); `lite` runs the
+  local s2-lite server; `bench` benchmarks throughput. Use `s2 --help` and
+  command-specific `--help` for discovery.

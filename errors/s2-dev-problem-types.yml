@@ -1,0 +1,41 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/s2-dev-openapi-original.json + https://s2.dev/docs/interface/rest
+format: json
+envelope: |
+  Non-2xx responses return a JSON error body even when Protobuf is requested
+  (Accept: application/protobuf). Bodies are NOT RFC 9457 problem+json.
+problems:
+  - status: 400
+    title: Bad request
+    description: Malformed request, invalid parameters, or invalid record/batch encoding.
+  - status: 403
+    title: Forbidden
+    description: >-
+      The access token is valid but its scope (op_groups / resource sets) does
+      not permit the requested operation or resource.
+  - status: 404
+    title: Not found
+    description: The referenced basin, stream, access token, or location does not exist.
+  - status: 408
+    title: Request timeout
+    description: The request (e.g. a tailing read waiting for records) exceeded its time budget.
+  - status: 409
+    title: Conflict
+    description: >-
+      Resource state conflict — e.g. creating a basin or stream whose name is
+      already taken (use ensure_basin / ensure_stream for idempotent upsert).
+  - status: 412
+    title: Precondition failed
+    description: >-
+      An append condition was not met — match_seq_num mismatch (optimistic
+      concurrency) or a stale fencing_token (pessimistic concurrency).
+  - status: 416
+    title: Range not satisfiable
+    description: >-
+      A read request specified a sequence number, timestamp, or offset outside
+      the retained/available range of the stream.
+notes: |
+  Titles/descriptions are DERIVED from OpenAPI 4xx response codes plus the
+  documented append-concurrency and read semantics; S2 does not publish a
+  standalone error-code registry beyond HTTP status codes.

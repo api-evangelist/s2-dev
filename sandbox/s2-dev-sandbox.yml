@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+source: https://s2.dev/docs/s2-lite + https://s2.dev/playground + https://s2.dev/docs/quickstart
+free_tier:
+  available: true
+  limits:
+    basins: 100
+    retention_days: 28
+  notes: Sign up at https://s2.dev/dashboard to issue scoped access tokens.
+local_emulation:
+  name: s2-lite
+  docs: https://s2.dev/docs/s2-lite
+  description: >-
+    Local emulation / self-hosted single-binary S2 server. SDKs and the CLI
+    point at it via endpoint overrides for local development and testing.
+    Runnable through the CLI `s2 lite` command.
+  testcontainers:
+    crate: s2-testcontainers
+    language: rust
+    purpose: Integration testing against s2-lite.
+playground:
+  url: https://s2.dev/playground
+  signup_required: false
+  description: Browser playground to try S2 without signing up.
+studio:
+  url: https://s2.dev/docs/studio
+  description: Browser UI (Studio) for reading and appending records.
+test_values: null
+notes: >-
+  S2 does not publish "magic" test identifiers or test cards (not a payments
+  API). Sandboxing is via the free tier, the no-signup playground, and the
+  s2-lite local emulator with endpoint overrides.

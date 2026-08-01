@@ -1,0 +1,43 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/s2-streamstore
+packages:
+  - language: typescript
+    registry: npm
+    name: "@s2-dev/streamstore"
+    url: https://www.npmjs.com/package/@s2-dev/streamstore
+    install: npm install @s2-dev/streamstore
+    repo: https://github.com/s2-streamstore/s2-sdk-typescript
+    official: true
+  - language: python
+    registry: pypi
+    name: s2-sdk
+    url: https://pypi.org/project/s2-sdk/
+    install: pip install s2-sdk
+    repo: https://github.com/s2-streamstore/s2-sdk-python
+    official: true
+  - language: go
+    registry: go
+    name: github.com/s2-streamstore/s2-sdk-go
+    url: https://pkg.go.dev/github.com/s2-streamstore/s2-sdk-go
+    install: go get github.com/s2-streamstore/s2-sdk-go
+    repo: https://github.com/s2-streamstore/s2-sdk-go
+    official: true
+  - language: rust
+    registry: crates
+    name: s2-sdk
+    url: https://crates.io/crates/s2-sdk
+    install: cargo add s2-sdk
+    repo: https://github.com/s2-streamstore/s2-sdk-rust
+    official: true
+  - language: cli
+    registry: homebrew
+    name: s2
+    url: https://github.com/s2-streamstore/homebrew-s2
+    install: brew install s2-streamstore/s2/s2
+    repo: https://github.com/s2-streamstore/homebrew-s2
+    official: true
+notes: |
+  Deprecated predecessors (do not use): PyPI `streamstore` and crate `streamstore`
+  both redirect to `s2-sdk`. All four SDKs plus the CLI are first-party
+  (s2-streamstore GitHub org).

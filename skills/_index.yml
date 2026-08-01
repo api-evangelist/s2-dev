@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/s2-dev-openapi-original.json + https://s2.dev/docs
+skills:
+  - file: s2-dev-create-basin-and-stream.md
+    name: Create a basin and stream on S2
+    api: openapi/s2-dev-openapi-original.json
+    operations: [create_basin, ensure_basin, create_stream, ensure_stream, get_stream_config]
+  - file: s2-dev-append-and-tail-records.md
+    name: Append records and tail a stream on S2
+    api: openapi/s2-dev-openapi-original.json
+    operations: [append, read, check_tail]
+  - file: s2-dev-issue-scoped-token.md
+    name: Issue a scoped S2 access token
+    api: openapi/s2-dev-openapi-original.json
+    operations: [issue_access_token, list_access_tokens, revoke_access_token]

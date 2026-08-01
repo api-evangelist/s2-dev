@@ -1,0 +1,27 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for S2, the durable streams API
+  version: 1.0.0
+extends: openapi/s2-dev-openapi-original.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: s2-dev
+      x-apievangelist-category: streaming
+      x-apievangelist-agent-ready: true
+      x-apievangelist-notes: >-
+        S2 is a durable, real-time stream store. Auth is a scoped bearer
+        access token (capability model: op_groups + resource sets), not OAuth2.
+        ensure_basin / ensure_stream (PUT) are idempotent upserts; appends use
+        match_seq_num (optimistic) and fencing_token (pessimistic) for
+        concurrency. Cursor pagination via has_more.
+  - target: $.servers
+    update:
+      - url: https://a.s2.dev/v1
+        description: Account / control-plane endpoint
+      - url: https://{basin}.b.s2.dev/v1
+        description: Basin-scoped data-plane endpoint
+        variables:
+          basin:
+            default: my-basin
+            description: Basin name

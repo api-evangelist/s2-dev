@@ -1,0 +1,50 @@
+generated: '2026-07-21'
+method: searched
+source: https://s2.dev/docs + openapi/s2-dev-openapi-original.json
+authentication:
+  style: bearer
+  header: "Authorization: Bearer <access_token>"
+  model: >-
+    Scoped access tokens (capability model). A token's scope is an
+    AccessTokenScope of resource sets (basins, streams, access_tokens) plus
+    PermittedOperationGroups (account/basin/stream read+write). See
+    authentication/s2-dev-authentication.yml.
+idempotency:
+  supported: true
+  mechanism: idempotent-upsert + append-conditions
+  details: >-
+    ensure_basin (PUT /basins/{basin}) and ensure_stream (PUT /streams/{stream})
+    are idempotent create-or-update operations. Appends support optimistic
+    concurrency via match_seq_num and pessimistic concurrency via fencing_token,
+    so a retried append does not duplicate records. There is no separate
+    Idempotency-Key header; correctness comes from sequence numbers and fencing.
+pagination:
+  style: cursor
+  params: [prefix, start_after, limit]
+  response_fields: [has_more]
+  notes: List operations (basins, streams, access-tokens) filter by prefix and
+    return has_more to signal more pages.
+versioning:
+  style: uri-path
+  current: v1
+streaming:
+  tailing: ["SSE", "long-poll (?wait=<secs>)", "S2S binary over HTTP/2"]
+  concurrency: [match_seq_num, fencing_token]
+formats:
+  request: [json, protobuf]
+  json_record_encoding:
+    header: s2-format
+    values: [raw, base64]
+  compression: [zstd, gzip]
+error_envelope:
+  format: json
+  problem_json: false
+  ref: errors/s2-dev-problem-types.yml
+rate_limit_signaling:
+  ref: rate-limits/s2-dev-rate-limits.yml
+  notes: 429 for Append; AppendSession is throttled rather than rejected.
+cross_links:
+  authentication: authentication/s2-dev-authentication.yml
+  errors: errors/s2-dev-problem-types.yml
+  lifecycle: lifecycle/s2-dev-lifecycle.yml
+  rate_limits: rate-limits/s2-dev-rate-limits.yml

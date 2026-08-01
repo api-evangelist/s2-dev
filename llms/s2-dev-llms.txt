@@ -1,0 +1,190 @@
+# S2
+
+> S2 is the API for unlimited, durable, real-time streams.
+
+Object storage deals with blobs; S2 ("Stream Store") is for durable, ordered record streams.
+
+Streams can be appended to, tailed in real time, and replayed from any retained point.
+
+Use S2 when an application needs durable real-time streaming such as agent session event logs, live views, data feeds, resumable LLM token streaming, or observability streams.
+
+## Resource model
+
+account: owns basins, access tokens, billing, and metrics
+basin: a globally named namespace for streams, similar to a bucket for objects
+stream: an unbounded, durable, ordered sequence of records
+record: the fundamental unit of stream data, with byte-valued headers and body
+access token: bearer token that can be scoped by resource and operation permissions
+
+Basins, streams, and access tokens are unlimited in cardinality.
+
+## Data plane
+
+append: write records atomically to the tail of a stream; records are ordered and durable before acknowledgement
+read: read records by sequence number, timestamp, or tail-relative offset; reads can wait at the tail or follow in real time
+check-tail: get the current tail position of a stream
+
+Tailing reads are supported with SSE, long polling (`?wait=<secs>`), and S2S, a custom binary protocol over HTTP/2 used by SDKs.
+
+acknowledged records: observed by subsequent read and check-tail operations
+append concurrency: `match_seq_num` for optimistic coordination and `fencing_token` for pessimistic coordination
+
+## Agent guidance
+
+- Prefer SDKs for TypeScript, Python, Go, and Rust application code; use REST for HTTP-level integrations or when no SDK fits.
+- Use `S2_ACCESS_TOKEN` or a local secret store for access tokens. Do not ask users to paste tokens into chat.
+- S2 URIs like `s2://{basin}/{stream}` appear in CLI and docs examples. SDKs generally navigate from a client to `basin` to `stream`.
+- Appends are atomic by batch. A batch can contain at most 1000 records or 1 MiB of data.
+- For steady event streams, use append sessions or the Producer API so batching, ordering, retries, and backpressure are handled by the SDK.
+- The tail is the stream's end position, not the last existing record. Reading from the tail means "start after all current records"; use a read session, SSE, or `wait` to receive future records.
+- Browser/live UI reads usually want SSE or long polling plus a scoped access token.
+- In the REST JSON API, record headers and bodies are bytes. Use raw JSON only for valid UTF-8; use `s2-format: base64` for arbitrary binary data.
+- For local development or emulation, use s2-lite with endpoint overrides.
+
+## Build with S2
+
+- [Introduction](https://s2.dev/docs/intro.md): S2's mental model and first steps.
+- [Quickstart](https://s2.dev/docs/quickstart.md): create an account, install the CLI, append records, and read them back.
+- [Sign up and dashboard](https://s2.dev/dashboard): hosted setup; create an organization and issue scoped access tokens.
+
+- [Demos](https://s2.dev/docs/demos.md): try S2 in action.
+- [Studio](https://s2.dev/docs/studio.md): browser UI for reading and appending records.
+- [s2-lite](https://s2.dev/docs/s2-lite.md): local emulation and self-hosted single-binary server.
+
+## Use cases
+
+- [Agents](https://s2.dev/docs/use-cases/agents.md): agent sessions, resumable chat, token streaming, audit logs, and multi-agent coordination.
+- [Live views](https://s2.dev/docs/use-cases/live-view.md): live job output, build logs, and task dashboards.
+- [Sync](https://s2.dev/docs/use-cases/sync.md): event sourcing, multiplayer sync, service sync, and WebSocket alternatives.
+- [Data feeds](https://s2.dev/docs/use-cases/data-feeds.md): broadcast data feeds with many independent readers and replayable history.
+
+## SDKs
+
+Prefer SDKs for TypeScript, Python, Go, and Rust application code.
+
+Start with [SDK overview](https://s2.dev/docs/sdk/languages.md) for package names, source repositories, generated API docs, examples, and client setup.
+
+### Configuration
+
+- [Endpoint overrides](https://s2.dev/docs/sdk/endpoints.md): custom account/basin endpoints for s2-lite, self-hosted, or explicit routing.
+- [Retries and timeouts](https://s2.dev/docs/sdk/retries-timeouts.md): connection/request timeouts, retry backoff, and append retry policy.
+
+### Control plane
+
+- [Basin resources](https://s2.dev/docs/sdk/basin-resources.md): list, create, inspect configuration, and delete basins.
+- [Stream resources](https://s2.dev/docs/sdk/stream-resources.md): list, create, inspect configuration, and delete streams within a basin.
+- [Metrics](https://s2.dev/docs/sdk/metrics.md): query account, basin, and stream metric sets.
+- [Access tokens](https://s2.dev/docs/sdk/access-tokens.md): list token metadata, issue scoped tokens, and revoke tokens.
+
+### Data plane
+
+- [Appending](https://s2.dev/docs/sdk/appending.md): single-batch appends, ordered append sessions, Producer API, batching, durability, and backpressure.
+- [Reading](https://s2.dev/docs/sdk/reading.md): single-batch reads, read sessions for replay/live tailing, and check-tail.
+
+### Utilities
+
+- [Paginators](https://s2.dev/docs/sdk/paginators.md): iterate basin, stream, and access-token lists without managing cursors.
+
+## Concepts
+
+### Core model
+
+- [Records](https://s2.dev/docs/concepts/records.md): fundamental stream data units.
+- [Streams](https://s2.dev/docs/concepts/streams.md): ordered, durable record sequences.
+- [Basins](https://s2.dev/docs/concepts/basins.md): globally named stream namespaces.
+- [Configs](https://s2.dev/docs/concepts/configs.md): basin and stream configuration.
+- [Access tokens](https://s2.dev/docs/concepts/access-tokens.md): scoped bearer tokens.
+- [Metrics](https://s2.dev/docs/concepts/metrics.md): account, basin, and stream metrics.
+
+### Data plane
+
+- [Appends](https://s2.dev/docs/concepts/appends.md): append acknowledgements, batching, durability, latency, and throughput.
+- [Reads](https://s2.dev/docs/concepts/reads.md): read positions, tailing, and replay.
+- [Concurrency control](https://s2.dev/docs/concepts/concurrency-control.md): optimistic match sequence numbers and fencing tokens.
+- [Trimming](https://s2.dev/docs/concepts/trimming.md): remove old retained records.
+- [Snapshots](https://s2.dev/docs/concepts/snapshots.md): snapshot-and-follow, external snapshots, and in-stream snapshots.
+- [Command records](https://s2.dev/docs/concepts/command-records.md): stream control records.
+- [Encryption](https://s2.dev/docs/concepts/encryption.md): data encryption model.
+
+## REST API
+
+Use `https://a.s2.dev/v1` as the base URL for account-level APIs: basins, access tokens, metrics, and locations. Use `https://{basin}.b.s2.dev/v1` as the base URL for basin-scoped APIs: streams and records.
+
+### General
+
+- [Protocol](https://s2.dev/docs/api/protocol.md): authentication, compression, JSON/protobuf body formats, and streaming sessions.
+- [Endpoints](https://s2.dev/docs/api/endpoints.md): account vs basin endpoint routing, hosted endpoint names, and PrivateLink notes.
+- [Error codes](https://s2.dev/docs/api/error-codes.md): structured API errors, retryability, and HTTP status behavior.
+
+### Records
+
+- [Append records](https://s2.dev/docs/api/records/append.md): `POST /streams/{stream}/records`; append a batch atomically with optional append conditions.
+- [Read records](https://s2.dev/docs/api/records/read.md): `GET /streams/{stream}/records`; replay or tail records by sequence number, timestamp, or tail offset; supports wait and SSE.
+- [Check tail](https://s2.dev/docs/api/records/check-tail.md): `GET /streams/{stream}/records/tail`; fetch the current stream tail for coordination and freshness checks.
+
+### Access tokens
+
+- [List access tokens](https://s2.dev/docs/api/access-tokens/list.md): `GET /access-tokens`; list token metadata with prefix filtering and cursor pagination.
+- [Issue access token](https://s2.dev/docs/api/access-tokens/issue.md): `POST /access-tokens`; issue a scoped token for specific resources and operations.
+- [Revoke access token](https://s2.dev/docs/api/access-tokens/revoke.md): `DELETE /access-tokens/{id}`; revoke an access token by ID.
+
+### Streams
+
+- [List streams](https://s2.dev/docs/api/streams/list.md): `GET /streams`; list streams in a basin with prefix filtering and cursor pagination.
+- [Create stream](https://s2.dev/docs/api/streams/create.md): `POST /streams`; create a new stream in a basin.
+- [Ensure stream](https://s2.dev/docs/api/streams/ensure.md): `PUT /streams/{stream}`; idempotently ensure a stream exists and update its configuration if present.
+- [Get stream configuration](https://s2.dev/docs/api/streams/get-config.md): `GET /streams/{stream}`; read the stream's current reconfigurable settings.
+- [Reconfigure stream](https://s2.dev/docs/api/streams/reconfigure.md): `PATCH /streams/{stream}`; update only provided stream configuration fields.
+- [Delete stream](https://s2.dev/docs/api/streams/delete.md): `DELETE /streams/{stream}`; delete a stream and its records asynchronously.
+
+### Basins
+
+- [List basins](https://s2.dev/docs/api/basins/list.md): `GET /basins`; list basins with prefix filtering and cursor pagination.
+- [Create basin](https://s2.dev/docs/api/basins/create.md): `POST /basins`; create a basin with a name, location, and optional configuration.
+- [Ensure basin](https://s2.dev/docs/api/basins/ensure.md): `PUT /basins/{basin}`; idempotently ensure a basin exists and update its configuration if present.
+- [Get basin configuration](https://s2.dev/docs/api/basins/get-config.md): `GET /basins/{basin}`; read the basin's current configuration.
+- [Reconfigure basin](https://s2.dev/docs/api/basins/reconfigure.md): `PATCH /basins/{basin}`; update only provided basin configuration fields.
+- [Delete basin](https://s2.dev/docs/api/basins/delete.md): `DELETE /basins/{basin}`; delete a basin, including streams and records, asynchronously.
+
+### Metrics
+
+- [Account metrics](https://s2.dev/docs/api/metrics/account.md): `GET /metrics`; account-level metrics for active basins and operations.
+- [Basin metrics](https://s2.dev/docs/api/metrics/basin.md): `GET /metrics/{basin}`; basin-level storage, operation, and throughput metrics.
+- [Stream metrics](https://s2.dev/docs/api/metrics/stream.md): `GET /metrics/{basin}/{stream}`; storage metrics for an individual stream.
+
+### Locations
+
+- [List locations](https://s2.dev/docs/api/locations/list.md): `GET /locations`; list S2 locations available to the account.
+- [Get default location](https://s2.dev/docs/api/locations/get-default.md): `GET /locations/default`; get the default location used for new basins.
+- [Set default location](https://s2.dev/docs/api/locations/set-default.md): `PUT /locations/default`; set the default location used for new basins.
+
+## CLI
+
+- [CLI overview](https://s2.dev/docs/cli/overview.md)
+- [CLI installation](https://s2.dev/docs/cli/installation.md)
+
+Use `s2 --help` and command-specific `--help` for CLI discovery.
+
+## Infrastructure as Code
+
+- [Terraform provider](https://s2.dev/docs/integrations/terraform-provider.md)
+- [CLI declarative spec](https://s2.dev/docs/infra/declarative-spec.md)
+
+## Integrations
+
+See the [integrations index](https://s2.dev/docs/integrations/overview.md) for Vercel AI SDK, TanStack AI, Anthropic SDK, Mastra, Yjs, OpenTelemetry, Bento, and more.
+
+## Platform
+
+- [Cells](https://s2.dev/docs/platform/cells.md): locations, fault domains, basin routing, and tenancy.
+- [Architecture](https://s2.dev/docs/platform/architecture.md): control/data plane, write/read paths, storage classes, caching, and correctness.
+- [Security](https://s2.dev/docs/platform/security.md): TLS, encryption, compliance contacts, and responsible disclosure.
+- [Private networking](https://s2.dev/docs/platform/private-networking.md): AWS PrivateLink setup, private DNS, security groups, and validation.
+- [Limits](https://s2.dev/docs/platform/limits.md): basin/stream limits, record/batch sizes, throughput, retention, and reconfiguration.
+- [Pricing](https://s2.dev/pricing): usage-based pricing.
+- [Status](https://status.s2.dev): service health and incidents.
+
+## Updates
+
+- [Product updates](https://s2.dev/docs/updates.md)
+- [Blog](https://s2.dev/blog): design context and longer-form explanations.

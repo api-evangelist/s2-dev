@@ -1,7 +1,17 @@
 aid: s2-dev
 name: S2 Dev
-description: S2 Dev is a company surfaced as a portfolio company of y-combinator and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  S2 ("Stream Store") is the API for unlimited, durable, real-time streams.
+  Where object storage deals with blobs, S2 provides append-able, ordered
+  record streams that can be tailed in real time and replayed from any retained
+  point. Core data-plane operations are append, read, and check-tail; the
+  control plane manages accounts, basins (stream namespaces), streams, scoped
+  access tokens, locations, and metrics. It targets agent session logs, live
+  views and build logs, event sourcing and sync, data feeds, resumable LLM
+  token streaming, and observability. Access is over a REST/JSON + Protobuf HTTP
+  API, an S2S binary protocol over HTTP/2, SSE tailing, first-party TypeScript,
+  Python, Go, and Rust SDKs, a CLI, and a Terraform provider. S2 is a Y
+  Combinator-backed company.
 url: https://raw.githubusercontent.com/api-evangelist/s2-dev/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,14 +19,190 @@ x-backed-by:
 - y-combinator
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
+image: https://avatars.githubusercontent.com/u/136030139?v=4
 tags:
 - Company
-apis: []
+- Streaming
+- Real-Time
+- Event Streaming
+- Durable Storage
+- Message Streaming
+- Data Feeds
+- Observability
+- Developer Tools
+- Infrastructure
+apis:
+- aid: s2-dev:s2-dev-access-tokens-api
+  name: S2 Dev access-tokens API
+  description: Manage access tokens
+  humanURL: https://s2.dev/docs/api
+  baseURL: https://a.s2.dev/v1
+  tags:
+  - access-tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/s2-dev-access-tokens-api-openapi.yml
+  - type: Protobuf
+    url: grpc/s2-dev-s2.proto
+- aid: s2-dev:s2-dev-basins-api
+  name: S2 Dev basins API
+  description: Manage basins
+  humanURL: https://s2.dev/docs/api
+  baseURL: https://a.s2.dev/v1
+  tags:
+  - basins
+  properties:
+  - type: OpenAPI
+    url: openapi/s2-dev-basins-api-openapi.yml
+  - type: Protobuf
+    url: grpc/s2-dev-s2.proto
+- aid: s2-dev:s2-dev-locations-api
+  name: S2 Dev locations API
+  description: Manage locations
+  humanURL: https://s2.dev/docs/api
+  baseURL: https://a.s2.dev/v1
+  tags:
+  - locations
+  properties:
+  - type: OpenAPI
+    url: openapi/s2-dev-locations-api-openapi.yml
+  - type: Protobuf
+    url: grpc/s2-dev-s2.proto
+- aid: s2-dev:s2-dev-metrics-api
+  name: S2 Dev metrics API
+  description: Usage metrics and data.
+  humanURL: https://s2.dev/docs/api
+  baseURL: https://a.s2.dev/v1
+  tags:
+  - metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/s2-dev-metrics-api-openapi.yml
+  - type: Protobuf
+    url: grpc/s2-dev-s2.proto
+- aid: s2-dev:s2-dev-records-api
+  name: S2 Dev records API
+  description: Manage records
+  humanURL: https://s2.dev/docs/api
+  baseURL: https://a.s2.dev/v1
+  tags:
+  - records
+  properties:
+  - type: OpenAPI
+    url: openapi/s2-dev-records-api-openapi.yml
+  - type: Protobuf
+    url: grpc/s2-dev-s2.proto
+- aid: s2-dev:s2-dev-streams-api
+  name: S2 Dev streams API
+  description: Manage streams
+  humanURL: https://s2.dev/docs/api
+  baseURL: https://a.s2.dev/v1
+  tags:
+  - streams
+  properties:
+  - type: OpenAPI
+    url: openapi/s2-dev-streams-api-openapi.yml
+  - type: Protobuf
+    url: grpc/s2-dev-s2.proto
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 26
+  pass: local-v1
+common:
+- type: VulnerabilityDisclosure
+  url: security/s2-dev-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/s2-dev-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/s2-dev-agentic-access.yml
+- type: Authentication
+  url: authentication/s2-dev-authentication.yml
+- type: Security
+  url: https://s2.dev/docs/platform/security
+- type: TrustCenter
+  url: security/s2-dev-trust-center.yml
+- type: Compliance
+  url: https://s2.dev/docs/platform/security
+- type: DeveloperPortal
+  url: https://s2.dev/docs
+- type: Documentation
+  url: https://s2.dev/docs
+- type: APIReference
+  url: https://s2.dev/docs/api
+- type: GettingStarted
+  url: https://s2.dev/docs/quickstart
+- type: Support
+  url: mailto:hi@s2.dev
+- type: Blog
+  url: https://s2.dev/blog
+- type: GitHubOrganization
+  url: https://github.com/s2-streamstore
+- type: Pricing
+  url: https://s2.dev/pricing
+- type: SignUp
+  url: https://s2.dev/dashboard
+- type: TermsOfService
+  url: https://s2.dev/terms
+- type: PrivacyPolicy
+  url: https://s2.dev/privacy
+- type: StatusPage
+  url: https://status.s2.dev
+- type: Packages
+  url: packages/s2-dev-packages.yml
+- type: SDKs
+  url: packages/s2-dev-packages.yml
+- type: CLI
+  url: cli/s2-dev-cli.yml
+- type: Sandbox
+  url: sandbox/s2-dev-sandbox.yml
+- type: ChangeLog
+  url: changelog/s2-dev-changelog.yml
+- type: Lifecycle
+  url: lifecycle/s2-dev-lifecycle.yml
+- type: RateLimits
+  url: rate-limits/s2-dev-rate-limits.yml
+- type: Conventions
+  url: conventions/s2-dev-conventions.yml
+- type: Idempotency
+  url: conventions/s2-dev-conventions.yml
+- type: ErrorCatalog
+  url: errors/s2-dev-problem-types.yml
+- type: DataModel
+  url: data-model/s2-dev-data-model.yml
+- type: Conformance
+  url: conformance/s2-dev-conformance.yml
+- type: WellKnown
+  url: well-known/s2-dev-well-known.yml
+- type: SecurityTxt
+  url: well-known/s2-dev-security.txt
+- type: APICatalog
+  url: well-known/s2-dev-api-catalog.json
+- type: LLMsTxt
+  url: llms/s2-dev-llms.txt
+- type: Overlay
+  url: overlays/s2-dev-openapi-overlay.yaml
+- type: MCPServer
+  url: mcp/s2-dev-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml

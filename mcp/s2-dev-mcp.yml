@@ -1,0 +1,87 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/s2-dev-openapi-original.json
+note: |
+  No official hosted/remote MCP server was found (mcp.s2.dev does not resolve,
+  s2.dev/mcp returns 404, and no @s2-dev MCP package is published as of
+  2026-07-21). S2 does publish an agent-oriented llms.txt and ships integrations
+  for the Anthropic SDK / Mastra / Vercel AI SDK, but not a standalone MCP server.
+  The tool list below is a CANDIDATE derived one-to-one from the OpenAPI
+  operations, offered as a starting point for an MCP wrapper.
+server:
+  name: s2
+  transport: http
+tools:
+  - name: list_access_tokens
+    description: List access tokens.
+    source_operation: openapi/s2-dev-openapi-original.json#list_access_tokens
+  - name: issue_access_token
+    description: Issue a new scoped access token.
+    source_operation: openapi/s2-dev-openapi-original.json#issue_access_token
+  - name: revoke_access_token
+    description: Revoke an access token.
+    source_operation: openapi/s2-dev-openapi-original.json#revoke_access_token
+  - name: list_basins
+    description: List basins.
+    source_operation: openapi/s2-dev-openapi-original.json#list_basins
+  - name: create_basin
+    description: Create a basin.
+    source_operation: openapi/s2-dev-openapi-original.json#create_basin
+  - name: get_basin_config
+    description: Get basin configuration.
+    source_operation: openapi/s2-dev-openapi-original.json#get_basin_config
+  - name: ensure_basin
+    description: Idempotently ensure a basin exists.
+    source_operation: openapi/s2-dev-openapi-original.json#ensure_basin
+  - name: reconfigure_basin
+    description: Reconfigure a basin.
+    source_operation: openapi/s2-dev-openapi-original.json#reconfigure_basin
+  - name: delete_basin
+    description: Delete a basin.
+    source_operation: openapi/s2-dev-openapi-original.json#delete_basin
+  - name: list_streams
+    description: List streams in a basin.
+    source_operation: openapi/s2-dev-openapi-original.json#list_streams
+  - name: create_stream
+    description: Create a stream.
+    source_operation: openapi/s2-dev-openapi-original.json#create_stream
+  - name: get_stream_config
+    description: Get stream configuration.
+    source_operation: openapi/s2-dev-openapi-original.json#get_stream_config
+  - name: ensure_stream
+    description: Idempotently ensure a stream exists.
+    source_operation: openapi/s2-dev-openapi-original.json#ensure_stream
+  - name: reconfigure_stream
+    description: Reconfigure a stream.
+    source_operation: openapi/s2-dev-openapi-original.json#reconfigure_stream
+  - name: delete_stream
+    description: Delete a stream.
+    source_operation: openapi/s2-dev-openapi-original.json#delete_stream
+  - name: append
+    description: Append a batch of records to the tail of a stream.
+    source_operation: openapi/s2-dev-openapi-original.json#append
+  - name: read
+    description: Read records by sequence number, timestamp, or tail offset.
+    source_operation: openapi/s2-dev-openapi-original.json#read
+  - name: check_tail
+    description: Get the current tail position of a stream.
+    source_operation: openapi/s2-dev-openapi-original.json#check_tail
+  - name: account_metrics
+    description: Account-level metrics.
+    source_operation: openapi/s2-dev-openapi-original.json#account_metrics
+  - name: basin_metrics
+    description: Basin-level metrics.
+    source_operation: openapi/s2-dev-openapi-original.json#basin_metrics
+  - name: stream_metrics
+    description: Stream-level metrics.
+    source_operation: openapi/s2-dev-openapi-original.json#stream_metrics
+  - name: list_locations
+    description: List locations available to the account.
+    source_operation: openapi/s2-dev-openapi-original.json#list_locations
+  - name: get_default_location
+    description: Get the default location for new basins.
+    source_operation: openapi/s2-dev-openapi-original.json#get_default_location
+  - name: set_default_location
+    description: Set the default location for new basins.
+    source_operation: openapi/s2-dev-openapi-original.json#set_default_location

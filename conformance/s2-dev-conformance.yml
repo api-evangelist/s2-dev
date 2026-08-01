@@ -1,0 +1,43 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/s2-dev-openapi-original.json + https://s2.dev/docs
+standards:
+  - id: openapi-3.1
+    conforms: true
+    evidence: openapi 3.1.0 spec published at s2-specs/s2/v1/openapi.json
+  - id: rfc9727-api-catalog
+    conforms: true
+    evidence: /.well-known/api-catalog linkset published on s2.dev
+  - id: rfc9116-security-txt
+    conforms: true
+    evidence: /.well-known/security.txt published on s2.dev
+  - id: http-bearer-auth
+    conforms: true
+    evidence: securityScheme access_token type http scheme bearer
+  - id: oauth2
+    conforms: false
+    evidence: uses scoped bearer access tokens (capability model), not OAuth2 flows
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: error responses return JSON bodies but not application/problem+json
+  - id: cursor-pagination
+    conforms: true
+    evidence: list operations return has_more with prefix/cursor filtering
+  - id: idempotent-upsert
+    conforms: true
+    evidence: ensure_basin / ensure_stream (PUT) are idempotent create-or-update
+  - id: sse-streaming
+    conforms: true
+    evidence: read sessions support Server-Sent Events for tailing
+  - id: grpc
+    conforms: true
+    evidence: protobuf service defined at s2-specs/s2/v1/s2.proto
+  - id: soc2
+    conforms: true
+    evidence: SOC 2 report available on request (trust@s2.dev)
+  - id: gdpr
+    conforms: true
+    evidence: GDPR data processing agreement available (trust@s2.dev)
+  - id: hipaa
+    conforms: true
+    evidence: HIPAA data processing agreement available (trust@s2.dev)

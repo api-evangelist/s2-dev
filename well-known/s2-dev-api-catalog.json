@@ -1,0 +1,33 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://a.s2.dev/v1",
+      "service-desc": [
+        {
+          "href": "https://raw.githubusercontent.com/s2-streamstore/s2-specs/main/s2/v1/openapi.json",
+          "type": "application/vnd.oai.openapi+json",
+          "title": "S2 OpenAPI specification"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://s2.dev/docs/api",
+          "type": "text/html",
+          "title": "S2 API documentation"
+        },
+        {
+          "href": "https://s2.dev/llms.txt",
+          "type": "text/markdown",
+          "title": "S2 documentation for agents"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://status.s2.dev/api/v1/summary",
+          "type": "application/json",
+          "title": "S2 service status"
+        }
+      ]
+    }
+  ]
+}

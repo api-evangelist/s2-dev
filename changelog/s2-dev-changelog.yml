@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: searched
+source: https://s2.dev/docs/updates
+scheme: dated-product-updates
+current_version: v1
+entries:
+  - date: '2026-07-15'
+    breaking: false
+    highlight: "Launched npm package @s2-dev/mastra-pubsub for storing Mastra durable-agent stream events in S2 with runId reconnection."
+  - date: '2026-07-09'
+    breaking: false
+    highlight: "Streamling integration available with S2 source and sink plugins."
+  - date: '2026-07-07'
+    breaking: true
+    highlight: "Account-level endpoint moved to a.s2.dev."
+  - date: '2026-07-06'
+    breaking: false
+    highlight: "opbox launched — open-source daemon for real-time plain-text directory syncing, backed by S2."
+  - date: '2026-06-15'
+    breaking: false
+    highlight: "Rust clients gained the s2-testcontainers crate for integration testing against s2-lite."
+  - date: '2026-06-01'
+    breaking: false
+    highlight: "RePlaya self-hosted browser session-replay tool with live tailing released."
+  - date: '2026-05-29'
+    breaking: false
+    highlight: "Location became a first-class construct; added US West and EU North."
+  - date: '2026-05-12'
+    breaking: false
+    highlight: "Anthropic integration in @s2-dev/resumable-stream for durable Claude chat sessions."

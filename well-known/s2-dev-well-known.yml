@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: searched
+hosts:
+  - host: https://s2.dev
+    documents:
+      - path: /.well-known/security.txt          # RFC 9116
+        status: 200
+        file: s2-dev-security.txt
+      - path: /.well-known/api-catalog            # RFC 9727 linkset
+        status: 200
+        file: s2-dev-api-catalog.json
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://a.s2.dev
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+notes: |
+  s2.dev publishes an RFC 9727 api-catalog linkset that points at the OpenAPI
+  spec (service-desc), the API docs + llms.txt (service-doc), and the status
+  summary endpoint (status). A valid security.txt (RFC 9116) is also present.

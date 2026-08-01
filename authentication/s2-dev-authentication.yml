@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/s2-dev-openapi-original.json
+docs: https://s2.dev/docs/interface/rest
+summary:
+  types:
+  - http
+  http_schemes:
+  - bearer
+schemes:
+- name: access_token
+  type: http
+  scheme: bearer
+  description: >-
+    Bearer authentication header of the form `Authorization: Bearer <token>`,
+    where <token> is a scoped S2 access token. SDKs read S2_ACCESS_TOKEN from
+    the environment. First use of a token on a connection adds tens of ms for
+    verification.
+  sources:
+  - openapi/s2-dev-openapi-original.json
+capability_model:
+  description: >-
+    S2 access tokens are capability tokens, not OAuth2. A token carries an
+    AccessTokenScope constraining WHICH resources and WHICH operations it can
+    perform. There is no OAuth2 authorization/token flow and therefore no
+    scopes/ artifact.
+  scope_dimensions:
+    resource_sets: [basins, streams, access_tokens]
+    operation_groups:
+      account: [read, write]
+      basin: [read, write]
+      stream: [read, write]
+    auto_prefix_streams: >-
+      Namespaces streams to a configured prefix; stream names are auto-prefixed
+      and the prefix is stripped on listing.
+    expiry: Optional expires_at (RFC 3339).
+  issue_operation: issue_access_token (POST /access-tokens)
+  revoke_operation: revoke_access_token (DELETE /access-tokens/{id})

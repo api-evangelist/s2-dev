@@ -1,0 +1,41 @@
+generated: '2026-07-21'
+method: searched
+source: https://s2.dev/docs/platform/limits
+rate_limits:
+  - scope: stream
+    name: append-throughput
+    limit_count: 100
+    unit: MiBps
+    description: Append throughput per stream.
+  - scope: stream-connection
+    name: append-batch-rate
+    limit_count: 200
+    unit: batches/second
+    description: Append batches per second per stream per client connection.
+  - scope: batch
+    name: batch-size
+    limit_count: 1000
+    unit: records
+    description: Maximum records per append batch (also capped at 1 MiB per batch).
+  - scope: record
+    name: record-size
+    limit_count: 1
+    unit: MiB
+    description: Maximum metered size of an individual record.
+  - scope: account
+    name: free-tier-basins
+    limit_count: 100
+    unit: basins
+    description: Basin cap on the free tier (unlimited on paid).
+quotas:
+  retention_free_tier_days: 28
+  retention_paid: configurable-up-to-infinite
+  basin_name_length: "8-48 chars"
+  stream_name_length: "up to 512 chars"
+enforcement:
+  status_code: 429
+  applies_to: Append
+  notes: >-
+    Append requests over the limit return HTTP 429; AppendSession streams are
+    throttled (backpressure) rather than rejected. Read throughput is highly
+    scalable with limits described as TBD.
