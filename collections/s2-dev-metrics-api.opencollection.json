@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "S2, the durable streams access-tokens metrics API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Account-level metrics.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/metrics",
+            "params": [
+              {
+                "name": "set",
+                "value": "",
+                "type": "query",
+                "description": "Metric set to return."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp as Unix epoch seconds, if applicable for the metric set."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Interval to aggregate over for timeseries metric sets."
+              }
+            ]
+          },
+          "docs": "Account-level metrics."
+        },
+        {
+          "info": {
+            "name": "Basin-level metrics.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/metrics/:basin",
+            "params": [
+              {
+                "name": "set",
+                "value": "",
+                "type": "query",
+                "description": "Metric set to return."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp as Unix epoch seconds, if applicable for the metric set."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Interval to aggregate over for timeseries metric sets."
+              },
+              {
+                "name": "basin",
+                "value": "",
+                "type": "path",
+                "description": "Basin name."
+              }
+            ]
+          },
+          "docs": "Basin-level metrics."
+        },
+        {
+          "info": {
+            "name": "Stream-level metrics.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/metrics/:basin/:stream",
+            "params": [
+              {
+                "name": "set",
+                "value": "",
+                "type": "query",
+                "description": "Metric set to return."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp as Unix epoch seconds, if applicable for metric set."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Interval to aggregate over for timeseries metric sets."
+              },
+              {
+                "name": "basin",
+                "value": "",
+                "type": "path",
+                "description": "Basin name."
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "Stream name."
+              }
+            ]
+          },
+          "docs": "Stream-level metrics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

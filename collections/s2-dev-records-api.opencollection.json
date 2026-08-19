@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "S2, the durable streams access-tokens records API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read records.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/streams/:stream/records",
+            "headers": [
+              {
+                "name": "s2-format",
+                "value": ""
+              },
+              {
+                "name": "s2-encryption-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "Stream name."
+              },
+              {
+                "name": "seq_num",
+                "value": "",
+                "type": "query",
+                "description": "Start from a sequence number."
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Start from a timestamp."
+              },
+              {
+                "name": "tail_offset",
+                "value": "",
+                "type": "query",
+                "description": "Start from number of records before the next sequence number."
+              },
+              {
+                "name": "clamp",
+                "value": "",
+                "type": "query",
+                "description": "Start reading from the tail if the requested position is beyond it.\nOtherwise, a `416 Range Not Satisfiable` response is returned."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Record count limit.\nNon-streaming reads are capped by the default limit of 1000 records."
+              },
+              {
+                "name": "bytes",
+                "value": "",
+                "type": "query",
+                "description": "Metered bytes limit.\nNon-streaming reads are capped by the default limit of 1 MiB."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Exclusive timestamp to read until."
+              },
+              {
+                "name": "wait",
+                "value": "",
+                "type": "query",
+                "description": "Duration in seconds to wait for new records.\nThe default duration is 0 if there is a bound on `count`, `bytes`, or `until`, and otherwise infinite.\nNon-streaming reads are always bounded on `count` and `bytes`, so you can achieve long poll semantics by specifying a non-zero duration up to 60 seconds.\nIn the context of an SSE or S2S streaming read, the duration will bound how much time can elapse between records throughout the lifetime of the session."
+              }
+            ]
+          },
+          "docs": "Read records."
+        },
+        {
+          "info": {
+            "name": "Append records.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://a.s2.dev/v1/streams/:stream/records",
+            "headers": [
+              {
+                "name": "s2-format",
+                "value": ""
+              },
+              {
+                "name": "s2-encryption-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "Stream name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append records."
+        },
+        {
+          "info": {
+            "name": "Check the tail.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/streams/:stream/records/tail",
+            "params": [
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "Stream name."
+              }
+            ]
+          },
+          "docs": "Check the tail."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

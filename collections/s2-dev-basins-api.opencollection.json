@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "S2, the durable streams access-tokens basins API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "basins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List basins.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/basins",
+            "params": [
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query",
+                "description": "Filter to basins whose names begin with this prefix."
+              },
+              {
+                "name": "start_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter to basins whose names lexicographically start after this string."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results, up to a maximum of 1000."
+              }
+            ]
+          },
+          "docs": "List basins."
+        },
+        {
+          "info": {
+            "name": "Create a basin.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://a.s2.dev/v1/basins",
+            "headers": [
+              {
+                "name": "s2-request-token",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a basin."
+        },
+        {
+          "info": {
+            "name": "Get basin configuration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/basins/:basin",
+            "params": [
+              {
+                "name": "basin",
+                "value": "",
+                "type": "path",
+                "description": "Basin name."
+              }
+            ]
+          },
+          "docs": "Get basin configuration."
+        },
+        {
+          "info": {
+            "name": "Ensure a basin.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://a.s2.dev/v1/basins/:basin",
+            "params": [
+              {
+                "name": "basin",
+                "value": "",
+                "type": "path",
+                "description": "Basin name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Ensure a basin."
+        },
+        {
+          "info": {
+            "name": "Reconfigure a basin.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://a.s2.dev/v1/basins/:basin",
+            "params": [
+              {
+                "name": "basin",
+                "value": "",
+                "type": "path",
+                "description": "Basin name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reconfigure a basin."
+        },
+        {
+          "info": {
+            "name": "Delete a basin.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://a.s2.dev/v1/basins/:basin",
+            "params": [
+              {
+                "name": "basin",
+                "value": "",
+                "type": "path",
+                "description": "Basin name."
+              }
+            ]
+          },
+          "docs": "Delete a basin."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

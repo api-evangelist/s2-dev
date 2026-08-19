@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "S2, the durable streams access-tokens API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "access-tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List access tokens.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/access-tokens",
+            "params": [
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query",
+                "description": "Filter to access tokens whose IDs begin with this prefix."
+              },
+              {
+                "name": "start_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter to access tokens whose IDs lexicographically start after this string."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results, up to a maximum of 1000."
+              }
+            ]
+          },
+          "docs": "List access tokens."
+        },
+        {
+          "info": {
+            "name": "Issue a new access token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://a.s2.dev/v1/access-tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issue a new access token."
+        },
+        {
+          "info": {
+            "name": "Revoke an access token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://a.s2.dev/v1/access-tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Access token ID."
+              }
+            ]
+          },
+          "docs": "Revoke an access token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1783 @@
+{
+  "item": [
+    {
+      "id": "0b3fd236-9795-40eb-a9b2-b598d42722ee",
+      "name": "records",
+      "description": {
+        "content": "Manage records",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "939c1777-db53-49bb-b23e-986283a3ee1f",
+          "name": "Read records.",
+          "request": {
+            "name": "Read records.",
+            "description": {},
+            "url": {
+              "path": [
+                "streams",
+                ":stream",
+                "records"
+              ],
+              "host": [
+                "{{streams-stream-records-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "seq_num",
+                  "value": "<long>",
+                  "description": "Start from a sequence number."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<long>",
+                  "description": "Start from a timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "tail_offset",
+                  "value": "<long>",
+                  "description": "Start from number of records before the next sequence number."
+                },
+                {
+                  "disabled": false,
+                  "key": "clamp",
+                  "value": "<boolean>",
+                  "description": "Start reading from the tail if the requested position is beyond it.\nOtherwise, a `416 Range Not Satisfiable` response is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<long>",
+                  "description": "Record count limit.\nNon-streaming reads are capped by the default limit of 1000 records."
+                },
+                {
+                  "disabled": false,
+                  "key": "bytes",
+                  "value": "<integer>",
+                  "description": "Metered bytes limit.\nNon-streaming reads are capped by the default limit of 1 MiB."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<long>",
+                  "description": "Exclusive timestamp to read until."
+                },
+                {
+                  "disabled": false,
+                  "key": "wait",
+                  "value": "<integer>",
+                  "description": "Duration in seconds to wait for new records.\nThe default duration is 0 if there is a bound on `count`, `bytes`, or `until`, and otherwise infinite.\nNon-streaming reads are always bounded on `count` and `bytes`, so you can achieve long poll semantics by specifying a non-zero duration up to 60 seconds.\nIn the context of an SSE or S2S streaming read, the duration will bound how much time can elapse between records throughout the lifetime of the session."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stream",
+                  "description": "(Required) Stream name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                "key": "s2-format",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                "key": "s2-encryption-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "486df75a-24cc-4dbc-a64d-35cdc50f88a4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seq_num",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "tail_offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "clamp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bytes",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "wait",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"records\": [\n    {\n      \"seq_num\": 755,\n      \"timestamp\": 8569,\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ]\n    },\n    {\n      \"seq_num\": 3292,\n      \"timestamp\": 3745,\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ]\n    }\n  ],\n  \"tail\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e8c2359-f829-4a41-ac57-826b19b679f1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seq_num",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "tail_offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "clamp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bytes",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "wait",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e04c7719-bd1d-4735-9409-bdbd010063c1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seq_num",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "tail_offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "clamp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bytes",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "wait",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30003651-da55-4a5e-8c02-baf9f67c37d4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seq_num",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "tail_offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "clamp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bytes",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "wait",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee054e81-0691-4422-ba66-6888b0938dd0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seq_num",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "tail_offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "clamp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bytes",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "wait",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40899d95-a5a4-431f-b787-6e4a850e34c4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seq_num",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "tail_offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "clamp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bytes",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "wait",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28e25840-07b8-4c3f-9786-fc4e92a601c3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seq_num",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "tail_offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "clamp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "bytes",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "6778"
+                    },
+                    {
+                      "key": "wait",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Requested Range Not Satisfiable",
+              "code": 416,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tail\": {\n    \"seq_num\": 3846,\n    \"timestamp\": 3140\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34bfe242-3cb5-422d-84fb-17da3fea0ab1",
+          "name": "Append records.",
+          "request": {
+            "name": "Append records.",
+            "description": {},
+            "url": {
+              "path": [
+                "streams",
+                ":stream",
+                "records"
+              ],
+              "host": [
+                "{{streams-stream-records-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stream",
+                  "description": "(Required) Stream name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                "key": "s2-format",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                "key": "s2-encryption-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"records\": [\n    {\n      \"body\": \"<string>\",\n      \"headers\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"timestamp\": \"<null>\"\n    },\n    {\n      \"body\": \"<string>\",\n      \"headers\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"timestamp\": \"<null>\"\n    }\n  ],\n  \"fencing_token\": \"<null>\",\n  \"match_seq_num\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c1e9c639-7671-4dba-a521-f27379d814d4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"records\": [\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    },\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    }\n  ],\n  \"fencing_token\": \"<null>\",\n  \"match_seq_num\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"start\": {\n    \"seq_num\": 3819,\n    \"timestamp\": 7712\n  },\n  \"end\": {\n    \"seq_num\": 946,\n    \"timestamp\": 1281\n  },\n  \"tail\": {\n    \"seq_num\": 4842,\n    \"timestamp\": 8535\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63cec7e8-c17a-4441-96e0-791cf990aba4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"records\": [\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    },\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    }\n  ],\n  \"fencing_token\": \"<null>\",\n  \"match_seq_num\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c44bdb3d-f51b-4d8f-a241-cd6c7beb9da5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"records\": [\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    },\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    }\n  ],\n  \"fencing_token\": \"<null>\",\n  \"match_seq_num\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82522602-0127-4751-97b0-5fdfa60793d1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"records\": [\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    },\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    }\n  ],\n  \"fencing_token\": \"<null>\",\n  \"match_seq_num\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "befa0822-1acf-41cc-bbce-c2d7ce8e80ed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"records\": [\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    },\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    }\n  ],\n  \"fencing_token\": \"<null>\",\n  \"match_seq_num\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "360f5bb4-3a19-4b14-8163-2a90fe07a227",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"records\": [\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    },\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    }\n  ],\n  \"fencing_token\": \"<null>\",\n  \"match_seq_num\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5db321c1-f1ab-4726-a51c-21abf2e47275",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Defines the interpretation of record data (header name, header value, and body) with the JSON content type.\nUse `raw` (default) for efficient transmission and storage of Unicode data — storage will be in UTF-8.\nUse `base64` for safe transmission with efficient storage of binary data.",
+                    "key": "s2-format",
+                    "value": "base64"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Encryption key material for append and read operations.\nProvide base64-encoded key when stream encryption is enabled.",
+                    "key": "s2-encryption-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"records\": [\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    },\n    {\n      \"body\": \"string\",\n      \"headers\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"timestamp\": null\n    }\n  ],\n  \"fencing_token\": \"<null>\",\n  \"match_seq_num\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fencing_token_mismatch\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cefd058-3470-4fd7-9af7-34739a4737bc",
+          "name": "Check the tail.",
+          "request": {
+            "name": "Check the tail.",
+            "description": {},
+            "url": {
+              "path": [
+                "streams",
+                ":stream",
+                "records",
+                "tail"
+              ],
+              "host": [
+                "{{streams-stream-records-tail-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stream",
+                  "description": "(Required) Stream name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "295420d1-6674-459f-b429-417747656f7e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records",
+                    "tail"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-tail-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tail\": {\n    \"seq_num\": 3846,\n    \"timestamp\": 3140\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40be2189-c77e-4fab-a76b-b31d42f3d178",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records",
+                    "tail"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-tail-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55050b13-7ee7-4a52-801f-ab8b6a8d1845",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records",
+                    "tail"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-tail-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25970852-88fa-46a9-a909-ae4329d4fb59",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records",
+                    "tail"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-tail-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09663e4a-4e7a-42c6-9191-91cd49dd5243",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records",
+                    "tail"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-tail-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19c869e2-269e-419a-9518-50e273e4ba83",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "streams",
+                    ":stream",
+                    "records",
+                    "tail"
+                  ],
+                  "host": [
+                    "{{streams-stream-records-tail-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://a.s2.dev/v1",
+      "key": "baseUrl"
+    },
+    {
+      "description": {
+        "content": "Basin name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "",
+      "key": "basin"
+    },
+    {
+      "type": "string",
+      "value": "https://{{basin}}.b.s2.dev/v1",
+      "key": "streams-stream-records-Url"
+    },
+    {
+      "description": {
+        "content": "Basin name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "",
+      "key": "basin"
+    },
+    {
+      "type": "string",
+      "value": "https://{{basin}}.b.s2.dev/v1",
+      "key": "streams-stream-records-tail-Url"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0dfdc97f-5520-401d-bf15-5a8fb9981740",
+    "name": "S2, the durable streams access-tokens records API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Streams as a cloud storage primitive.\n\nContact Support:\n Email: support@s2.dev",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "S2, the durable access-tokens streams API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List streams.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/streams",
+            "params": [
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query",
+                "description": "Filter to streams whose names begin with this prefix."
+              },
+              {
+                "name": "start_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter to streams whose names lexicographically start after this string."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results, up to a maximum of 1000."
+              }
+            ]
+          },
+          "docs": "List streams."
+        },
+        {
+          "info": {
+            "name": "Create a stream.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://a.s2.dev/v1/streams",
+            "headers": [
+              {
+                "name": "s2-request-token",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a stream."
+        },
+        {
+          "info": {
+            "name": "Get stream configuration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/streams/:stream",
+            "params": [
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "Stream name."
+              }
+            ]
+          },
+          "docs": "Get stream configuration."
+        },
+        {
+          "info": {
+            "name": "Ensure a stream.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://a.s2.dev/v1/streams/:stream",
+            "params": [
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "Stream name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Ensure a stream."
+        },
+        {
+          "info": {
+            "name": "Reconfigure a stream.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://a.s2.dev/v1/streams/:stream",
+            "params": [
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "Stream name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reconfigure a stream."
+        },
+        {
+          "info": {
+            "name": "Delete a stream.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://a.s2.dev/v1/streams/:stream",
+            "params": [
+              {
+                "name": "stream",
+                "value": "",
+                "type": "path",
+                "description": "Stream name."
+              }
+            ]
+          },
+          "docs": "Delete a stream."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

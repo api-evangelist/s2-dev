@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "S2, the durable streams access-tokens locations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List locations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/locations"
+          },
+          "docs": "List locations."
+        },
+        {
+          "info": {
+            "name": "Get the default location.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://a.s2.dev/v1/locations/default"
+          },
+          "docs": "Get the default location."
+        },
+        {
+          "info": {
+            "name": "Set the default location.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://a.s2.dev/v1/locations/default",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the default location."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
