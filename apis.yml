@@ -53,6 +53,8 @@ apis:
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
   tags:
+  - Access Tokens
+  tags_raw:
   - access-tokens
   properties:
   - type: OpenAPI
@@ -65,6 +67,8 @@ apis:
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
   tags:
+  - Basins
+  tags_raw:
   - basins
   properties:
   - type: OpenAPI
@@ -77,6 +81,8 @@ apis:
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
   tags:
+  - Locations
+  tags_raw:
   - locations
   properties:
   - type: OpenAPI
@@ -89,6 +95,8 @@ apis:
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
   tags:
+  - Metrics
+  tags_raw:
   - metrics
   properties:
   - type: OpenAPI
@@ -101,6 +109,8 @@ apis:
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
   tags:
+  - Records
+  tags_raw:
   - records
   properties:
   - type: OpenAPI
@@ -113,6 +123,8 @@ apis:
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
   tags:
+  - Streams
+  tags_raw:
   - streams
   properties:
   - type: OpenAPI
