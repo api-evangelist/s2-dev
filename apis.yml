@@ -65,7 +65,7 @@ apis:
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
   tags:
-  - access-tokens
+  - Access Tokens
   tags_raw:
   - access-tokens
   properties:
@@ -79,7 +79,7 @@ apis:
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
   tags:
-  - basins
+  - Basins
   tags_raw:
   - basins
   properties:
