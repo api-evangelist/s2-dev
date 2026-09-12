@@ -157,6 +157,8 @@ x-enrichment:
   artifacts_added: 26
   pass: local-v1
 common:
+- type: Website
+  url: https://www.s2.dev/
 - type: VulnerabilityDisclosure
   url: security/s2-dev-vulnerability-disclosure.yml
 - type: DomainSecurity
