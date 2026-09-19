@@ -57,6 +57,17 @@ tags:
 - Event Streaming
 - Durable Storage
 - Message Streaming
+- Data Feed
+- Observability
+- Developer Tools
+- Infrastructure
+tags_raw:
+- Company
+- Streaming
+- Real-Time
+- Event Streaming
+- Durable Storage
+- Message Streaming
 - Data Feeds
 - Observability
 - Developer Tools
@@ -96,7 +107,7 @@ apis:
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
   tags:
-  - Locations
+  - Location
   tags_raw:
   - locations
   properties:
