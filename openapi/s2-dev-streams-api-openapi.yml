@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: S2, the durable access-tokens streams API
+  title: S2, the durable Streams API
   description: Streams as a cloud storage primitive.
   termsOfService: https://s2.dev/terms
   contact:
@@ -13,7 +13,7 @@ servers:
 security:
 - access_token: []
 tags:
-- name: streams
+- name: Streams
   description: Manage streams
 paths:
   /streams:
@@ -26,8 +26,8 @@ paths:
           description: Basin name
     get:
       tags:
-      - streams
-      summary: List streams.
+      - Streams
+      summary: List streams
       operationId: list_streams
       parameters:
       - name: prefix
@@ -86,8 +86,8 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
     post:
       tags:
-      - streams
-      summary: Create a stream.
+      - Streams
+      summary: Create a stream
       operationId: create_stream
       parameters:
       - name: s2-request-token
@@ -149,8 +149,8 @@ paths:
           description: Basin name
     get:
       tags:
-      - streams
-      summary: Get stream configuration.
+      - Streams
+      summary: Get stream configuration
       operationId: get_stream_config
       parameters:
       - name: stream
@@ -198,8 +198,8 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
     put:
       tags:
-      - streams
-      summary: Ensure a stream.
+      - Streams
+      summary: Ensure a stream
       operationId: ensure_stream
       parameters:
       - name: stream
@@ -260,8 +260,8 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
     delete:
       tags:
-      - streams
-      summary: Delete a stream.
+      - Streams
+      summary: Delete a stream
       operationId: delete_stream
       parameters:
       - name: stream
@@ -305,8 +305,8 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
     patch:
       tags:
-      - streams
-      summary: Reconfigure a stream.
+      - Streams
+      summary: Reconfigure a stream
       operationId: reconfigure_stream
       parameters:
       - name: stream
@@ -360,51 +360,25 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    StreamReconfiguration:
-      type: object
-      properties:
-        delete_on_empty:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/DeleteOnEmptyReconfiguration'
-            description: Delete-on-empty configuration.
-        retention_policy:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/RetentionPolicy'
-            description: 'Retention policy for the stream.
-
-              If unspecified, the default is to retain records for 7 days.'
-        storage_class:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/StorageClass'
-            description: Storage class for recent writes.
-        timestamping:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/TimestampingReconfiguration'
-            description: Timestamping behavior.
-    CreateStreamRequest:
+    StreamNameStr:
+      type: string
+      maxLength: 512
+      minLength: 1
+    ListStreamsResponse:
       type: object
       required:
-      - stream
+      - streams
+      - has_more
       properties:
-        config:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/StreamConfig'
-            description: Stream configuration.
-        stream:
-          $ref: '#/components/schemas/StreamNameStr'
-          description: 'Stream name that is unique to the basin.
-
-            It can be between 1 and 512 bytes in length.'
-    EncryptionAlgorithm:
-      type: string
-      enum:
-      - aegis-256
-      - aes-256-gcm
+        has_more:
+          type: boolean
+          description: Indicates that there are more results that match the criteria.
+        streams:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamInfo'
+          description: Matching streams.
+          maxItems: 1000
     StreamConfig:
       type: object
       properties:
@@ -432,78 +406,11 @@ components:
             description: Timestamping behavior.
     InfiniteRetention:
       type: object
-    DeleteOnEmptyConfig:
-      type: object
-      properties:
-        min_age_secs:
-          type: integer
-          format: int64
-          description: 'Minimum age in seconds before an empty stream can be deleted.
-
-            Set to 0 (default) to disable delete-on-empty (don''t delete automatically).'
-          minimum: 0
     StorageClass:
       type: string
       enum:
       - standard
       - express
-    RetentionPolicy:
-      oneOf:
-      - type: object
-        description: 'Age in seconds for automatic trimming of records older than this threshold.
-
-          This must be set to a value greater than 0 seconds.'
-        required:
-        - age
-        properties:
-          age:
-            type: integer
-            format: int64
-            description: 'Age in seconds for automatic trimming of records older than this threshold.
-
-              This must be set to a value greater than 0 seconds.'
-            minimum: 0
-      - type: object
-        description: Retain records unless explicitly trimmed.
-        required:
-        - infinite
-        properties:
-          infinite:
-            $ref: '#/components/schemas/InfiniteRetention'
-            description: Retain records unless explicitly trimmed.
-    TimestampingMode:
-      type: string
-      enum:
-      - client-prefer
-      - client-require
-      - arrival
-    DeleteOnEmptyReconfiguration:
-      type: object
-      properties:
-        min_age_secs:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Minimum age in seconds before an empty stream can be deleted.
-
-            Set to 0 to disable delete-on-empty (don''t delete automatically).'
-          minimum: 0
-    ListStreamsResponse:
-      type: object
-      required:
-      - streams
-      - has_more
-      properties:
-        has_more:
-          type: boolean
-          description: Indicates that there are more results that match the criteria.
-        streams:
-          type: array
-          items:
-            $ref: '#/components/schemas/StreamInfo'
-          description: Matching streams.
-          maxItems: 1000
     TimestampingReconfiguration:
       type: object
       properties:
@@ -532,10 +439,6 @@ components:
           description: 'Allow client-specified timestamps to exceed the arrival time.
 
             If this is `false` or not set, client timestamps will be capped at the arrival time.'
-    StreamNameStr:
-      type: string
-      maxLength: 512
-      minLength: 1
     ErrorInfo:
       type: object
       required:
@@ -546,6 +449,64 @@ components:
           type: string
         message:
           type: string
+    RequestToken:
+      type: string
+      maxLength: 36
+    TimestampingMode:
+      type: string
+      enum:
+      - client-prefer
+      - client-require
+      - arrival
+    RetentionPolicy:
+      oneOf:
+      - type: object
+        description: 'Age in seconds for automatic trimming of records older than this threshold.
+
+          This must be set to a value greater than 0 seconds.'
+        required:
+        - age
+        properties:
+          age:
+            type: integer
+            format: int64
+            description: 'Age in seconds for automatic trimming of records older than this threshold.
+
+              This must be set to a value greater than 0 seconds.'
+            minimum: 0
+      - type: object
+        description: Retain records unless explicitly trimmed.
+        required:
+        - infinite
+        properties:
+          infinite:
+            $ref: '#/components/schemas/InfiniteRetention'
+            description: Retain records unless explicitly trimmed.
+    StreamReconfiguration:
+      type: object
+      properties:
+        delete_on_empty:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DeleteOnEmptyReconfiguration'
+            description: Delete-on-empty configuration.
+        retention_policy:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/RetentionPolicy'
+            description: 'Retention policy for the stream.
+
+              If unspecified, the default is to retain records for 7 days.'
+        storage_class:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StorageClass'
+            description: Storage class for recent writes.
+        timestamping:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingReconfiguration'
+            description: Timestamping behavior.
     StreamInfo:
       type: object
       required:
@@ -570,9 +531,48 @@ components:
         name:
           $ref: '#/components/schemas/StreamNameStr'
           description: Stream name.
-    RequestToken:
+    EncryptionAlgorithm:
       type: string
-      maxLength: 36
+      enum:
+      - aegis-256
+      - aes-256-gcm
+    DeleteOnEmptyReconfiguration:
+      type: object
+      properties:
+        min_age_secs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Minimum age in seconds before an empty stream can be deleted.
+
+            Set to 0 to disable delete-on-empty (don''t delete automatically).'
+          minimum: 0
+    CreateStreamRequest:
+      type: object
+      required:
+      - stream
+      properties:
+        config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StreamConfig'
+            description: Stream configuration.
+        stream:
+          $ref: '#/components/schemas/StreamNameStr'
+          description: 'Stream name that is unique to the basin.
+
+            It can be between 1 and 512 bytes in length.'
+    DeleteOnEmptyConfig:
+      type: object
+      properties:
+        min_age_secs:
+          type: integer
+          format: int64
+          description: 'Minimum age in seconds before an empty stream can be deleted.
+
+            Set to 0 (default) to disable delete-on-empty (don''t delete automatically).'
+          minimum: 0
   securitySchemes:
     access_token:
       type: http

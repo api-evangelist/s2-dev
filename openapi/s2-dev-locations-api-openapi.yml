@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: S2, the durable streams access-tokens locations API
+  title: S2, the durable streams Locations API
   description: Streams as a cloud storage primitive.
   termsOfService: https://s2.dev/terms
   contact:
@@ -13,14 +13,14 @@ servers:
 security:
 - access_token: []
 tags:
-- name: locations
+- name: Locations
   description: Manage locations
 paths:
   /locations:
     get:
       tags:
-      - locations
-      summary: List locations.
+      - Locations
+      summary: List locations
       operationId: list_locations
       responses:
         '200':
@@ -52,8 +52,8 @@ paths:
   /locations/default:
     get:
       tags:
-      - locations
-      summary: Get the default location.
+      - Locations
+      summary: Get the default location
       operationId: get_default_location
       responses:
         '200':
@@ -76,8 +76,8 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
     put:
       tags:
-      - locations
-      summary: Set the default location.
+      - Locations
+      summary: Set the default location
       operationId: set_default_location
       requestBody:
         content:
@@ -122,6 +122,10 @@ components:
           type: string
         message:
           type: string
+    LocationName:
+      type: string
+      maxLength: 64
+      minLength: 1
     LocationInfo:
       type: object
       required:
@@ -134,10 +138,6 @@ components:
         name:
           $ref: '#/components/schemas/LocationName'
           description: Location name.
-    LocationName:
-      type: string
-      maxLength: 64
-      minLength: 1
   securitySchemes:
     access_token:
       type: http

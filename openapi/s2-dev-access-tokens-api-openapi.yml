@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: S2, the durable streams access-tokens API
+  title: S2, the durable streams Access Tokens API
   description: Streams as a cloud storage primitive.
   termsOfService: https://s2.dev/terms
   contact:
@@ -13,14 +13,14 @@ servers:
 security:
 - access_token: []
 tags:
-- name: access-tokens
+- name: Access Tokens
   description: Manage access tokens
 paths:
   /access-tokens:
     get:
       tags:
-      - access-tokens
-      summary: List access tokens.
+      - Access Tokens
+      summary: List access tokens
       operationId: list_access_tokens
       parameters:
       - name: prefix
@@ -73,8 +73,8 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
     post:
       tags:
-      - access-tokens
-      summary: Issue a new access token.
+      - Access Tokens
+      summary: Issue a new access token
       operationId: issue_access_token
       requestBody:
         content:
@@ -116,8 +116,8 @@ paths:
   /access-tokens/{id}:
     delete:
       tags:
-      - access-tokens
-      summary: Revoke an access token.
+      - Access Tokens
+      summary: Revoke an access token
       operationId: revoke_access_token
       parameters:
       - name: id
@@ -149,17 +149,34 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    ReadWritePermissions:
+    IssueAccessTokenRequest:
       type: object
+      required:
+      - id
+      - scope
       properties:
-        read:
+        auto_prefix_streams:
           type: boolean
-          description: Read permission.
+          description: 'Namespace streams based on the configured stream-level scope, which must be a prefix.
+
+            Stream name arguments will be automatically prefixed, and the prefix will be stripped when listing streams.'
           default: false
-        write:
-          type: boolean
-          description: Write permission.
-          default: false
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: 'Expiration time in RFC 3339 format.
+
+            If not set, the expiration will be set to that of the requestor''s token.'
+        id:
+          $ref: '#/components/schemas/AccessTokenIdStr'
+          description: 'Access token ID.
+
+            It must be unique to the account and between 1 and 96 bytes in length.'
+        scope:
+          $ref: '#/components/schemas/AccessTokenScope'
+          description: Access token scope.
     AccessTokenScope:
       type: object
       properties:
@@ -192,122 +209,6 @@ components:
           - type: 'null'
           - $ref: '#/components/schemas/ResourceSet'
             description: Stream names allowed.
-    ListAccessTokensResponse:
-      type: object
-      required:
-      - access_tokens
-      - has_more
-      properties:
-        access_tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessTokenInfo'
-          description: Matching access tokens.
-          maxItems: 1000
-        has_more:
-          type: boolean
-          description: Indicates that there are more access tokens that match the criteria.
-    IssueAccessTokenResponse:
-      type: object
-      required:
-      - access_token
-      properties:
-        access_token:
-          type: string
-          description: Created access token.
-    IssueAccessTokenRequest:
-      type: object
-      required:
-      - id
-      - scope
-      properties:
-        auto_prefix_streams:
-          type: boolean
-          description: 'Namespace streams based on the configured stream-level scope, which must be a prefix.
-
-            Stream name arguments will be automatically prefixed, and the prefix will be stripped when listing streams.'
-          default: false
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: 'Expiration time in RFC 3339 format.
-
-            If not set, the expiration will be set to that of the requestor''s token.'
-        id:
-          $ref: '#/components/schemas/AccessTokenIdStr'
-          description: 'Access token ID.
-
-            It must be unique to the account and between 1 and 96 bytes in length.'
-        scope:
-          $ref: '#/components/schemas/AccessTokenScope'
-          description: Access token scope.
-    Operation:
-      type: string
-      enum:
-      - list-basins
-      - create-basin
-      - delete-basin
-      - reconfigure-basin
-      - get-basin-config
-      - issue-access-token
-      - revoke-access-token
-      - list-access-tokens
-      - list-streams
-      - create-stream
-      - delete-stream
-      - get-stream-config
-      - reconfigure-stream
-      - check-tail
-      - append
-      - read
-      - trim
-      - fence
-      - account-metrics
-      - basin-metrics
-      - stream-metrics
-      - list-locations
-      - get-default-location
-      - set-default-location
-    ErrorInfo:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    ResourceSet:
-      oneOf:
-      - type: object
-        title: exact
-        description: 'Match only the resource with this exact name.
-
-          Use an empty string to match no resources.'
-        required:
-        - exact
-        properties:
-          exact:
-            type: string
-            description: 'Match only the resource with this exact name.
-
-              Use an empty string to match no resources.'
-      - type: object
-        title: prefix
-        description: 'Match all resources that start with this prefix.
-
-          Use an empty string to match all resource.'
-        required:
-        - prefix
-        properties:
-          prefix:
-            type: string
-            description: 'Match all resources that start with this prefix.
-
-              Use an empty string to match all resource.'
     PermittedOperationGroups:
       type: object
       properties:
@@ -348,10 +249,109 @@ components:
         scope:
           $ref: '#/components/schemas/AccessTokenScope'
           description: Access token scope.
+    ResourceSet:
+      oneOf:
+      - type: object
+        title: exact
+        description: 'Match only the resource with this exact name.
+
+          Use an empty string to match no resources.'
+        required:
+        - exact
+        properties:
+          exact:
+            type: string
+            description: 'Match only the resource with this exact name.
+
+              Use an empty string to match no resources.'
+      - type: object
+        title: prefix
+        description: 'Match all resources that start with this prefix.
+
+          Use an empty string to match all resource.'
+        required:
+        - prefix
+        properties:
+          prefix:
+            type: string
+            description: 'Match all resources that start with this prefix.
+
+              Use an empty string to match all resource.'
     AccessTokenIdStr:
       type: string
       maxLength: 96
       minLength: 1
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    ListAccessTokensResponse:
+      type: object
+      required:
+      - access_tokens
+      - has_more
+      properties:
+        access_tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessTokenInfo'
+          description: Matching access tokens.
+          maxItems: 1000
+        has_more:
+          type: boolean
+          description: Indicates that there are more access tokens that match the criteria.
+    IssueAccessTokenResponse:
+      type: object
+      required:
+      - access_token
+      properties:
+        access_token:
+          type: string
+          description: Created access token.
+    Operation:
+      type: string
+      enum:
+      - list-basins
+      - create-basin
+      - delete-basin
+      - reconfigure-basin
+      - get-basin-config
+      - issue-access-token
+      - revoke-access-token
+      - list-access-tokens
+      - list-streams
+      - create-stream
+      - delete-stream
+      - get-stream-config
+      - reconfigure-stream
+      - check-tail
+      - append
+      - read
+      - trim
+      - fence
+      - account-metrics
+      - basin-metrics
+      - stream-metrics
+      - list-locations
+      - get-default-location
+      - set-default-location
+    ReadWritePermissions:
+      type: object
+      properties:
+        read:
+          type: boolean
+          description: Read permission.
+          default: false
+        write:
+          type: boolean
+          description: Write permission.
+          default: false
   securitySchemes:
     access_token:
       type: http

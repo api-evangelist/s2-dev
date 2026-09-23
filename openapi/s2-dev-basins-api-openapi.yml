@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: S2, the durable streams access-tokens basins API
+  title: S2, the durable streams Basins API
   description: Streams as a cloud storage primitive.
   termsOfService: https://s2.dev/terms
   contact:
@@ -13,14 +13,14 @@ servers:
 security:
 - access_token: []
 tags:
-- name: basins
+- name: Basins
   description: Manage basins
 paths:
   /basins:
     get:
       tags:
-      - basins
-      summary: List basins.
+      - Basins
+      summary: List basins
       operationId: list_basins
       parameters:
       - name: prefix
@@ -73,8 +73,8 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
     post:
       tags:
-      - basins
-      summary: Create a basin.
+      - Basins
+      summary: Create a basin
       operationId: create_basin
       parameters:
       - name: s2-request-token
@@ -129,8 +129,8 @@ paths:
   /basins/{basin}:
     get:
       tags:
-      - basins
-      summary: Get basin configuration.
+      - Basins
+      summary: Get basin configuration
       operationId: get_basin_config
       parameters:
       - name: basin
@@ -178,8 +178,8 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
     put:
       tags:
-      - basins
-      summary: Ensure a basin.
+      - Basins
+      summary: Ensure a basin
       operationId: ensure_basin
       parameters:
       - name: basin
@@ -228,8 +228,8 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
     delete:
       tags:
-      - basins
-      summary: Delete a basin.
+      - Basins
+      summary: Delete a basin
       operationId: delete_basin
       parameters:
       - name: basin
@@ -273,8 +273,8 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
     patch:
       tags:
-      - basins
-      summary: Reconfigure a basin.
+      - Basins
+      summary: Reconfigure a basin
       operationId: reconfigure_basin
       parameters:
       - name: basin
@@ -322,127 +322,6 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    EnsureBasinRequest:
-      type: object
-      properties:
-        config:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/BasinConfig'
-            description: Basin configuration.
-        location:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/LocationName'
-            description: 'Basin location.
-
-              If omitted when creating, uses the default location for the account.
-
-              This cannot be changed.'
-    TimestampingReconfiguration:
-      type: object
-      properties:
-        mode:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/TimestampingMode'
-            description: Timestamping mode for appends that influences how timestamps are handled.
-        uncapped:
-          type:
-          - boolean
-          - 'null'
-          description: Allow client-specified timestamps to exceed the arrival time.
-    BasinInfo:
-      type: object
-      required:
-      - name
-      - created_at
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          description: Creation time in RFC 3339 format.
-        deleted_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Deletion time in RFC 3339 format, if the basin is being deleted.
-        location:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/LocationName'
-            description: Basin location.
-        name:
-          $ref: '#/components/schemas/BasinNameStr'
-          description: Basin name.
-    RequestToken:
-      type: string
-      maxLength: 36
-    ListBasinsResponse:
-      type: object
-      required:
-      - basins
-      - has_more
-      properties:
-        basins:
-          type: array
-          items:
-            $ref: '#/components/schemas/BasinInfo'
-          description: Matching basins.
-          maxItems: 1000
-        has_more:
-          type: boolean
-          description: Indicates that there are more basins that match the criteria.
-    StorageClass:
-      type: string
-      enum:
-      - standard
-      - express
-    LocationName:
-      type: string
-      maxLength: 64
-      minLength: 1
-    TimestampingConfig:
-      type: object
-      properties:
-        mode:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/TimestampingMode'
-            description: Timestamping mode for appends that influences how timestamps are handled.
-        uncapped:
-          type:
-          - boolean
-          - 'null'
-          description: 'Allow client-specified timestamps to exceed the arrival time.
-
-            If this is `false` or not set, client timestamps will be capped at the arrival time.'
-    BasinReconfiguration:
-      type: object
-      properties:
-        create_stream_on_append:
-          type:
-          - boolean
-          - 'null'
-          description: Create a stream on append.
-        create_stream_on_read:
-          type:
-          - boolean
-          - 'null'
-          description: Create a stream on read.
-        default_stream_config:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/StreamReconfiguration'
-            description: Basin configuration.
-        stream_cipher:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/EncryptionAlgorithm'
-            description: Encryption algorithm to apply to newly created streams in the basin.
-    InfiniteRetention:
-      type: object
     BasinConfig:
       type: object
       properties:
@@ -464,28 +343,6 @@ components:
           - type: 'null'
           - $ref: '#/components/schemas/EncryptionAlgorithm'
             description: Encryption algorithm to apply to newly created streams in the basin.
-    DeleteOnEmptyReconfiguration:
-      type: object
-      properties:
-        min_age_secs:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Minimum age in seconds before an empty stream can be deleted.
-
-            Set to 0 to disable delete-on-empty (don''t delete automatically).'
-          minimum: 0
-    ErrorInfo:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     CreateBasinRequest:
       type: object
       required:
@@ -510,36 +367,48 @@ components:
             description: 'Basin location.
 
               If omitted when creating, uses the default location for the account.'
-    StreamReconfiguration:
+    BasinNameStr:
+      type: string
+      maxLength: 48
+      minLength: 8
+    ListBasinsResponse:
+      type: object
+      required:
+      - basins
+      - has_more
+      properties:
+        basins:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasinInfo'
+          description: Matching basins.
+          maxItems: 1000
+        has_more:
+          type: boolean
+          description: Indicates that there are more basins that match the criteria.
+    BasinReconfiguration:
       type: object
       properties:
-        delete_on_empty:
+        create_stream_on_append:
+          type:
+          - boolean
+          - 'null'
+          description: Create a stream on append.
+        create_stream_on_read:
+          type:
+          - boolean
+          - 'null'
+          description: Create a stream on read.
+        default_stream_config:
           oneOf:
           - type: 'null'
-          - $ref: '#/components/schemas/DeleteOnEmptyReconfiguration'
-            description: Delete-on-empty configuration.
-        retention_policy:
+          - $ref: '#/components/schemas/StreamReconfiguration'
+            description: Basin configuration.
+        stream_cipher:
           oneOf:
           - type: 'null'
-          - $ref: '#/components/schemas/RetentionPolicy'
-            description: 'Retention policy for the stream.
-
-              If unspecified, the default is to retain records for 7 days.'
-        storage_class:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/StorageClass'
-            description: Storage class for recent writes.
-        timestamping:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/TimestampingReconfiguration'
-            description: Timestamping behavior.
-    EncryptionAlgorithm:
-      type: string
-      enum:
-      - aegis-256
-      - aes-256-gcm
+          - $ref: '#/components/schemas/EncryptionAlgorithm'
+            description: Encryption algorithm to apply to newly created streams in the basin.
     StreamConfig:
       type: object
       properties:
@@ -565,12 +434,98 @@ components:
           - type: 'null'
           - $ref: '#/components/schemas/TimestampingConfig'
             description: Timestamping behavior.
-    TimestampingMode:
+    InfiniteRetention:
+      type: object
+    TimestampingReconfiguration:
+      type: object
+      properties:
+        mode:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingMode'
+            description: Timestamping mode for appends that influences how timestamps are handled.
+        uncapped:
+          type:
+          - boolean
+          - 'null'
+          description: Allow client-specified timestamps to exceed the arrival time.
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    EncryptionAlgorithm:
       type: string
       enum:
-      - client-prefer
-      - client-require
-      - arrival
+      - aegis-256
+      - aes-256-gcm
+    DeleteOnEmptyReconfiguration:
+      type: object
+      properties:
+        min_age_secs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Minimum age in seconds before an empty stream can be deleted.
+
+            Set to 0 to disable delete-on-empty (don''t delete automatically).'
+          minimum: 0
+    StorageClass:
+      type: string
+      enum:
+      - standard
+      - express
+    LocationName:
+      type: string
+      maxLength: 64
+      minLength: 1
+    BasinInfo:
+      type: object
+      required:
+      - name
+      - created_at
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: Creation time in RFC 3339 format.
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Deletion time in RFC 3339 format, if the basin is being deleted.
+        location:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/LocationName'
+            description: Basin location.
+        name:
+          $ref: '#/components/schemas/BasinNameStr'
+          description: Basin name.
+    EnsureBasinRequest:
+      type: object
+      properties:
+        config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/BasinConfig'
+            description: Basin configuration.
+        location:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/LocationName'
+            description: 'Basin location.
+
+              If omitted when creating, uses the default location for the account.
+
+              This cannot be changed.'
     DeleteOnEmptyConfig:
       type: object
       properties:
@@ -581,6 +536,30 @@ components:
 
             Set to 0 (default) to disable delete-on-empty (don''t delete automatically).'
           minimum: 0
+    RequestToken:
+      type: string
+      maxLength: 36
+    TimestampingConfig:
+      type: object
+      properties:
+        mode:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingMode'
+            description: Timestamping mode for appends that influences how timestamps are handled.
+        uncapped:
+          type:
+          - boolean
+          - 'null'
+          description: 'Allow client-specified timestamps to exceed the arrival time.
+
+            If this is `false` or not set, client timestamps will be capped at the arrival time.'
+    TimestampingMode:
+      type: string
+      enum:
+      - client-prefer
+      - client-require
+      - arrival
     RetentionPolicy:
       oneOf:
       - type: object
@@ -605,10 +584,31 @@ components:
           infinite:
             $ref: '#/components/schemas/InfiniteRetention'
             description: Retain records unless explicitly trimmed.
-    BasinNameStr:
-      type: string
-      maxLength: 48
-      minLength: 8
+    StreamReconfiguration:
+      type: object
+      properties:
+        delete_on_empty:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DeleteOnEmptyReconfiguration'
+            description: Delete-on-empty configuration.
+        retention_policy:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/RetentionPolicy'
+            description: 'Retention policy for the stream.
+
+              If unspecified, the default is to retain records for 7 days.'
+        storage_class:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StorageClass'
+            description: Storage class for recent writes.
+        timestamping:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingReconfiguration'
+            description: Timestamping behavior.
   securitySchemes:
     access_token:
       type: http
