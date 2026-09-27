@@ -360,57 +360,6 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    StreamNameStr:
-      type: string
-      maxLength: 512
-      minLength: 1
-    ListStreamsResponse:
-      type: object
-      required:
-      - streams
-      - has_more
-      properties:
-        has_more:
-          type: boolean
-          description: Indicates that there are more results that match the criteria.
-        streams:
-          type: array
-          items:
-            $ref: '#/components/schemas/StreamInfo'
-          description: Matching streams.
-          maxItems: 1000
-    StreamConfig:
-      type: object
-      properties:
-        delete_on_empty:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/DeleteOnEmptyConfig'
-            description: Delete-on-empty configuration.
-        retention_policy:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/RetentionPolicy'
-            description: 'Retention policy for the stream.
-
-              If unspecified, the default is to retain records for 7 days.'
-        storage_class:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/StorageClass'
-            description: Storage class for recent writes.
-        timestamping:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/TimestampingConfig'
-            description: Timestamping behavior.
-    InfiniteRetention:
-      type: object
-    StorageClass:
-      type: string
-      enum:
-      - standard
-      - express
     TimestampingReconfiguration:
       type: object
       properties:
@@ -424,64 +373,53 @@ components:
           - boolean
           - 'null'
           description: Allow client-specified timestamps to exceed the arrival time.
-    TimestampingConfig:
-      type: object
-      properties:
-        mode:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/TimestampingMode'
-            description: Timestamping mode for appends that influences how timestamps are handled.
-        uncapped:
-          type:
-          - boolean
-          - 'null'
-          description: 'Allow client-specified timestamps to exceed the arrival time.
-
-            If this is `false` or not set, client timestamps will be capped at the arrival time.'
-    ErrorInfo:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    RequestToken:
+    EncryptionAlgorithm:
       type: string
-      maxLength: 36
+      enum:
+      - aegis-256
+      - aes-256-gcm
     TimestampingMode:
       type: string
       enum:
       - client-prefer
       - client-require
       - arrival
-    RetentionPolicy:
-      oneOf:
-      - type: object
-        description: 'Age in seconds for automatic trimming of records older than this threshold.
-
-          This must be set to a value greater than 0 seconds.'
-        required:
-        - age
-        properties:
-          age:
-            type: integer
-            format: int64
-            description: 'Age in seconds for automatic trimming of records older than this threshold.
-
-              This must be set to a value greater than 0 seconds.'
-            minimum: 0
-      - type: object
-        description: Retain records unless explicitly trimmed.
-        required:
-        - infinite
-        properties:
-          infinite:
-            $ref: '#/components/schemas/InfiniteRetention'
-            description: Retain records unless explicitly trimmed.
+    StreamInfo:
+      type: object
+      required:
+      - name
+      - created_at
+      properties:
+        cipher:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/EncryptionAlgorithm'
+            description: Encryption algorithm for this stream, if encryption is enabled.
+        created_at:
+          type: string
+          format: date-time
+          description: Creation time in RFC 3339 format.
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Deletion time in RFC 3339 format, if the stream is being deleted.
+        name:
+          $ref: '#/components/schemas/StreamNameStr'
+          description: Stream name.
+    StreamNameStr:
+      type: string
+      maxLength: 512
+      minLength: 1
+    RequestToken:
+      type: string
+      maxLength: 36
+    StorageClass:
+      type: string
+      enum:
+      - standard
+      - express
     StreamReconfiguration:
       type: object
       properties:
@@ -507,47 +445,6 @@ components:
           - type: 'null'
           - $ref: '#/components/schemas/TimestampingReconfiguration'
             description: Timestamping behavior.
-    StreamInfo:
-      type: object
-      required:
-      - name
-      - created_at
-      properties:
-        cipher:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/EncryptionAlgorithm'
-            description: Encryption algorithm for this stream, if encryption is enabled.
-        created_at:
-          type: string
-          format: date-time
-          description: Creation time in RFC 3339 format.
-        deleted_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Deletion time in RFC 3339 format, if the stream is being deleted.
-        name:
-          $ref: '#/components/schemas/StreamNameStr'
-          description: Stream name.
-    EncryptionAlgorithm:
-      type: string
-      enum:
-      - aegis-256
-      - aes-256-gcm
-    DeleteOnEmptyReconfiguration:
-      type: object
-      properties:
-        min_age_secs:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Minimum age in seconds before an empty stream can be deleted.
-
-            Set to 0 to disable delete-on-empty (don''t delete automatically).'
-          minimum: 0
     CreateStreamRequest:
       type: object
       required:
@@ -563,6 +460,21 @@ components:
           description: 'Stream name that is unique to the basin.
 
             It can be between 1 and 512 bytes in length.'
+    TimestampingConfig:
+      type: object
+      properties:
+        mode:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingMode'
+            description: Timestamping mode for appends that influences how timestamps are handled.
+        uncapped:
+          type:
+          - boolean
+          - 'null'
+          description: 'Allow client-specified timestamps to exceed the arrival time.
+
+            If this is `false` or not set, client timestamps will be capped at the arrival time.'
     DeleteOnEmptyConfig:
       type: object
       properties:
@@ -572,6 +484,94 @@ components:
           description: 'Minimum age in seconds before an empty stream can be deleted.
 
             Set to 0 (default) to disable delete-on-empty (don''t delete automatically).'
+          minimum: 0
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    StreamConfig:
+      type: object
+      properties:
+        delete_on_empty:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DeleteOnEmptyConfig'
+            description: Delete-on-empty configuration.
+        retention_policy:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/RetentionPolicy'
+            description: 'Retention policy for the stream.
+
+              If unspecified, the default is to retain records for 7 days.'
+        storage_class:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StorageClass'
+            description: Storage class for recent writes.
+        timestamping:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingConfig'
+            description: Timestamping behavior.
+    RetentionPolicy:
+      oneOf:
+      - type: object
+        description: 'Age in seconds for automatic trimming of records older than this threshold.
+
+          This must be set to a value greater than 0 seconds.'
+        required:
+        - age
+        properties:
+          age:
+            type: integer
+            format: int64
+            description: 'Age in seconds for automatic trimming of records older than this threshold.
+
+              This must be set to a value greater than 0 seconds.'
+            minimum: 0
+      - type: object
+        description: Retain records unless explicitly trimmed.
+        required:
+        - infinite
+        properties:
+          infinite:
+            $ref: '#/components/schemas/InfiniteRetention'
+            description: Retain records unless explicitly trimmed.
+    InfiniteRetention:
+      type: object
+    ListStreamsResponse:
+      type: object
+      required:
+      - streams
+      - has_more
+      properties:
+        has_more:
+          type: boolean
+          description: Indicates that there are more results that match the criteria.
+        streams:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamInfo'
+          description: Matching streams.
+          maxItems: 1000
+    DeleteOnEmptyReconfiguration:
+      type: object
+      properties:
+        min_age_secs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Minimum age in seconds before an empty stream can be deleted.
+
+            Set to 0 to disable delete-on-empty (don''t delete automatically).'
           minimum: 0
   securitySchemes:
     access_token:

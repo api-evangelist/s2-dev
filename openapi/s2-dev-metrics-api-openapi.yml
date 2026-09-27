@@ -216,44 +216,47 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    StreamNameStr:
-      type: string
-      maxLength: 512
-      minLength: 1
     MetricUnit:
       type: string
       enum:
       - bytes
       - operations
+    ScalarMetric:
+      type: object
+      required:
+      - name
+      - unit
+      - value
+      properties:
+        name:
+          type: string
+          description: Metric name.
+        unit:
+          $ref: '#/components/schemas/MetricUnit'
+          description: Unit of the metric.
+        value:
+          type: number
+          format: double
+          description: Metric value.
     AccountMetricSet:
       type: string
       enum:
       - active-basins
       - account-ops
-    LabelMetric:
+    StreamNameStr:
+      type: string
+      maxLength: 512
+      minLength: 1
+    MetricSetResponse:
       type: object
       required:
-      - name
       - values
       properties:
-        name:
-          type: string
-          description: Label name.
         values:
           type: array
           items:
-            type: string
-          description: Label values.
-    ErrorInfo:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-        message:
-          type: string
+            $ref: '#/components/schemas/Metric'
+          description: Metrics comprising the set.
     BasinMetricSet:
       type: string
       enum:
@@ -263,35 +266,10 @@ components:
       - read-throughput
       - append-throughput
       - basin-ops
-    GaugeMetric:
-      type: object
-      required:
-      - name
-      - unit
-      - values
-      properties:
-        name:
-          type: string
-          description: Timeseries name.
-        unit:
-          $ref: '#/components/schemas/MetricUnit'
-          description: Unit of the metric.
-        values:
-          type: array
-          items:
-            type: array
-            items: false
-            prefixItems:
-            - type: integer
-              format: int32
-              minimum: 0
-            - type: number
-              format: double
-          description: 'Timeseries values.
-
-            Each element is a tuple of a timestamp in Unix epoch seconds and a data point.
-
-            The data point represents the value at the instant of the timestamp.'
+    StreamMetricSet:
+      type: string
+      enum:
+      - storage
     Metric:
       oneOf:
       - type: object
@@ -326,29 +304,16 @@ components:
           label:
             $ref: '#/components/schemas/LabelMetric'
             description: Set of string labels.
-    TimeseriesInterval:
-      type: string
-      enum:
-      - minute
-      - hour
-      - day
-    ScalarMetric:
+    ErrorInfo:
       type: object
       required:
-      - name
-      - unit
-      - value
+      - code
+      - message
       properties:
-        name:
+        code:
           type: string
-          description: Metric name.
-        unit:
-          $ref: '#/components/schemas/MetricUnit'
-          description: Unit of the metric.
-        value:
-          type: number
-          format: double
-          description: Metric value.
+        message:
+          type: string
     AccumulationMetric:
       type: object
       required:
@@ -382,24 +347,59 @@ components:
             Each element is a tuple of a timestamp in Unix epoch seconds and a data point.
 
             The data point represents the accumulated value for the time period starting at the timestamp, spanning one `interval`.'
+    GaugeMetric:
+      type: object
+      required:
+      - name
+      - unit
+      - values
+      properties:
+        name:
+          type: string
+          description: Timeseries name.
+        unit:
+          $ref: '#/components/schemas/MetricUnit'
+          description: Unit of the metric.
+        values:
+          type: array
+          items:
+            type: array
+            items: false
+            prefixItems:
+            - type: integer
+              format: int32
+              minimum: 0
+            - type: number
+              format: double
+          description: 'Timeseries values.
+
+            Each element is a tuple of a timestamp in Unix epoch seconds and a data point.
+
+            The data point represents the value at the instant of the timestamp.'
+    TimeseriesInterval:
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
     BasinNameStr:
       type: string
       maxLength: 48
       minLength: 8
-    StreamMetricSet:
-      type: string
-      enum:
-      - storage
-    MetricSetResponse:
+    LabelMetric:
       type: object
       required:
+      - name
       - values
       properties:
+        name:
+          type: string
+          description: Label name.
         values:
           type: array
           items:
-            $ref: '#/components/schemas/Metric'
-          description: Metrics comprising the set.
+            type: string
+          description: Label values.
   securitySchemes:
     access_token:
       type: http

@@ -177,6 +177,127 @@ components:
         scope:
           $ref: '#/components/schemas/AccessTokenScope'
           description: Access token scope.
+    Operation:
+      type: string
+      enum:
+      - list-basins
+      - create-basin
+      - delete-basin
+      - reconfigure-basin
+      - get-basin-config
+      - issue-access-token
+      - revoke-access-token
+      - list-access-tokens
+      - list-streams
+      - create-stream
+      - delete-stream
+      - get-stream-config
+      - reconfigure-stream
+      - check-tail
+      - append
+      - read
+      - trim
+      - fence
+      - account-metrics
+      - basin-metrics
+      - stream-metrics
+      - list-locations
+      - get-default-location
+      - set-default-location
+    ListAccessTokensResponse:
+      type: object
+      required:
+      - access_tokens
+      - has_more
+      properties:
+        access_tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessTokenInfo'
+          description: Matching access tokens.
+          maxItems: 1000
+        has_more:
+          type: boolean
+          description: Indicates that there are more access tokens that match the criteria.
+    PermittedOperationGroups:
+      type: object
+      properties:
+        account:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ReadWritePermissions'
+            description: Account-level access permissions.
+        basin:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ReadWritePermissions'
+            description: Basin-level access permissions.
+        stream:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ReadWritePermissions'
+            description: Stream-level access permissions.
+    IssueAccessTokenResponse:
+      type: object
+      required:
+      - access_token
+      properties:
+        access_token:
+          type: string
+          description: Created access token.
+    ReadWritePermissions:
+      type: object
+      properties:
+        read:
+          type: boolean
+          description: Read permission.
+          default: false
+        write:
+          type: boolean
+          description: Write permission.
+          default: false
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    AccessTokenIdStr:
+      type: string
+      maxLength: 96
+      minLength: 1
+    ResourceSet:
+      oneOf:
+      - type: object
+        title: exact
+        description: 'Match only the resource with this exact name.
+
+          Use an empty string to match no resources.'
+        required:
+        - exact
+        properties:
+          exact:
+            type: string
+            description: 'Match only the resource with this exact name.
+
+              Use an empty string to match no resources.'
+      - type: object
+        title: prefix
+        description: 'Match all resources that start with this prefix.
+
+          Use an empty string to match all resource.'
+        required:
+        - prefix
+        properties:
+          prefix:
+            type: string
+            description: 'Match all resources that start with this prefix.
+
+              Use an empty string to match all resource.'
     AccessTokenScope:
       type: object
       properties:
@@ -209,24 +330,6 @@ components:
           - type: 'null'
           - $ref: '#/components/schemas/ResourceSet'
             description: Stream names allowed.
-    PermittedOperationGroups:
-      type: object
-      properties:
-        account:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ReadWritePermissions'
-            description: Account-level access permissions.
-        basin:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ReadWritePermissions'
-            description: Basin-level access permissions.
-        stream:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ReadWritePermissions'
-            description: Stream-level access permissions.
     AccessTokenInfo:
       type: object
       required:
@@ -249,109 +352,6 @@ components:
         scope:
           $ref: '#/components/schemas/AccessTokenScope'
           description: Access token scope.
-    ResourceSet:
-      oneOf:
-      - type: object
-        title: exact
-        description: 'Match only the resource with this exact name.
-
-          Use an empty string to match no resources.'
-        required:
-        - exact
-        properties:
-          exact:
-            type: string
-            description: 'Match only the resource with this exact name.
-
-              Use an empty string to match no resources.'
-      - type: object
-        title: prefix
-        description: 'Match all resources that start with this prefix.
-
-          Use an empty string to match all resource.'
-        required:
-        - prefix
-        properties:
-          prefix:
-            type: string
-            description: 'Match all resources that start with this prefix.
-
-              Use an empty string to match all resource.'
-    AccessTokenIdStr:
-      type: string
-      maxLength: 96
-      minLength: 1
-    ErrorInfo:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    ListAccessTokensResponse:
-      type: object
-      required:
-      - access_tokens
-      - has_more
-      properties:
-        access_tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessTokenInfo'
-          description: Matching access tokens.
-          maxItems: 1000
-        has_more:
-          type: boolean
-          description: Indicates that there are more access tokens that match the criteria.
-    IssueAccessTokenResponse:
-      type: object
-      required:
-      - access_token
-      properties:
-        access_token:
-          type: string
-          description: Created access token.
-    Operation:
-      type: string
-      enum:
-      - list-basins
-      - create-basin
-      - delete-basin
-      - reconfigure-basin
-      - get-basin-config
-      - issue-access-token
-      - revoke-access-token
-      - list-access-tokens
-      - list-streams
-      - create-stream
-      - delete-stream
-      - get-stream-config
-      - reconfigure-stream
-      - check-tail
-      - append
-      - read
-      - trim
-      - fence
-      - account-metrics
-      - basin-metrics
-      - stream-metrics
-      - list-locations
-      - get-default-location
-      - set-default-location
-    ReadWritePermissions:
-      type: object
-      properties:
-        read:
-          type: boolean
-          description: Read permission.
-          default: false
-        write:
-          type: boolean
-          description: Write permission.
-          default: false
   securitySchemes:
     access_token:
       type: http

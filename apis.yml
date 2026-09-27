@@ -74,7 +74,7 @@ tags_raw:
 - Infrastructure
 apis:
 - aid: s2-dev:s2-dev-access-tokens-api
-  name: S2 Dev access-tokens API
+  name: S2 Dev Access Tokens API
   description: Manage access tokens
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
@@ -88,7 +88,7 @@ apis:
   - type: Protobuf
     url: grpc/s2-dev-s2.proto
 - aid: s2-dev:s2-dev-basins-api
-  name: S2 Dev basins API
+  name: S2 Dev Basins API
   description: Manage basins
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
@@ -102,7 +102,7 @@ apis:
   - type: Protobuf
     url: grpc/s2-dev-s2.proto
 - aid: s2-dev:s2-dev-locations-api
-  name: S2 Dev locations API
+  name: S2 Dev Locations API
   description: Manage locations
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
@@ -116,7 +116,7 @@ apis:
   - type: Protobuf
     url: grpc/s2-dev-s2.proto
 - aid: s2-dev:s2-dev-metrics-api
-  name: S2 Dev metrics API
+  name: S2 Dev Metrics API
   description: Usage metrics and data.
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
@@ -130,7 +130,7 @@ apis:
   - type: Protobuf
     url: grpc/s2-dev-s2.proto
 - aid: s2-dev:s2-dev-records-api
-  name: S2 Dev records API
+  name: S2 Dev Records API
   description: Manage records
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
@@ -144,7 +144,7 @@ apis:
   - type: Protobuf
     url: grpc/s2-dev-s2.proto
 - aid: s2-dev:s2-dev-streams-api
-  name: S2 Dev streams API
+  name: S2 Dev Streams API
   description: Manage streams
   humanURL: https://s2.dev/docs/api
   baseURL: https://a.s2.dev/v1
