@@ -216,60 +216,10 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    MetricUnit:
+    BasinNameStr:
       type: string
-      enum:
-      - bytes
-      - operations
-    ScalarMetric:
-      type: object
-      required:
-      - name
-      - unit
-      - value
-      properties:
-        name:
-          type: string
-          description: Metric name.
-        unit:
-          $ref: '#/components/schemas/MetricUnit'
-          description: Unit of the metric.
-        value:
-          type: number
-          format: double
-          description: Metric value.
-    AccountMetricSet:
-      type: string
-      enum:
-      - active-basins
-      - account-ops
-    StreamNameStr:
-      type: string
-      maxLength: 512
-      minLength: 1
-    MetricSetResponse:
-      type: object
-      required:
-      - values
-      properties:
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/Metric'
-          description: Metrics comprising the set.
-    BasinMetricSet:
-      type: string
-      enum:
-      - storage
-      - append-ops
-      - read-ops
-      - read-throughput
-      - append-throughput
-      - basin-ops
-    StreamMetricSet:
-      type: string
-      enum:
-      - storage
+      maxLength: 48
+      minLength: 8
     Metric:
       oneOf:
       - type: object
@@ -304,6 +254,58 @@ components:
           label:
             $ref: '#/components/schemas/LabelMetric'
             description: Set of string labels.
+    GaugeMetric:
+      type: object
+      required:
+      - name
+      - unit
+      - values
+      properties:
+        name:
+          type: string
+          description: Timeseries name.
+        unit:
+          $ref: '#/components/schemas/MetricUnit'
+          description: Unit of the metric.
+        values:
+          type: array
+          items:
+            type: array
+            items: false
+            prefixItems:
+            - type: integer
+              format: int32
+              minimum: 0
+            - type: number
+              format: double
+          description: 'Timeseries values.
+
+            Each element is a tuple of a timestamp in Unix epoch seconds and a data point.
+
+            The data point represents the value at the instant of the timestamp.'
+    StreamMetricSet:
+      type: string
+      enum:
+      - storage
+    BasinMetricSet:
+      type: string
+      enum:
+      - storage
+      - append-ops
+      - read-ops
+      - read-throughput
+      - append-throughput
+      - basin-ops
+    MetricSetResponse:
+      type: object
+      required:
+      - values
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/Metric'
+          description: Metrics comprising the set.
     ErrorInfo:
       type: object
       required:
@@ -347,45 +349,6 @@ components:
             Each element is a tuple of a timestamp in Unix epoch seconds and a data point.
 
             The data point represents the accumulated value for the time period starting at the timestamp, spanning one `interval`.'
-    GaugeMetric:
-      type: object
-      required:
-      - name
-      - unit
-      - values
-      properties:
-        name:
-          type: string
-          description: Timeseries name.
-        unit:
-          $ref: '#/components/schemas/MetricUnit'
-          description: Unit of the metric.
-        values:
-          type: array
-          items:
-            type: array
-            items: false
-            prefixItems:
-            - type: integer
-              format: int32
-              minimum: 0
-            - type: number
-              format: double
-          description: 'Timeseries values.
-
-            Each element is a tuple of a timestamp in Unix epoch seconds and a data point.
-
-            The data point represents the value at the instant of the timestamp.'
-    TimeseriesInterval:
-      type: string
-      enum:
-      - minute
-      - hour
-      - day
-    BasinNameStr:
-      type: string
-      maxLength: 48
-      minLength: 8
     LabelMetric:
       type: object
       required:
@@ -400,6 +363,43 @@ components:
           items:
             type: string
           description: Label values.
+    ScalarMetric:
+      type: object
+      required:
+      - name
+      - unit
+      - value
+      properties:
+        name:
+          type: string
+          description: Metric name.
+        unit:
+          $ref: '#/components/schemas/MetricUnit'
+          description: Unit of the metric.
+        value:
+          type: number
+          format: double
+          description: Metric value.
+    AccountMetricSet:
+      type: string
+      enum:
+      - active-basins
+      - account-ops
+    MetricUnit:
+      type: string
+      enum:
+      - bytes
+      - operations
+    TimeseriesInterval:
+      type: string
+      enum:
+      - minute
+      - hour
+      - day
+    StreamNameStr:
+      type: string
+      maxLength: 512
+      minLength: 1
   securitySchemes:
     access_token:
       type: http

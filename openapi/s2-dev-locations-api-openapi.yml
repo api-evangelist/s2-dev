@@ -112,16 +112,6 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    ErrorInfo:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     LocationInfo:
       type: object
       required:
@@ -138,6 +128,16 @@ components:
       type: string
       maxLength: 64
       minLength: 1
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
   securitySchemes:
     access_token:
       type: http
