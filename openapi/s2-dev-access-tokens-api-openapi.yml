@@ -149,17 +149,6 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    ReadWritePermissions:
-      type: object
-      properties:
-        read:
-          type: boolean
-          description: Read permission.
-          default: false
-        write:
-          type: boolean
-          description: Write permission.
-          default: false
     ListAccessTokensResponse:
       type: object
       required:
@@ -175,6 +164,75 @@ components:
         has_more:
           type: boolean
           description: Indicates that there are more access tokens that match the criteria.
+    IssueAccessTokenResponse:
+      type: object
+      required:
+      - access_token
+      properties:
+        access_token:
+          type: string
+          description: Created access token.
+    ReadWritePermissions:
+      type: object
+      properties:
+        read:
+          type: boolean
+          description: Read permission.
+          default: false
+        write:
+          type: boolean
+          description: Write permission.
+          default: false
+    AccessTokenInfo:
+      type: object
+      required:
+      - id
+      - auto_prefix_streams
+      - scope
+      properties:
+        auto_prefix_streams:
+          type: boolean
+          description: Namespace streams based on the configured stream-level scope.
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Expiration time in RFC 3339 format.
+        id:
+          $ref: '#/components/schemas/AccessTokenIdStr'
+          description: Access token ID.
+        scope:
+          $ref: '#/components/schemas/AccessTokenScope'
+          description: Access token scope.
+    ResourceSet:
+      oneOf:
+      - type: object
+        title: exact
+        description: 'Match only the resource with this exact name.
+
+          Use an empty string to match no resources.'
+        required:
+        - exact
+        properties:
+          exact:
+            type: string
+            description: 'Match only the resource with this exact name.
+
+              Use an empty string to match no resources.'
+      - type: object
+        title: prefix
+        description: 'Match all resources that start with this prefix.
+
+          Use an empty string to match all resource.'
+        required:
+        - prefix
+        properties:
+          prefix:
+            type: string
+            description: 'Match all resources that start with this prefix.
+
+              Use an empty string to match all resource.'
     AccessTokenScope:
       type: object
       properties:
@@ -207,24 +265,10 @@ components:
           - type: 'null'
           - $ref: '#/components/schemas/ResourceSet'
             description: Stream names allowed.
-    PermittedOperationGroups:
-      type: object
-      properties:
-        account:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ReadWritePermissions'
-            description: Account-level access permissions.
-        basin:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ReadWritePermissions'
-            description: Basin-level access permissions.
-        stream:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ReadWritePermissions'
-            description: Stream-level access permissions.
+    AccessTokenIdStr:
+      type: string
+      maxLength: 96
+      minLength: 1
     Operation:
       type: string
       enum:
@@ -252,78 +296,6 @@ components:
       - list-locations
       - get-default-location
       - set-default-location
-    ErrorInfo:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    ResourceSet:
-      oneOf:
-      - type: object
-        title: exact
-        description: 'Match only the resource with this exact name.
-
-          Use an empty string to match no resources.'
-        required:
-        - exact
-        properties:
-          exact:
-            type: string
-            description: 'Match only the resource with this exact name.
-
-              Use an empty string to match no resources.'
-      - type: object
-        title: prefix
-        description: 'Match all resources that start with this prefix.
-
-          Use an empty string to match all resource.'
-        required:
-        - prefix
-        properties:
-          prefix:
-            type: string
-            description: 'Match all resources that start with this prefix.
-
-              Use an empty string to match all resource.'
-    AccessTokenIdStr:
-      type: string
-      maxLength: 96
-      minLength: 1
-    IssueAccessTokenResponse:
-      type: object
-      required:
-      - access_token
-      properties:
-        access_token:
-          type: string
-          description: Created access token.
-    AccessTokenInfo:
-      type: object
-      required:
-      - id
-      - auto_prefix_streams
-      - scope
-      properties:
-        auto_prefix_streams:
-          type: boolean
-          description: Namespace streams based on the configured stream-level scope.
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Expiration time in RFC 3339 format.
-        id:
-          $ref: '#/components/schemas/AccessTokenIdStr'
-          description: Access token ID.
-        scope:
-          $ref: '#/components/schemas/AccessTokenScope'
-          description: Access token scope.
     IssueAccessTokenRequest:
       type: object
       required:
@@ -352,6 +324,34 @@ components:
         scope:
           $ref: '#/components/schemas/AccessTokenScope'
           description: Access token scope.
+    PermittedOperationGroups:
+      type: object
+      properties:
+        account:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ReadWritePermissions'
+            description: Account-level access permissions.
+        basin:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ReadWritePermissions'
+            description: Basin-level access permissions.
+        stream:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ReadWritePermissions'
+            description: Stream-level access permissions.
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
   securitySchemes:
     access_token:
       type: http

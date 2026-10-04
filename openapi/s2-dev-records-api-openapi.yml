@@ -305,117 +305,10 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    SequencedRecord:
-      type: object
-      description: Record that is durably sequenced on a stream.
-      required:
-      - seq_num
-      - timestamp
-      properties:
-        body:
-          type: string
-          description: Body of the record.
-        headers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Header'
-          description: Series of name-value pairs for this record.
-        seq_num:
-          $ref: '#/components/schemas/u64'
-          description: Sequence number assigned by the service.
-        timestamp:
-          $ref: '#/components/schemas/u64'
-          description: Timestamp for this record.
-    AppendRecord:
-      type: object
-      description: Record to be appended to a stream.
-      properties:
-        body:
-          type: string
-          description: Body of the record.
-        headers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Header'
-          description: Series of name-value pairs for this record.
-        timestamp:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/u64'
-            description: 'Timestamp for this record.
-
-              The service will always ensure monotonicity by adjusting it up if necessary to the maximum observed timestamp.
-
-              Refer to stream timestamping configuration for the finer semantics around whether a client-specified timestamp is required, and whether it will be capped at the arrival time.'
     u64:
       type: integer
       format: int64
       minimum: 0
-    TailResponse:
-      type: object
-      required:
-      - tail
-      properties:
-        tail:
-          $ref: '#/components/schemas/StreamPosition'
-          description: Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
-    Format:
-      type: string
-      enum:
-      - raw
-      - base64
-    ReadEvent:
-      oneOf:
-      - type: object
-        title: batch
-        required:
-        - event
-        - data
-        - id
-        properties:
-          data:
-            $ref: '#/components/schemas/ReadBatch'
-          event:
-            type: string
-            enum:
-            - batch
-          id:
-            type: string
-            pattern: ^[0-9]+,[0-9]+,[0-9]+$
-      - type: object
-        title: error
-        required:
-        - event
-        - data
-        properties:
-          data:
-            type: string
-          event:
-            type: string
-            enum:
-            - error
-      - type: object
-        title: ping
-        required:
-        - event
-        - data
-        properties:
-          data:
-            $ref: '#/components/schemas/PingEventData'
-          event:
-            type: string
-            enum:
-            - ping
-    ErrorInfo:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     PingEventData:
       type: object
       required:
@@ -430,9 +323,6 @@ components:
           format: int64
           description: Time the ping was emitted, as Unix epoch milliseconds.
           minimum: 0
-    FencingToken:
-      type: string
-      maxLength: 36
     AppendInput:
       type: object
       description: Payload of an `append` request.
@@ -477,6 +367,72 @@ components:
           description: 'Sequence number that will be assigned to the next record on the stream, and timestamp of the last record on the stream.
 
             This can be greater than the `end` position in case of concurrent appends.'
+    ReadBatch:
+      type: object
+      required:
+      - records
+      properties:
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/SequencedRecord'
+          description: 'Records that are durably sequenced on the stream, retrieved based on the requested criteria.
+
+            This can only be empty in response to a unary read (i.e. not SSE), if the request cannot be satisfied without violating an explicit bound (`count`, `bytes`, or `until`).'
+        tail:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StreamPosition'
+            description: 'Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
+
+              This will only be present when reading recent records.'
+    ReadEvent:
+      oneOf:
+      - type: object
+        title: batch
+        required:
+        - event
+        - data
+        - id
+        properties:
+          data:
+            $ref: '#/components/schemas/ReadBatch'
+          event:
+            type: string
+            enum:
+            - batch
+          id:
+            type: string
+            pattern: ^[0-9]+,[0-9]+,[0-9]+$
+      - type: object
+        title: error
+        required:
+        - event
+        - data
+        properties:
+          data:
+            type: string
+          event:
+            type: string
+            enum:
+            - error
+      - type: object
+        title: ping
+        required:
+        - event
+        - data
+        properties:
+          data:
+            $ref: '#/components/schemas/PingEventData'
+          event:
+            type: string
+            enum:
+            - ping
+    Format:
+      type: string
+      enum:
+      - raw
+      - base64
     AppendConditionFailed:
       oneOf:
       - type: object
@@ -506,6 +462,42 @@ components:
 
               The expected next sequence number is returned.'
       description: Aborted due to a failed condition.
+    TailResponse:
+      type: object
+      required:
+      - tail
+      properties:
+        tail:
+          $ref: '#/components/schemas/StreamPosition'
+          description: Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
+    FencingToken:
+      type: string
+      maxLength: 36
+    AppendRecord:
+      type: object
+      description: Record to be appended to a stream.
+      properties:
+        body:
+          type: string
+          description: Body of the record.
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Header'
+          description: Series of name-value pairs for this record.
+        timestamp:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/u64'
+            description: 'Timestamp for this record.
+
+              The service will always ensure monotonicity by adjusting it up if necessary to the maximum observed timestamp.
+
+              Refer to stream timestamping configuration for the finer semantics around whether a client-specified timestamp is required, and whether it will be capped at the arrival time.'
+    StreamNameStr:
+      type: string
+      maxLength: 512
+      minLength: 1
     StreamPosition:
       type: object
       description: Position of a record in a stream.
@@ -521,35 +513,43 @@ components:
           description: 'Timestamp, which may be client-specified or assigned by the service.
 
             If it is assigned by the service, it will represent milliseconds since Unix epoch.'
-    ReadBatch:
+    SequencedRecord:
       type: object
+      description: Record that is durably sequenced on a stream.
       required:
-      - records
+      - seq_num
+      - timestamp
       properties:
-        records:
+        body:
+          type: string
+          description: Body of the record.
+        headers:
           type: array
           items:
-            $ref: '#/components/schemas/SequencedRecord'
-          description: 'Records that are durably sequenced on the stream, retrieved based on the requested criteria.
-
-            This can only be empty in response to a unary read (i.e. not SSE), if the request cannot be satisfied without violating an explicit bound (`count`, `bytes`, or `until`).'
-        tail:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/StreamPosition'
-            description: 'Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
-
-              This will only be present when reading recent records.'
+            $ref: '#/components/schemas/Header'
+          description: Series of name-value pairs for this record.
+        seq_num:
+          $ref: '#/components/schemas/u64'
+          description: Sequence number assigned by the service.
+        timestamp:
+          $ref: '#/components/schemas/u64'
+          description: Timestamp for this record.
     Header:
       type: array
       items:
         type: string
       maxItems: 2
       minItems: 2
-    StreamNameStr:
-      type: string
-      maxLength: 512
-      minLength: 1
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
   securitySchemes:
     access_token:
       type: http
