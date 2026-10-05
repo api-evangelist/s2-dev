@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/s2-streamstore/s2-specs/main/s2/v1/openapi.json",
+ "requested_url": "https://raw.githubusercontent.com/s2-streamstore/s2-specs/main/s2/v1/openapi.json",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 100486,
+ "sha256": "6ce426a5ca54be75e13a800b563cd8422236bd7b19dedca5695d1bb0181031eb",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
