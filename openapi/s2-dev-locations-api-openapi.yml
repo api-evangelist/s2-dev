@@ -124,10 +124,6 @@ components:
         name:
           $ref: '#/components/schemas/LocationName'
           description: Location name.
-    LocationName:
-      type: string
-      maxLength: 64
-      minLength: 1
     ErrorInfo:
       type: object
       required:
@@ -138,6 +134,10 @@ components:
           type: string
         message:
           type: string
+    LocationName:
+      type: string
+      maxLength: 64
+      minLength: 1
   securitySchemes:
     access_token:
       type: http

@@ -305,47 +305,6 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    u64:
-      type: integer
-      format: int64
-      minimum: 0
-    PingEventData:
-      type: object
-      required:
-      - timestamp
-      - tail
-      properties:
-        tail:
-          $ref: '#/components/schemas/StreamPosition'
-          description: Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
-        timestamp:
-          type: integer
-          format: int64
-          description: Time the ping was emitted, as Unix epoch milliseconds.
-          minimum: 0
-    AppendInput:
-      type: object
-      description: Payload of an `append` request.
-      required:
-      - records
-      properties:
-        fencing_token:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/FencingToken'
-            description: Enforce a fencing token, which starts out as an empty string that can be overridden by a `fence` command record.
-        match_seq_num:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/u64'
-            description: Enforce that the sequence number assigned to the first record matches.
-        records:
-          type: array
-          items:
-            $ref: '#/components/schemas/AppendRecord'
-          description: 'Batch of records to append atomically, which must contain at least one record, and no more than 1000.
-
-            The total size of a batch of records may not exceed 1 MiB of metered bytes.'
     AppendAck:
       type: object
       description: Success response to an `append` request.
@@ -386,6 +345,149 @@ components:
             description: 'Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
 
               This will only be present when reading recent records.'
+    TailResponse:
+      type: object
+      required:
+      - tail
+      properties:
+        tail:
+          $ref: '#/components/schemas/StreamPosition'
+          description: Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
+    AppendRecord:
+      type: object
+      description: Record to be appended to a stream.
+      properties:
+        body:
+          type: string
+          description: Body of the record.
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Header'
+          description: Series of name-value pairs for this record.
+        timestamp:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/u64'
+            description: 'Timestamp for this record.
+
+              The service will always ensure monotonicity by adjusting it up if necessary to the maximum observed timestamp.
+
+              Refer to stream timestamping configuration for the finer semantics around whether a client-specified timestamp is required, and whether it will be capped at the arrival time.'
+    PingEventData:
+      type: object
+      required:
+      - timestamp
+      - tail
+      properties:
+        tail:
+          $ref: '#/components/schemas/StreamPosition'
+          description: Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
+        timestamp:
+          type: integer
+          format: int64
+          description: Time the ping was emitted, as Unix epoch milliseconds.
+          minimum: 0
+    SequencedRecord:
+      type: object
+      description: Record that is durably sequenced on a stream.
+      required:
+      - seq_num
+      - timestamp
+      properties:
+        body:
+          type: string
+          description: Body of the record.
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Header'
+          description: Series of name-value pairs for this record.
+        seq_num:
+          $ref: '#/components/schemas/u64'
+          description: Sequence number assigned by the service.
+        timestamp:
+          $ref: '#/components/schemas/u64'
+          description: Timestamp for this record.
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    FencingToken:
+      type: string
+      maxLength: 36
+    u64:
+      type: integer
+      format: int64
+      minimum: 0
+    Header:
+      type: array
+      items:
+        type: string
+      maxItems: 2
+      minItems: 2
+    AppendConditionFailed:
+      oneOf:
+      - type: object
+        title: fencing token
+        description: 'Fencing token did not match.
+
+          The expected fencing token is returned.'
+        required:
+        - fencing_token_mismatch
+        properties:
+          fencing_token_mismatch:
+            $ref: '#/components/schemas/FencingToken'
+            description: 'Fencing token did not match.
+
+              The expected fencing token is returned.'
+      - type: object
+        title: seq num
+        description: 'Sequence number did not match the tail of the stream.
+
+          The expected next sequence number is returned.'
+        required:
+        - seq_num_mismatch
+        properties:
+          seq_num_mismatch:
+            $ref: '#/components/schemas/u64'
+            description: 'Sequence number did not match the tail of the stream.
+
+              The expected next sequence number is returned.'
+      description: Aborted due to a failed condition.
+    AppendInput:
+      type: object
+      description: Payload of an `append` request.
+      required:
+      - records
+      properties:
+        fencing_token:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/FencingToken'
+            description: Enforce a fencing token, which starts out as an empty string that can be overridden by a `fence` command record.
+        match_seq_num:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/u64'
+            description: Enforce that the sequence number assigned to the first record matches.
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppendRecord'
+          description: 'Batch of records to append atomically, which must contain at least one record, and no more than 1000.
+
+            The total size of a batch of records may not exceed 1 MiB of metered bytes.'
+    StreamNameStr:
+      type: string
+      maxLength: 512
+      minLength: 1
     ReadEvent:
       oneOf:
       - type: object
@@ -428,76 +530,6 @@ components:
             type: string
             enum:
             - ping
-    Format:
-      type: string
-      enum:
-      - raw
-      - base64
-    AppendConditionFailed:
-      oneOf:
-      - type: object
-        title: fencing token
-        description: 'Fencing token did not match.
-
-          The expected fencing token is returned.'
-        required:
-        - fencing_token_mismatch
-        properties:
-          fencing_token_mismatch:
-            $ref: '#/components/schemas/FencingToken'
-            description: 'Fencing token did not match.
-
-              The expected fencing token is returned.'
-      - type: object
-        title: seq num
-        description: 'Sequence number did not match the tail of the stream.
-
-          The expected next sequence number is returned.'
-        required:
-        - seq_num_mismatch
-        properties:
-          seq_num_mismatch:
-            $ref: '#/components/schemas/u64'
-            description: 'Sequence number did not match the tail of the stream.
-
-              The expected next sequence number is returned.'
-      description: Aborted due to a failed condition.
-    TailResponse:
-      type: object
-      required:
-      - tail
-      properties:
-        tail:
-          $ref: '#/components/schemas/StreamPosition'
-          description: Sequence number that will be assigned to the next record on the stream, and timestamp of the last record.
-    FencingToken:
-      type: string
-      maxLength: 36
-    AppendRecord:
-      type: object
-      description: Record to be appended to a stream.
-      properties:
-        body:
-          type: string
-          description: Body of the record.
-        headers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Header'
-          description: Series of name-value pairs for this record.
-        timestamp:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/u64'
-            description: 'Timestamp for this record.
-
-              The service will always ensure monotonicity by adjusting it up if necessary to the maximum observed timestamp.
-
-              Refer to stream timestamping configuration for the finer semantics around whether a client-specified timestamp is required, and whether it will be capped at the arrival time.'
-    StreamNameStr:
-      type: string
-      maxLength: 512
-      minLength: 1
     StreamPosition:
       type: object
       description: Position of a record in a stream.
@@ -513,43 +545,11 @@ components:
           description: 'Timestamp, which may be client-specified or assigned by the service.
 
             If it is assigned by the service, it will represent milliseconds since Unix epoch.'
-    SequencedRecord:
-      type: object
-      description: Record that is durably sequenced on a stream.
-      required:
-      - seq_num
-      - timestamp
-      properties:
-        body:
-          type: string
-          description: Body of the record.
-        headers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Header'
-          description: Series of name-value pairs for this record.
-        seq_num:
-          $ref: '#/components/schemas/u64'
-          description: Sequence number assigned by the service.
-        timestamp:
-          $ref: '#/components/schemas/u64'
-          description: Timestamp for this record.
-    Header:
-      type: array
-      items:
-        type: string
-      maxItems: 2
-      minItems: 2
-    ErrorInfo:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-        message:
-          type: string
+    Format:
+      type: string
+      enum:
+      - raw
+      - base64
   securitySchemes:
     access_token:
       type: http

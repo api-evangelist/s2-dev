@@ -149,40 +149,10 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    ListAccessTokensResponse:
-      type: object
-      required:
-      - access_tokens
-      - has_more
-      properties:
-        access_tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessTokenInfo'
-          description: Matching access tokens.
-          maxItems: 1000
-        has_more:
-          type: boolean
-          description: Indicates that there are more access tokens that match the criteria.
-    IssueAccessTokenResponse:
-      type: object
-      required:
-      - access_token
-      properties:
-        access_token:
-          type: string
-          description: Created access token.
-    ReadWritePermissions:
-      type: object
-      properties:
-        read:
-          type: boolean
-          description: Read permission.
-          default: false
-        write:
-          type: boolean
-          description: Write permission.
-          default: false
+    AccessTokenIdStr:
+      type: string
+      maxLength: 96
+      minLength: 1
     AccessTokenInfo:
       type: object
       required:
@@ -205,34 +175,32 @@ components:
         scope:
           $ref: '#/components/schemas/AccessTokenScope'
           description: Access token scope.
-    ResourceSet:
-      oneOf:
-      - type: object
-        title: exact
-        description: 'Match only the resource with this exact name.
-
-          Use an empty string to match no resources.'
-        required:
-        - exact
-        properties:
-          exact:
-            type: string
-            description: 'Match only the resource with this exact name.
-
-              Use an empty string to match no resources.'
-      - type: object
-        title: prefix
-        description: 'Match all resources that start with this prefix.
-
-          Use an empty string to match all resource.'
-        required:
-        - prefix
-        properties:
-          prefix:
-            type: string
-            description: 'Match all resources that start with this prefix.
-
-              Use an empty string to match all resource.'
+    ListAccessTokensResponse:
+      type: object
+      required:
+      - access_tokens
+      - has_more
+      properties:
+        access_tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessTokenInfo'
+          description: Matching access tokens.
+          maxItems: 1000
+        has_more:
+          type: boolean
+          description: Indicates that there are more access tokens that match the criteria.
+    ReadWritePermissions:
+      type: object
+      properties:
+        read:
+          type: boolean
+          description: Read permission.
+          default: false
+        write:
+          type: boolean
+          description: Write permission.
+          default: false
     AccessTokenScope:
       type: object
       properties:
@@ -265,10 +233,6 @@ components:
           - type: 'null'
           - $ref: '#/components/schemas/ResourceSet'
             description: Stream names allowed.
-    AccessTokenIdStr:
-      type: string
-      maxLength: 96
-      minLength: 1
     Operation:
       type: string
       enum:
@@ -296,6 +260,34 @@ components:
       - list-locations
       - get-default-location
       - set-default-location
+    ResourceSet:
+      oneOf:
+      - type: object
+        title: exact
+        description: 'Match only the resource with this exact name.
+
+          Use an empty string to match no resources.'
+        required:
+        - exact
+        properties:
+          exact:
+            type: string
+            description: 'Match only the resource with this exact name.
+
+              Use an empty string to match no resources.'
+      - type: object
+        title: prefix
+        description: 'Match all resources that start with this prefix.
+
+          Use an empty string to match all resource.'
+        required:
+        - prefix
+        properties:
+          prefix:
+            type: string
+            description: 'Match all resources that start with this prefix.
+
+              Use an empty string to match all resource.'
     IssueAccessTokenRequest:
       type: object
       required:
@@ -324,6 +316,16 @@ components:
         scope:
           $ref: '#/components/schemas/AccessTokenScope'
           description: Access token scope.
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     PermittedOperationGroups:
       type: object
       properties:
@@ -342,16 +344,14 @@ components:
           - type: 'null'
           - $ref: '#/components/schemas/ReadWritePermissions'
             description: Stream-level access permissions.
-    ErrorInfo:
+    IssueAccessTokenResponse:
       type: object
       required:
-      - code
-      - message
+      - access_token
       properties:
-        code:
+        access_token:
           type: string
-        message:
-          type: string
+          description: Created access token.
   securitySchemes:
     access_token:
       type: http

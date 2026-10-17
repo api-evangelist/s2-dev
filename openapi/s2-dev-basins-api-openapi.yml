@@ -322,11 +322,38 @@ paths:
                 $ref: '#/components/schemas/ErrorInfo'
 components:
   schemas:
-    EncryptionAlgorithm:
+    BasinNameStr:
+      type: string
+      maxLength: 48
+      minLength: 8
+    StorageClass:
       type: string
       enum:
-      - aegis-256
-      - aes-256-gcm
+      - standard
+      - express
+    TimestampingReconfiguration:
+      type: object
+      properties:
+        mode:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingMode'
+            description: Timestamping mode for appends that influences how timestamps are handled.
+        uncapped:
+          type:
+          - boolean
+          - 'null'
+          description: Allow client-specified timestamps to exceed the arrival time.
+    ErrorInfo:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     ListBasinsResponse:
       type: object
       required:
@@ -342,24 +369,76 @@ components:
         has_more:
           type: boolean
           description: Indicates that there are more basins that match the criteria.
-    TimestampingMode:
+    EncryptionAlgorithm:
       type: string
       enum:
-      - client-prefer
-      - client-require
-      - arrival
-    InfiniteRetention:
+      - aegis-256
+      - aes-256-gcm
+    LocationName:
+      type: string
+      maxLength: 64
+      minLength: 1
+    TimestampingConfig:
       type: object
-    ErrorInfo:
-      type: object
-      required:
-      - code
-      - message
       properties:
-        code:
-          type: string
-        message:
-          type: string
+        mode:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/TimestampingMode'
+            description: Timestamping mode for appends that influences how timestamps are handled.
+        uncapped:
+          type:
+          - boolean
+          - 'null'
+          description: 'Allow client-specified timestamps to exceed the arrival time.
+
+            If this is `false` or not set, client timestamps will be capped at the arrival time.'
+    BasinConfig:
+      type: object
+      properties:
+        create_stream_on_append:
+          type: boolean
+          description: Create stream on append if it doesn't exist, using the default stream configuration.
+          default: false
+        create_stream_on_read:
+          type: boolean
+          description: Create stream on read if it doesn't exist, using the default stream configuration.
+          default: false
+        default_stream_config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StreamConfig'
+            description: Default stream configuration.
+        stream_cipher:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/EncryptionAlgorithm'
+            description: Encryption algorithm to apply to newly created streams in the basin.
+    RequestToken:
+      type: string
+      maxLength: 36
+    DeleteOnEmptyReconfiguration:
+      type: object
+      properties:
+        min_age_secs:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Minimum age in seconds before an empty stream can be deleted.
+
+            Set to 0 to disable delete-on-empty (don''t delete automatically).'
+          minimum: 0
+    DeleteOnEmptyConfig:
+      type: object
+      properties:
+        min_age_secs:
+          type: integer
+          format: int64
+          description: 'Minimum age in seconds before an empty stream can be deleted.
+
+            Set to 0 (default) to disable delete-on-empty (don''t delete automatically).'
+          minimum: 0
     StreamConfig:
       type: object
       properties:
@@ -385,19 +464,78 @@ components:
           - type: 'null'
           - $ref: '#/components/schemas/TimestampingConfig'
             description: Timestamping behavior.
-    StorageClass:
+    RetentionPolicy:
+      oneOf:
+      - type: object
+        description: 'Age in seconds for automatic trimming of records older than this threshold.
+
+          This must be set to a value greater than 0 seconds.'
+        required:
+        - age
+        properties:
+          age:
+            type: integer
+            format: int64
+            description: 'Age in seconds for automatic trimming of records older than this threshold.
+
+              This must be set to a value greater than 0 seconds.'
+            minimum: 0
+      - type: object
+        description: Retain records unless explicitly trimmed.
+        required:
+        - infinite
+        properties:
+          infinite:
+            $ref: '#/components/schemas/InfiniteRetention'
+            description: Retain records unless explicitly trimmed.
+    InfiniteRetention:
+      type: object
+    EnsureBasinRequest:
+      type: object
+      properties:
+        config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/BasinConfig'
+            description: Basin configuration.
+        location:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/LocationName'
+            description: 'Basin location.
+
+              If omitted when creating, uses the default location for the account.
+
+              This cannot be changed.'
+    BasinReconfiguration:
+      type: object
+      properties:
+        create_stream_on_append:
+          type:
+          - boolean
+          - 'null'
+          description: Create a stream on append.
+        create_stream_on_read:
+          type:
+          - boolean
+          - 'null'
+          description: Create a stream on read.
+        default_stream_config:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StreamReconfiguration'
+            description: Basin configuration.
+        stream_cipher:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/EncryptionAlgorithm'
+            description: Encryption algorithm to apply to newly created streams in the basin.
+    TimestampingMode:
       type: string
       enum:
-      - standard
-      - express
-    BasinNameStr:
-      type: string
-      maxLength: 48
-      minLength: 8
-    LocationName:
-      type: string
-      maxLength: 64
-      minLength: 1
+      - client-prefer
+      - client-require
+      - arrival
     CreateBasinRequest:
       type: object
       required:
@@ -422,65 +560,6 @@ components:
             description: 'Basin location.
 
               If omitted when creating, uses the default location for the account.'
-    RequestToken:
-      type: string
-      maxLength: 36
-    BasinReconfiguration:
-      type: object
-      properties:
-        create_stream_on_append:
-          type:
-          - boolean
-          - 'null'
-          description: Create a stream on append.
-        create_stream_on_read:
-          type:
-          - boolean
-          - 'null'
-          description: Create a stream on read.
-        default_stream_config:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/StreamReconfiguration'
-            description: Basin configuration.
-        stream_cipher:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/EncryptionAlgorithm'
-            description: Encryption algorithm to apply to newly created streams in the basin.
-    DeleteOnEmptyReconfiguration:
-      type: object
-      properties:
-        min_age_secs:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Minimum age in seconds before an empty stream can be deleted.
-
-            Set to 0 to disable delete-on-empty (don''t delete automatically).'
-          minimum: 0
-    BasinConfig:
-      type: object
-      properties:
-        create_stream_on_append:
-          type: boolean
-          description: Create stream on append if it doesn't exist, using the default stream configuration.
-          default: false
-        create_stream_on_read:
-          type: boolean
-          description: Create stream on read if it doesn't exist, using the default stream configuration.
-          default: false
-        default_stream_config:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/StreamConfig'
-            description: Default stream configuration.
-        stream_cipher:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/EncryptionAlgorithm'
-            description: Encryption algorithm to apply to newly created streams in the basin.
     BasinInfo:
       type: object
       required:
@@ -505,51 +584,6 @@ components:
         name:
           $ref: '#/components/schemas/BasinNameStr'
           description: Basin name.
-    EnsureBasinRequest:
-      type: object
-      properties:
-        config:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/BasinConfig'
-            description: Basin configuration.
-        location:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/LocationName'
-            description: 'Basin location.
-
-              If omitted when creating, uses the default location for the account.
-
-              This cannot be changed.'
-    TimestampingConfig:
-      type: object
-      properties:
-        mode:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/TimestampingMode'
-            description: Timestamping mode for appends that influences how timestamps are handled.
-        uncapped:
-          type:
-          - boolean
-          - 'null'
-          description: 'Allow client-specified timestamps to exceed the arrival time.
-
-            If this is `false` or not set, client timestamps will be capped at the arrival time.'
-    TimestampingReconfiguration:
-      type: object
-      properties:
-        mode:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/TimestampingMode'
-            description: Timestamping mode for appends that influences how timestamps are handled.
-        uncapped:
-          type:
-          - boolean
-          - 'null'
-          description: Allow client-specified timestamps to exceed the arrival time.
     StreamReconfiguration:
       type: object
       properties:
@@ -575,40 +609,6 @@ components:
           - type: 'null'
           - $ref: '#/components/schemas/TimestampingReconfiguration'
             description: Timestamping behavior.
-    RetentionPolicy:
-      oneOf:
-      - type: object
-        description: 'Age in seconds for automatic trimming of records older than this threshold.
-
-          This must be set to a value greater than 0 seconds.'
-        required:
-        - age
-        properties:
-          age:
-            type: integer
-            format: int64
-            description: 'Age in seconds for automatic trimming of records older than this threshold.
-
-              This must be set to a value greater than 0 seconds.'
-            minimum: 0
-      - type: object
-        description: Retain records unless explicitly trimmed.
-        required:
-        - infinite
-        properties:
-          infinite:
-            $ref: '#/components/schemas/InfiniteRetention'
-            description: Retain records unless explicitly trimmed.
-    DeleteOnEmptyConfig:
-      type: object
-      properties:
-        min_age_secs:
-          type: integer
-          format: int64
-          description: 'Minimum age in seconds before an empty stream can be deleted.
-
-            Set to 0 (default) to disable delete-on-empty (don''t delete automatically).'
-          minimum: 0
   securitySchemes:
     access_token:
       type: http
