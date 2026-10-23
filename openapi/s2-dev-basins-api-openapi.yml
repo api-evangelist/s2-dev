@@ -614,3 +614,9 @@ components:
       type: http
       scheme: bearer
       description: Bearer authentication header of the form `Bearer <token>`, where `<token>` is your access token.
+x-provenance:
+  method: harvested
+  publisher: S2 Dev
+  source: https://raw.githubusercontent.com/s2-streamstore/s2-specs/main/s2/v1/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
