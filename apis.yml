@@ -168,6 +168,8 @@ x-enrichment:
   artifacts_added: 26
   pass: local-v1
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/s2-dev/overview
 - url: https://s2.dev/blog/feed.xml
   type: BlogRSS
 - type: Website
