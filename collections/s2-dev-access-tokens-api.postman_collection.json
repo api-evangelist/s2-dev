@@ -1,300 +1,540 @@
 {
+  "info": {
+    "_postman_id": "cdb4c28d-584c-4a84-ae88-97611259f7b8",
+    "name": "S2, the durable streams Access Tokens API",
+    "description": "Streams as a cloud storage primitive.\n\nContact Support:\n Email: support@s2.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:18:50.000Z",
+    "updatedAt": "2026-10-21T21:18:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-cdb4c28d-584c-4a84-ae88-97611259f7b8"
+  },
   "item": [
     {
-      "id": "a7539d88-e59d-40c6-8672-30de450d0fcf",
       "name": "access-tokens",
-      "description": {
-        "content": "Manage access tokens",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "13789a04-1188-428e-9aa4-26018e6c10a0",
-          "name": "List access tokens.",
-          "request": {
-            "name": "List access tokens.",
-            "description": {},
-            "url": {
-              "path": [
-                "access-tokens"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Revoke an access token",
+              "id": "28ecc89e-99d6-4d49-9a4e-4d2ca19a6584",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/access-tokens/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access-tokens",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3b84eb96-fbab-46d8-ab10-3a119a054123",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Access token ID."
+                    }
+                  ]
+                }
+              },
+              "response": [
                 {
-                  "disabled": false,
-                  "key": "prefix",
-                  "value": "",
-                  "description": "Filter to access tokens whose IDs begin with this prefix."
+                  "id": "f87990b9-1010-438e-8ff6-650643083939",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/access-tokens/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access-tokens",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:18:51.000Z",
+                  "updatedAt": "2026-10-21T21:18:51.000Z",
+                  "uid": "35240-f87990b9-1010-438e-8ff6-650643083939"
                 },
                 {
-                  "disabled": false,
-                  "key": "start_after",
-                  "value": "",
-                  "description": "Filter to access tokens whose IDs lexicographically start after this string."
+                  "id": "1ed158e9-72f0-444b-a40f-f297c4cedb76",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/access-tokens/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access-tokens",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:51.000Z",
+                  "updatedAt": "2026-10-21T21:18:51.000Z",
+                  "uid": "35240-1ed158e9-72f0-444b-a40f-f297c4cedb76"
                 },
                 {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "1000",
-                  "description": "Number of results, up to a maximum of 1000."
+                  "id": "21bd6687-f4f6-457c-a71e-a5d1941cec46",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/access-tokens/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access-tokens",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:51.000Z",
+                  "updatedAt": "2026-10-21T21:18:51.000Z",
+                  "uid": "35240-21bd6687-f4f6-457c-a71e-a5d1941cec46"
+                },
+                {
+                  "id": "e94c66ff-176b-46aa-8c3b-c782b7dee4a2",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/access-tokens/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "access-tokens",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Request Timeout",
+                  "code": 408,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:51.000Z",
+                  "updatedAt": "2026-10-21T21:18:51.000Z",
+                  "uid": "35240-e94c66ff-176b-46aa-8c3b-c782b7dee4a2"
                 }
               ],
-              "variable": []
-            },
+              "createdAt": "2026-10-21T21:18:51.000Z",
+              "updatedAt": "2026-10-21T21:18:51.000Z",
+              "uid": "35240-28ecc89e-99d6-4d49-9a4e-4d2ca19a6584"
+            }
+          ],
+          "id": "9bc4880d-f8ac-4426-acf8-38bf246af385",
+          "createdAt": "2026-10-21T21:18:51.000Z",
+          "updatedAt": "2026-10-21T21:18:51.000Z",
+          "uid": "35240-9bc4880d-f8ac-4426-acf8-38bf246af385"
+        },
+        {
+          "name": "List access tokens",
+          "id": "9b2cba5b-7218-4ccf-b542-e4f7df2b010a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "fbe634fc-478e-4554-b4e9-963d83db7db3",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"access_tokens\": [\n    {\n      \"id\": \"string\",\n      \"auto_prefix_streams\": true,\n      \"scope\": {\n        \"access_tokens\": null,\n        \"basins\": null,\n        \"op_groups\": null,\n        \"ops\": [\n          \"account-metrics\",\n          \"revoke-access-token\"\n        ],\n        \"streams\": null\n      },\n      \"expires_at\": \"1953-06-28T20:34:11.744Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"auto_prefix_streams\": false,\n      \"scope\": {\n        \"access_tokens\": null,\n        \"basins\": null,\n        \"op_groups\": null,\n        \"ops\": [\n          \"get-stream-config\",\n          \"reconfigure-basin\"\n        ],\n        \"streams\": null\n      },\n      \"expires_at\": \"1979-09-24T06:46:16.098Z\"\n    }\n  ],\n  \"has_more\": false\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "93e3394e-a894-40d2-adcc-aacf204db62e",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c845d4f1-6584-45c9-972c-b4a6bd4b26de",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fa388fc2-068a-4e6a-b594-712a699b5391",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "782d89cd-7b83-4df1-973a-883b0912f345",
-          "name": "Issue a new access token.",
-          "request": {
-            "name": "Issue a new access token.",
-            "description": {},
             "url": {
-              "path": [
-                "access-tokens"
-              ],
+              "raw": "{{baseUrl}}/access-tokens?prefix=&start_after=&limit=1000",
               "host": [
                 "{{baseUrl}}"
               ],
-              "query": [],
-              "variable": []
+              "path": [
+                "access-tokens"
+              ],
+              "query": [
+                {
+                  "description": "Filter to access tokens whose IDs begin with this prefix.",
+                  "key": "prefix",
+                  "value": ""
+                },
+                {
+                  "description": "Filter to access tokens whose IDs lexicographically start after this string.",
+                  "key": "start_after",
+                  "value": ""
+                },
+                {
+                  "description": "Number of results, up to a maximum of 1000.",
+                  "key": "limit",
+                  "value": "1000"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8dac382d-9854-441c-a181-bed6274363c2",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/access-tokens?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access-tokens"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to access tokens whose IDs begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to access tokens whose IDs lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"access_tokens\": [\n    {\n      \"id\": \"<string>\",\n      \"auto_prefix_streams\": \"<boolean>\",\n      \"scope\": {\n        \"access_tokens\": \"<null>\",\n        \"basins\": \"<null>\",\n        \"op_groups\": \"<null>\",\n        \"ops\": \"<array,null>\",\n        \"streams\": \"<null>\"\n      },\n      \"expires_at\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"auto_prefix_streams\": \"<boolean>\",\n      \"scope\": {\n        \"access_tokens\": \"<null>\",\n        \"basins\": \"<null>\",\n        \"op_groups\": \"<null>\",\n        \"ops\": \"<array,null>\",\n        \"streams\": \"<null>\"\n      },\n      \"expires_at\": \"<string,null-date-time>\"\n    }\n  ],\n  \"has_more\": \"<boolean>\"\n}",
+              "createdAt": "2026-10-21T21:18:51.000Z",
+              "updatedAt": "2026-10-21T21:18:51.000Z",
+              "uid": "35240-8dac382d-9854-441c-a181-bed6274363c2"
             },
+            {
+              "id": "91ff13b5-2983-4132-a150-9f0a84143460",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/access-tokens?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access-tokens"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to access tokens whose IDs begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to access tokens whose IDs lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:51.000Z",
+              "updatedAt": "2026-10-21T21:18:51.000Z",
+              "uid": "35240-91ff13b5-2983-4132-a150-9f0a84143460"
+            },
+            {
+              "id": "73bb3366-4896-4b33-af8f-8fb8f16b7caa",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/access-tokens?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access-tokens"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to access tokens whose IDs begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to access tokens whose IDs lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:51.000Z",
+              "updatedAt": "2026-10-21T21:18:51.000Z",
+              "uid": "35240-73bb3366-4896-4b33-af8f-8fb8f16b7caa"
+            },
+            {
+              "id": "0786601d-e19d-4f38-9b8e-6ac4178e9ca2",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/access-tokens?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access-tokens"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to access tokens whose IDs begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to access tokens whose IDs lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:51.000Z",
+              "updatedAt": "2026-10-21T21:18:51.000Z",
+              "uid": "35240-0786601d-e19d-4f38-9b8e-6ac4178e9ca2"
+            }
+          ],
+          "createdAt": "2026-10-21T21:18:51.000Z",
+          "updatedAt": "2026-10-21T21:18:51.000Z",
+          "uid": "35240-9b2cba5b-7218-4ccf-b542-e4f7df2b010a"
+        },
+        {
+          "name": "Issue a new access token",
+          "id": "0ca4679e-37f6-4042-a592-077a3e28889a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -305,526 +545,317 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": \"<string>\",\n  \"scope\": {\n    \"access_tokens\": \"<null>\",\n    \"basins\": \"<null>\",\n    \"op_groups\": \"<null>\",\n    \"ops\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"streams\": \"<null>\"\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"scope\": {\n    \"access_tokens\": \"<null>\",\n    \"basins\": \"<null>\",\n    \"op_groups\": \"<null>\",\n    \"ops\": \"<array,null>\",\n    \"streams\": \"<null>\"\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/access-tokens",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "access-tokens"
+              ]
             }
           },
           "response": [
             {
-              "id": "c4ed2f37-c730-4732-9355-bf15027d9926",
+              "id": "01041703-4b64-4147-a2d7-3a2f2e30da5b",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"id\": \"string\",\n  \"scope\": {\n    \"access_tokens\": null,\n    \"basins\": null,\n    \"op_groups\": null,\n    \"ops\": [\n      \"reconfigure-basin\",\n      \"list-basins\"\n    ],\n    \"streams\": null\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"scope\": {\n    \"access_tokens\": \"<null>\",\n    \"basins\": \"<null>\",\n    \"op_groups\": \"<null>\",\n    \"ops\": \"<array,null>\",\n    \"streams\": \"<null>\"\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/access-tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access-tokens"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"access_token\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"access_token\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:51.000Z",
+              "updatedAt": "2026-10-21T21:18:51.000Z",
+              "uid": "35240-01041703-4b64-4147-a2d7-3a2f2e30da5b"
             },
             {
-              "id": "81b92565-cb56-4d55-876a-cdf5297c1052",
+              "id": "a4757f3d-5010-4884-8a2f-afed0eb5330a",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"id\": \"string\",\n  \"scope\": {\n    \"access_tokens\": null,\n    \"basins\": null,\n    \"op_groups\": null,\n    \"ops\": [\n      \"reconfigure-basin\",\n      \"list-basins\"\n    ],\n    \"streams\": null\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"scope\": {\n    \"access_tokens\": \"<null>\",\n    \"basins\": \"<null>\",\n    \"op_groups\": \"<null>\",\n    \"ops\": \"<array,null>\",\n    \"streams\": \"<null>\"\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/access-tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access-tokens"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:51.000Z",
+              "updatedAt": "2026-10-21T21:18:51.000Z",
+              "uid": "35240-a4757f3d-5010-4884-8a2f-afed0eb5330a"
             },
             {
-              "id": "8cc916c7-ee82-43d4-8ad9-d8ae30b0c2f0",
+              "id": "dfeb89a7-f9e3-480c-8498-4de7e2d823fc",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"id\": \"string\",\n  \"scope\": {\n    \"access_tokens\": null,\n    \"basins\": null,\n    \"op_groups\": null,\n    \"ops\": [\n      \"reconfigure-basin\",\n      \"list-basins\"\n    ],\n    \"streams\": null\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"scope\": {\n    \"access_tokens\": \"<null>\",\n    \"basins\": \"<null>\",\n    \"op_groups\": \"<null>\",\n    \"ops\": \"<array,null>\",\n    \"streams\": \"<null>\"\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/access-tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access-tokens"
+                  ]
                 }
               },
               "status": "Forbidden",
               "code": 403,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:51.000Z",
+              "updatedAt": "2026-10-21T21:18:51.000Z",
+              "uid": "35240-dfeb89a7-f9e3-480c-8498-4de7e2d823fc"
             },
             {
-              "id": "a7f4489f-69d3-4392-b2b6-ed48ac6344b6",
+              "id": "bcc53bb0-3e8b-4c88-834c-94c588b5b04e",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"id\": \"string\",\n  \"scope\": {\n    \"access_tokens\": null,\n    \"basins\": null,\n    \"op_groups\": null,\n    \"ops\": [\n      \"reconfigure-basin\",\n      \"list-basins\"\n    ],\n    \"streams\": null\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"scope\": {\n    \"access_tokens\": \"<null>\",\n    \"basins\": \"<null>\",\n    \"op_groups\": \"<null>\",\n    \"ops\": \"<array,null>\",\n    \"streams\": \"<null>\"\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/access-tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access-tokens"
+                  ]
                 }
               },
               "status": "Request Timeout",
               "code": 408,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:51.000Z",
+              "updatedAt": "2026-10-21T21:18:51.000Z",
+              "uid": "35240-bcc53bb0-3e8b-4c88-834c-94c588b5b04e"
             },
             {
-              "id": "52fa9e20-32f1-4c1f-b18f-c2e7f5d1016f",
+              "id": "95dddd03-0ba8-47f7-9fcc-0582cb7d0e3e",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"id\": \"string\",\n  \"scope\": {\n    \"access_tokens\": null,\n    \"basins\": null,\n    \"op_groups\": null,\n    \"ops\": [\n      \"reconfigure-basin\",\n      \"list-basins\"\n    ],\n    \"streams\": null\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"scope\": {\n    \"access_tokens\": \"<null>\",\n    \"basins\": \"<null>\",\n    \"op_groups\": \"<null>\",\n    \"ops\": \"<array,null>\",\n    \"streams\": \"<null>\"\n  },\n  \"auto_prefix_streams\": false,\n  \"expires_at\": \"<string,null-date-time>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/access-tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "access-tokens"
+                  ]
                 }
               },
               "status": "Conflict",
               "code": 409,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:51.000Z",
+              "updatedAt": "2026-10-21T21:18:51.000Z",
+              "uid": "35240-95dddd03-0ba8-47f7-9fcc-0582cb7d0e3e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e516ff32-a548-4fa2-9371-8cf5121c59cc",
-          "name": "Revoke an access token.",
-          "request": {
-            "name": "Revoke an access token.",
-            "description": {},
-            "url": {
-              "path": [
-                "access-tokens",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Access token ID."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "68f26a72-32fd-48db-a8da-92982cede50b",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Access token ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "489a0ff3-d7f6-4e59-b567-95614bcd6ac4",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Access token ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2e5b2473-a2e7-4d88-8d87-779ba4dffe21",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Access token ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "032f7729-421b-4564-97f4-4f6bc786fae6",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "access-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Access token ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:18:51.000Z",
+          "updatedAt": "2026-10-21T21:18:51.000Z",
+          "uid": "35240-0ca4679e-37f6-4042-a592-077a3e28889a"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://a.s2.dev/v1",
-      "key": "baseUrl"
+      "id": "340eb194-851b-4b15-b27c-3a3e2164dba0",
+      "createdAt": "2026-10-21T21:18:51.000Z",
+      "updatedAt": "2026-10-21T21:18:51.000Z",
+      "uid": "35240-340eb194-851b-4b15-b27c-3a3e2164dba0"
     }
   ],
   "auth": {
@@ -832,17 +863,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "6e64be89-e26b-4dca-8d09-ee05dedefafe",
-    "name": "S2, the durable streams access-tokens API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Streams as a cloud storage primitive.\n\nContact Support:\n Email: support@s2.dev",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://a.s2.dev/v1"
     }
-  }
+  ]
 }

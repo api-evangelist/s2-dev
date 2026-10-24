@@ -1,358 +1,1936 @@
 {
+  "info": {
+    "_postman_id": "c77f54a6-baef-4b92-830d-d05635bbb7d8",
+    "name": "S2, the durable Streams API",
+    "description": "Streams as a cloud storage primitive.\n\nContact Support:\n Email: support@s2.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:19:32.000Z",
+    "updatedAt": "2026-10-21T21:19:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c77f54a6-baef-4b92-830d-d05635bbb7d8"
+  },
   "item": [
     {
-      "id": "0849ad9d-ceae-4626-a12f-58a4fa1a9c41",
       "name": "streams",
-      "description": {
-        "content": "Manage streams",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "57b67bc5-b7db-4896-b22f-c32026f6ca30",
-          "name": "List streams.",
-          "request": {
-            "name": "List streams.",
-            "description": {},
-            "url": {
-              "path": [
-                "streams"
-              ],
-              "host": [
-                "{{streams-Url}}"
-              ],
-              "query": [
+          "name": "{stream}",
+          "item": [
+            {
+              "name": "Get stream configuration",
+              "id": "c77b9a1d-7a26-4b14-a909-b877f4734284",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/streams/:stream",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams",
+                    ":stream"
+                  ],
+                  "variable": [
+                    {
+                      "id": "1756e3eb-7926-4816-8d06-3ca9c00739ed",
+                      "key": "stream",
+                      "value": "<string>",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                }
+              },
+              "response": [
                 {
-                  "disabled": false,
-                  "key": "prefix",
-                  "value": "",
-                  "description": "Filter to streams whose names begin with this prefix."
+                  "id": "330e8131-968f-45d6-b2ea-a9aa97782d4a",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-330e8131-968f-45d6-b2ea-a9aa97782d4a"
                 },
                 {
-                  "disabled": false,
-                  "key": "start_after",
-                  "value": "",
-                  "description": "Filter to streams whose names lexicographically start after this string."
+                  "id": "b324dd13-3247-466d-9332-d112a62f712e",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-b324dd13-3247-466d-9332-d112a62f712e"
                 },
                 {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "1000",
-                  "description": "Number of results, up to a maximum of 1000."
+                  "id": "817bd648-f02e-4f90-956a-db79fb8e776a",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-817bd648-f02e-4f90-956a-db79fb8e776a"
+                },
+                {
+                  "id": "bb37ca57-712d-42ce-90c1-2dd4f8850850",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-bb37ca57-712d-42ce-90c1-2dd4f8850850"
+                },
+                {
+                  "id": "f4cac782-c410-4bc6-8d3e-6b97942d7862",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Request Timeout",
+                  "code": 408,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-f4cac782-c410-4bc6-8d3e-6b97942d7862"
+                },
+                {
+                  "id": "79b93c86-6244-45db-a545-6041fdbcff48",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-79b93c86-6244-45db-a545-6041fdbcff48"
                 }
               ],
-              "variable": []
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-c77b9a1d-7a26-4b14-a909-b877f4734284"
             },
+            {
+              "name": "Ensure a stream",
+              "id": "ef11edb8-2e31-404f-84eb-3958790ec6e0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<null>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/streams/:stream",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams",
+                    ":stream"
+                  ],
+                  "variable": [
+                    {
+                      "id": "bf8e5257-0d3e-401d-8351-1ab1f53825ce",
+                      "key": "stream",
+                      "value": "<string>",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "6792b4bc-674c-4518-aa10-5996d130bc03",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"cipher\": \"<null>\",\n  \"deleted_at\": \"<string,null-date-time>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-6792b4bc-674c-4518-aa10-5996d130bc03"
+                },
+                {
+                  "id": "014dbb0a-d7df-4584-9b18-d5ec4e12a2e8",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"cipher\": \"<null>\",\n  \"deleted_at\": \"<string,null-date-time>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-014dbb0a-d7df-4584-9b18-d5ec4e12a2e8"
+                },
+                {
+                  "id": "e0c89376-dbfa-4d1b-9c4c-2f82ce2f459d",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-e0c89376-dbfa-4d1b-9c4c-2f82ce2f459d"
+                },
+                {
+                  "id": "a8891538-4e0a-41c1-8e4c-200e11636757",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-a8891538-4e0a-41c1-8e4c-200e11636757"
+                },
+                {
+                  "id": "de473b39-5a81-4fc8-8771-f5e89129e6b7",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-de473b39-5a81-4fc8-8771-f5e89129e6b7"
+                },
+                {
+                  "id": "b937fc4b-d4f9-4d42-b2ad-2a36b334deeb",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Request Timeout",
+                  "code": 408,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-b937fc4b-d4f9-4d42-b2ad-2a36b334deeb"
+                },
+                {
+                  "id": "0288e779-31ea-4706-b465-9e7d3d84a3e3",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-0288e779-31ea-4706-b465-9e7d3d84a3e3"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-ef11edb8-2e31-404f-84eb-3958790ec6e0"
+            },
+            {
+              "name": "Delete a stream",
+              "id": "2a2412b1-824b-485b-bee5-768b658a32bb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/streams/:stream",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams",
+                    ":stream"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f72bccfd-4dcb-473e-a369-fc6e20d31fb7",
+                      "key": "stream",
+                      "value": "<string>",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "9e891b0c-218f-4b09-99f0-1cc4a1d4ab2f",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-9e891b0c-218f-4b09-99f0-1cc4a1d4ab2f"
+                },
+                {
+                  "id": "907866a0-c7f3-4ba9-9e11-b48a5c7f4f0b",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-907866a0-c7f3-4ba9-9e11-b48a5c7f4f0b"
+                },
+                {
+                  "id": "29880f3d-3743-4684-94a0-c17345301e2e",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-29880f3d-3743-4684-94a0-c17345301e2e"
+                },
+                {
+                  "id": "b6b15165-a4d8-4c2d-8688-96f565c6e28a",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-b6b15165-a4d8-4c2d-8688-96f565c6e28a"
+                },
+                {
+                  "id": "bba837a0-6782-498c-b718-895ffb13eaff",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Request Timeout",
+                  "code": 408,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-bba837a0-6782-498c-b718-895ffb13eaff"
+                },
+                {
+                  "id": "39951d72-f90d-4d26-aed2-1495c677660f",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-39951d72-f90d-4d26-aed2-1495c677660f"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-2a2412b1-824b-485b-bee5-768b658a32bb"
+            },
+            {
+              "name": "Reconfigure a stream",
+              "id": "f05c6579-0258-4eab-86c6-2d27b0497b71",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/streams/:stream",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams",
+                    ":stream"
+                  ],
+                  "variable": [
+                    {
+                      "id": "77fed2c4-3ad7-41cf-8903-abddcfc84375",
+                      "key": "stream",
+                      "value": "<string>",
+                      "description": "(Required) Stream name."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "031a4cb3-8f07-41ea-b59a-61f841ec0619",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-031a4cb3-8f07-41ea-b59a-61f841ec0619"
+                },
+                {
+                  "id": "e3ef77d0-a74d-47ef-9876-5f0cfef9b8ef",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-e3ef77d0-a74d-47ef-9876-5f0cfef9b8ef"
+                },
+                {
+                  "id": "dec8a9d8-1341-4f5e-a2b1-54008d04d1d2",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-dec8a9d8-1341-4f5e-a2b1-54008d04d1d2"
+                },
+                {
+                  "id": "37641c76-7f7d-4765-a59a-cc3757479c1b",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-37641c76-7f7d-4765-a59a-cc3757479c1b"
+                },
+                {
+                  "id": "903f2c79-6ba3-4d2e-94f9-77307d204d6c",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Request Timeout",
+                  "code": 408,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-903f2c79-6ba3-4d2e-94f9-77307d204d6c"
+                },
+                {
+                  "id": "2487d744-0799-419a-b933-d3f7bec95b68",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/streams/:stream",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "streams",
+                        ":stream"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-2487d744-0799-419a-b933-d3f7bec95b68"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-f05c6579-0258-4eab-86c6-2d27b0497b71"
+            }
+          ],
+          "id": "f0eea688-074e-4d8b-9873-2572f1c1daa0",
+          "createdAt": "2026-10-21T21:19:32.000Z",
+          "updatedAt": "2026-10-21T21:19:32.000Z",
+          "uid": "35240-f0eea688-074e-4d8b-9873-2572f1c1daa0"
+        },
+        {
+          "name": "List streams",
+          "id": "69ae3b99-ab9e-4b8a-a494-b40f6dd2391a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "533f96f5-58d2-4c0d-b24f-0893c1d49ec4",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams"
-                  ],
-                  "host": [
-                    "{{streams-Url}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"streams\": [\n    {\n      \"name\": \"string\",\n      \"created_at\": \"1976-04-09T00:55:49.511Z\",\n      \"cipher\": null,\n      \"deleted_at\": \"2009-01-14T16:24:30.885Z\"\n    },\n    {\n      \"name\": \"string\",\n      \"created_at\": \"1954-06-14T00:00:39.518Z\",\n      \"cipher\": null,\n      \"deleted_at\": \"1998-09-07T01:57:56.312Z\"\n    }\n  ],\n  \"has_more\": true\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9a0c2028-c7e7-4079-bf5c-6ca47ea2a57e",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams"
-                  ],
-                  "host": [
-                    "{{streams-Url}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "907adc97-e795-42f0-8f51-2bcc810125ae",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams"
-                  ],
-                  "host": [
-                    "{{streams-Url}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ea2a61c8-617d-4993-b77c-98a8bb879553",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams"
-                  ],
-                  "host": [
-                    "{{streams-Url}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7690f053-ef24-465c-bf47-5893397c426a",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams"
-                  ],
-                  "host": [
-                    "{{streams-Url}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "5e8a570a-999b-4bb9-a696-1bc102e6cb16",
-          "name": "Create a stream.",
-          "request": {
-            "name": "Create a stream.",
-            "description": {},
             "url": {
+              "raw": "{{baseUrl}}/streams?prefix=&start_after=&limit=1000",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "streams"
               ],
-              "host": [
-                "{{streams-Url}}"
+              "query": [
+                {
+                  "description": "Filter to streams whose names begin with this prefix.",
+                  "key": "prefix",
+                  "value": ""
+                },
+                {
+                  "description": "Filter to streams whose names lexicographically start after this string.",
+                  "key": "start_after",
+                  "value": ""
+                },
+                {
+                  "description": "Number of results, up to a maximum of 1000.",
+                  "key": "limit",
+                  "value": "1000"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b458baa0-3408-43ba-bf77-502bc4f05460",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/streams?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to streams whose names begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to streams whose names lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
               ],
-              "query": [],
-              "variable": []
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"streams\": [\n    {\n      \"name\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"cipher\": \"<null>\",\n      \"deleted_at\": \"<string,null-date-time>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"cipher\": \"<null>\",\n      \"deleted_at\": \"<string,null-date-time>\"\n    }\n  ],\n  \"has_more\": \"<boolean>\"\n}",
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-b458baa0-3408-43ba-bf77-502bc4f05460"
             },
+            {
+              "id": "d3ca4ecf-5ace-40c2-86e7-970c720d235e",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/streams?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to streams whose names begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to streams whose names lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-d3ca4ecf-5ace-40c2-86e7-970c720d235e"
+            },
+            {
+              "id": "b442839c-734c-40ad-b467-0511df3cc530",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/streams?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to streams whose names begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to streams whose names lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-b442839c-734c-40ad-b467-0511df3cc530"
+            },
+            {
+              "id": "a7eefb33-ec5d-400e-94ce-e2a9cd4c08c7",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/streams?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to streams whose names begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to streams whose names lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-a7eefb33-ec5d-400e-94ce-e2a9cd4c08c7"
+            },
+            {
+              "id": "756d57c3-d718-4070-b845-4e09a57b82d2",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/streams?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to streams whose names begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to streams whose names lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-756d57c3-d718-4070-b845-4e09a57b82d2"
+            }
+          ],
+          "createdAt": "2026-10-21T21:19:32.000Z",
+          "updatedAt": "2026-10-21T21:19:32.000Z",
+          "uid": "35240-69ae3b99-ab9e-4b8a-a494-b40f6dd2391a"
+        },
+        {
+          "name": "Create a stream",
+          "id": "7d359c8a-d2b3-4bfe-8f80-0385d8f9d42d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
             "header": [
               {
-                "disabled": false,
                 "description": "Client-specified request token for idempotent retries.",
                 "key": "s2-request-token",
                 "value": "<string>"
@@ -366,1964 +1944,403 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"stream\": \"<string>\",\n  \"config\": \"<null>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/streams",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "streams"
+              ]
             }
           },
           "response": [
             {
-              "id": "71e932f6-73e9-44ad-8a8e-185505471369",
+              "id": "4cd3f579-a3c0-44c3-877d-1210a1b4fc0d",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams"
-                  ],
-                  "host": [
-                    "{{streams-Url}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "Client-specified request token for idempotent retries.",
                     "key": "s2-request-token",
-                    "value": "string"
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"stream\": \"string\",\n  \"config\": \"<null>\"\n}",
+                  "raw": "{\n  \"stream\": \"<string>\",\n  \"config\": \"<null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/streams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"name\": \"string\",\n  \"created_at\": \"1980-03-20T02:58:45.294Z\",\n  \"cipher\": null,\n  \"deleted_at\": \"1954-02-17T16:48:03.853Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"cipher\": \"<null>\",\n  \"deleted_at\": \"<string,null-date-time>\"\n}",
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-4cd3f579-a3c0-44c3-877d-1210a1b4fc0d"
             },
             {
-              "id": "27b56082-09bd-4aec-b64b-0a10d0e6c498",
+              "id": "8b8fd496-8dc5-4a74-ab63-a9de8b77c491",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams"
-                  ],
-                  "host": [
-                    "{{streams-Url}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "Client-specified request token for idempotent retries.",
                     "key": "s2-request-token",
-                    "value": "string"
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"stream\": \"string\",\n  \"config\": \"<null>\"\n}",
+                  "raw": "{\n  \"stream\": \"<string>\",\n  \"config\": \"<null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/streams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-8b8fd496-8dc5-4a74-ab63-a9de8b77c491"
             },
             {
-              "id": "a5b2e36a-c206-4eb5-b359-8d5b5926ce20",
+              "id": "3470e663-1246-4ce9-9f48-fc18177718e8",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams"
-                  ],
-                  "host": [
-                    "{{streams-Url}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "Client-specified request token for idempotent retries.",
                     "key": "s2-request-token",
-                    "value": "string"
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"stream\": \"string\",\n  \"config\": \"<null>\"\n}",
+                  "raw": "{\n  \"stream\": \"<string>\",\n  \"config\": \"<null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d2d3684a-2d34-40a0-a0f0-425541ce9757",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/streams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "streams"
-                  ],
-                  "host": [
-                    "{{streams-Url}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "Client-specified request token for idempotent retries.",
-                    "key": "s2-request-token",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"stream\": \"string\",\n  \"config\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                  ]
                 }
               },
-              "status": "Not Found",
-              "code": 404,
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-3470e663-1246-4ce9-9f48-fc18177718e8"
             },
             {
-              "id": "6d127ff1-38c1-4a07-aabe-f464999c2100",
+              "id": "ea8ad1ad-e5a4-4465-84d6-f50984534b65",
+              "name": "New Response",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Client-specified request token for idempotent retries.",
+                    "key": "s2-request-token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stream\": \"<string>\",\n  \"config\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/streams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "streams"
-                  ],
-                  "host": [
-                    "{{streams-Url}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "Client-specified request token for idempotent retries.",
-                    "key": "s2-request-token",
-                    "value": "string"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"stream\": \"string\",\n  \"config\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                  ]
                 }
               },
-              "status": "Request Timeout",
-              "code": 408,
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-ea8ad1ad-e5a4-4465-84d6-f50984534b65"
             },
             {
-              "id": "604b7fd8-8e1d-49cb-85dc-35d38e42c178",
+              "id": "fa970fea-66e6-403a-9068-86771e18a2d2",
+              "name": "New Response",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Client-specified request token for idempotent retries.",
+                    "key": "s2-request-token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stream\": \"<string>\",\n  \"config\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/streams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "streams"
-                  ],
-                  "host": [
-                    "{{streams-Url}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                  ]
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-fa970fea-66e6-403a-9068-86771e18a2d2"
+            },
+            {
+              "id": "034095b9-23d4-4c0c-ac72-25596943f9d4",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "Client-specified request token for idempotent retries.",
                     "key": "s2-request-token",
-                    "value": "string"
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"stream\": \"string\",\n  \"config\": \"<null>\"\n}",
+                  "raw": "{\n  \"stream\": \"<string>\",\n  \"config\": \"<null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/streams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "streams"
+                  ]
                 }
               },
               "status": "Conflict",
               "code": 409,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-034095b9-23d4-4c0c-ac72-25596943f9d4"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4519f2c1-f721-43e4-9bb8-7c9a7ffe2c84",
-          "name": "Get stream configuration.",
-          "request": {
-            "name": "Get stream configuration.",
-            "description": {},
-            "url": {
-              "path": [
-                "streams",
-                ":stream"
-              ],
-              "host": [
-                "{{streams-stream-Url}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "stream",
-                  "description": "(Required) Stream name."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "c4a6b5bc-7918-4684-a71b-ed232badf8f2",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"delete_on_empty\": null,\n  \"retention_policy\": null,\n  \"storage_class\": null,\n  \"timestamping\": null\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e8587e95-9de2-4f39-97e3-c166b14d0b5c",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1d2458e4-3378-4381-9a7d-1ad5a49f0dad",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9a13acc0-d67b-4012-80c1-f26df62e0a57",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cddc8052-0ec4-4894-86ad-36ba4aa868fd",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "41cc5d2d-c40f-4011-a92e-ae17316c7297",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ea69104e-7a32-4e25-bfd7-61715f203a29",
-          "name": "Ensure a stream.",
-          "request": {
-            "name": "Ensure a stream.",
-            "description": {},
-            "url": {
-              "path": [
-                "streams",
-                ":stream"
-              ],
-              "host": [
-                "{{streams-stream-Url}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "stream",
-                  "description": "(Required) Stream name."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "<null>",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "da163056-b164-4b3a-afd2-d8d25f77618b",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"string\",\n  \"created_at\": \"1980-03-20T02:58:45.294Z\",\n  \"cipher\": null,\n  \"deleted_at\": \"1954-02-17T16:48:03.853Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "876a806b-5c8b-4d53-9c9e-bd1501457120",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"string\",\n  \"created_at\": \"1980-03-20T02:58:45.294Z\",\n  \"cipher\": null,\n  \"deleted_at\": \"1954-02-17T16:48:03.853Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fb47e731-1a75-43a7-b5fa-a40bdaa17355",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "eccc7584-863b-4f5d-ad50-a96fa80411d1",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dcb7802f-8445-47fd-b54e-ce578c3b80ec",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f6bea4f8-42c5-4538-83eb-edccff723ad1",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "26528156-745f-47cd-ba0e-341a7ca063bf",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "127bfe47-d9f7-4f2c-bda6-712d35209d30",
-          "name": "Delete a stream.",
-          "request": {
-            "name": "Delete a stream.",
-            "description": {},
-            "url": {
-              "path": [
-                "streams",
-                ":stream"
-              ],
-              "host": [
-                "{{streams-stream-Url}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "stream",
-                  "description": "(Required) Stream name."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "429a6290-e442-4574-84a3-734457daa7e5",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Accepted",
-              "code": 202,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "cd8fc9d0-df00-4e76-bd09-3eb2c06bc19b",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7dd9763b-2193-44c1-ad64-38b0bc2d2c97",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bb5a2203-26f8-460d-a941-bd0bb7239753",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "77159988-5cb2-4bdd-9649-f663bd47ef48",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7dd6aee9-0c97-4e4b-8564-996293c2a605",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f83c3d0c-9659-438b-a78f-62405be0c8d1",
-          "name": "Reconfigure a stream.",
-          "request": {
-            "name": "Reconfigure a stream.",
-            "description": {},
-            "url": {
-              "path": [
-                "streams",
-                ":stream"
-              ],
-              "host": [
-                "{{streams-stream-Url}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "stream",
-                  "description": "(Required) Stream name."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "52966cac-197b-404b-a1f3-c0bc1c7acbba",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"delete_on_empty\": null,\n  \"retention_policy\": null,\n  \"storage_class\": null,\n  \"timestamping\": null\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "948c0866-10db-4e3f-aa99-11e8e5ce9246",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "06bb30fa-de6f-453b-aa4e-2a5bbf5f76a0",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8e75a214-5af2-41c5-9543-4fad951e530a",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4c49c0d1-6934-4d0e-b0ff-92b598de4aec",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5d02ee94-7b60-4584-b4f5-bcbb4eb9486a",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "streams",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{streams-stream-Url}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"delete_on_empty\": \"<null>\",\n  \"retention_policy\": \"<null>\",\n  \"storage_class\": \"<null>\",\n  \"timestamping\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:19:32.000Z",
+          "updatedAt": "2026-10-21T21:19:32.000Z",
+          "uid": "35240-7d359c8a-d2b3-4bfe-8f80-0385d8f9d42d"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://a.s2.dev/v1",
-      "key": "baseUrl"
-    },
-    {
-      "description": {
-        "content": "Basin name",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "",
-      "key": "basin"
-    },
-    {
-      "type": "string",
-      "value": "https://{{basin}}.b.s2.dev/v1",
-      "key": "streams-Url"
-    },
-    {
-      "description": {
-        "content": "Basin name",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "",
-      "key": "basin"
-    },
-    {
-      "type": "string",
-      "value": "https://{{basin}}.b.s2.dev/v1",
-      "key": "streams-stream-Url"
+      "id": "e2b05a1b-7451-43c8-9937-34fb78895049",
+      "createdAt": "2026-10-21T21:19:32.000Z",
+      "updatedAt": "2026-10-21T21:19:32.000Z",
+      "uid": "35240-e2b05a1b-7451-43c8-9937-34fb78895049"
     }
   ],
   "auth": {
@@ -2331,17 +2348,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "3895ef65-fae0-4d6e-8fd3-d5ead9b57806",
-    "name": "S2, the durable access-tokens streams API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Streams as a cloud storage primitive.\n\nContact Support:\n Email: support@s2.dev",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://a.s2.dev/v1"
     }
-  }
+  ]
 }

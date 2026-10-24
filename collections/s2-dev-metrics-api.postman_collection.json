@@ -1,1032 +1,1054 @@
 {
+  "info": {
+    "_postman_id": "da4a89e4-001b-4f60-8d65-47dd3514990f",
+    "name": "S2, the durable streams Metrics API",
+    "description": "Streams as a cloud storage primitive.\n\nContact Support:\n Email: support@s2.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:19:10.000Z",
+    "updatedAt": "2026-10-21T21:19:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-da4a89e4-001b-4f60-8d65-47dd3514990f"
+  },
   "item": [
     {
-      "id": "eee1af5e-a55c-450d-bb2b-67ec780a90d6",
       "name": "metrics",
-      "description": {
-        "content": "Usage metrics and data.",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "7f4409d5-96ff-4cff-add8-a35cc4f09697",
-          "name": "Account-level metrics.",
+          "name": "{basin}",
+          "item": [
+            {
+              "name": "{stream}",
+              "item": [
+                {
+                  "name": "Stream-level metrics",
+                  "id": "1a2fb813-9e9c-4fb6-b9a1-756ddb016bc0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/metrics/:basin/:stream?set=storage&start=<integer>&end=<integer>&interval=day",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "metrics",
+                        ":basin",
+                        ":stream"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Metric set to return.",
+                          "key": "set",
+                          "value": "storage"
+                        },
+                        {
+                          "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
+                          "key": "start",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "End timestamp as Unix epoch seconds, if applicable for metric set.",
+                          "key": "end",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Interval to aggregate over for timeseries metric sets.",
+                          "key": "interval",
+                          "value": "day"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "a0e6785b-db44-4408-956d-03fab0095464",
+                          "key": "basin",
+                          "value": "<string>",
+                          "description": "(Required) Basin name."
+                        },
+                        {
+                          "id": "842ac3a9-da34-48d8-986d-35f268d78c86",
+                          "key": "stream",
+                          "value": "<string>",
+                          "description": "(Required) Stream name."
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "9942e6b0-b18c-41bb-9fca-3eab6a38ec6a",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/metrics/:basin/:stream?set=storage&start=<integer>&end=<integer>&interval=day",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "metrics",
+                            ":basin",
+                            ":stream"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Metric set to return.",
+                              "key": "set",
+                              "value": "storage"
+                            },
+                            {
+                              "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
+                              "key": "start",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "End timestamp as Unix epoch seconds, if applicable for metric set.",
+                              "key": "end",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Interval to aggregate over for timeseries metric sets.",
+                              "key": "interval",
+                              "value": "day"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "basin"
+                            },
+                            {
+                              "key": "stream"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"values\": [\n    {\n      \"scalar\": {\n        \"name\": \"<string>\",\n        \"unit\": \"operations\",\n        \"value\": \"<double>\"\n      }\n    },\n    {\n      \"scalar\": {\n        \"name\": \"<string>\",\n        \"unit\": \"bytes\",\n        \"value\": \"<double>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T21:19:11.000Z",
+                      "updatedAt": "2026-10-21T21:19:11.000Z",
+                      "uid": "35240-9942e6b0-b18c-41bb-9fca-3eab6a38ec6a"
+                    },
+                    {
+                      "id": "899b0083-0d9d-464b-bd9b-6fabc16348a9",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/metrics/:basin/:stream?set=storage&start=<integer>&end=<integer>&interval=day",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "metrics",
+                            ":basin",
+                            ":stream"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Metric set to return.",
+                              "key": "set",
+                              "value": "storage"
+                            },
+                            {
+                              "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
+                              "key": "start",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "End timestamp as Unix epoch seconds, if applicable for metric set.",
+                              "key": "end",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Interval to aggregate over for timeseries metric sets.",
+                              "key": "interval",
+                              "value": "day"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "basin"
+                            },
+                            {
+                              "key": "stream"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T21:19:11.000Z",
+                      "updatedAt": "2026-10-21T21:19:11.000Z",
+                      "uid": "35240-899b0083-0d9d-464b-bd9b-6fabc16348a9"
+                    },
+                    {
+                      "id": "589fbd9b-f03b-4b11-9b75-262ff11d50a1",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/metrics/:basin/:stream?set=storage&start=<integer>&end=<integer>&interval=day",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "metrics",
+                            ":basin",
+                            ":stream"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Metric set to return.",
+                              "key": "set",
+                              "value": "storage"
+                            },
+                            {
+                              "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
+                              "key": "start",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "End timestamp as Unix epoch seconds, if applicable for metric set.",
+                              "key": "end",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Interval to aggregate over for timeseries metric sets.",
+                              "key": "interval",
+                              "value": "day"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "basin"
+                            },
+                            {
+                              "key": "stream"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T21:19:11.000Z",
+                      "updatedAt": "2026-10-21T21:19:11.000Z",
+                      "uid": "35240-589fbd9b-f03b-4b11-9b75-262ff11d50a1"
+                    },
+                    {
+                      "id": "98df5c42-af86-4e50-a123-9d1a8faa23f7",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/metrics/:basin/:stream?set=storage&start=<integer>&end=<integer>&interval=day",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "metrics",
+                            ":basin",
+                            ":stream"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Metric set to return.",
+                              "key": "set",
+                              "value": "storage"
+                            },
+                            {
+                              "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
+                              "key": "start",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "End timestamp as Unix epoch seconds, if applicable for metric set.",
+                              "key": "end",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Interval to aggregate over for timeseries metric sets.",
+                              "key": "interval",
+                              "value": "day"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "basin"
+                            },
+                            {
+                              "key": "stream"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Request Timeout",
+                      "code": 408,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T21:19:11.000Z",
+                      "updatedAt": "2026-10-21T21:19:11.000Z",
+                      "uid": "35240-98df5c42-af86-4e50-a123-9d1a8faa23f7"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T21:19:11.000Z",
+                  "updatedAt": "2026-10-21T21:19:11.000Z",
+                  "uid": "35240-1a2fb813-9e9c-4fb6-b9a1-756ddb016bc0"
+                }
+              ],
+              "id": "6ca69d8f-b96d-46fd-af91-c3c69a643bee",
+              "createdAt": "2026-10-21T21:19:11.000Z",
+              "updatedAt": "2026-10-21T21:19:11.000Z",
+              "uid": "35240-6ca69d8f-b96d-46fd-af91-c3c69a643bee"
+            },
+            {
+              "name": "Basin-level metrics",
+              "id": "162955b3-da15-434e-9ef9-3d89b7da86e7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/metrics/:basin?set=read-ops&start=<integer>&end=<integer>&interval=day",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "metrics",
+                    ":basin"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Metric set to return.",
+                      "key": "set",
+                      "value": "read-ops"
+                    },
+                    {
+                      "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
+                      "key": "start",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "End timestamp as Unix epoch seconds, if applicable for the metric set.",
+                      "key": "end",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Interval to aggregate over for timeseries metric sets.",
+                      "key": "interval",
+                      "value": "day"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "4e849501-fe63-44c9-b68b-c2c7dd813178",
+                      "key": "basin",
+                      "value": "<string>",
+                      "description": "(Required) Basin name."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "35843501-6023-4ce4-adfa-0d9841761393",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/metrics/:basin?set=read-ops&start=<integer>&end=<integer>&interval=day",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "metrics",
+                        ":basin"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Metric set to return.",
+                          "key": "set",
+                          "value": "read-ops"
+                        },
+                        {
+                          "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
+                          "key": "start",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "End timestamp as Unix epoch seconds, if applicable for the metric set.",
+                          "key": "end",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Interval to aggregate over for timeseries metric sets.",
+                          "key": "interval",
+                          "value": "day"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"values\": [\n    {\n      \"scalar\": {\n        \"name\": \"<string>\",\n        \"unit\": \"operations\",\n        \"value\": \"<double>\"\n      }\n    },\n    {\n      \"scalar\": {\n        \"name\": \"<string>\",\n        \"unit\": \"bytes\",\n        \"value\": \"<double>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T21:19:11.000Z",
+                  "updatedAt": "2026-10-21T21:19:11.000Z",
+                  "uid": "35240-35843501-6023-4ce4-adfa-0d9841761393"
+                },
+                {
+                  "id": "aa0ca8a4-2a33-4fe6-af93-2748dbb871be",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/metrics/:basin?set=read-ops&start=<integer>&end=<integer>&interval=day",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "metrics",
+                        ":basin"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Metric set to return.",
+                          "key": "set",
+                          "value": "read-ops"
+                        },
+                        {
+                          "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
+                          "key": "start",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "End timestamp as Unix epoch seconds, if applicable for the metric set.",
+                          "key": "end",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Interval to aggregate over for timeseries metric sets.",
+                          "key": "interval",
+                          "value": "day"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:11.000Z",
+                  "updatedAt": "2026-10-21T21:19:11.000Z",
+                  "uid": "35240-aa0ca8a4-2a33-4fe6-af93-2748dbb871be"
+                },
+                {
+                  "id": "c3cd149b-d72d-49f2-81f0-7ae8b55448a6",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/metrics/:basin?set=read-ops&start=<integer>&end=<integer>&interval=day",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "metrics",
+                        ":basin"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Metric set to return.",
+                          "key": "set",
+                          "value": "read-ops"
+                        },
+                        {
+                          "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
+                          "key": "start",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "End timestamp as Unix epoch seconds, if applicable for the metric set.",
+                          "key": "end",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Interval to aggregate over for timeseries metric sets.",
+                          "key": "interval",
+                          "value": "day"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:11.000Z",
+                  "updatedAt": "2026-10-21T21:19:11.000Z",
+                  "uid": "35240-c3cd149b-d72d-49f2-81f0-7ae8b55448a6"
+                },
+                {
+                  "id": "9e5728db-4933-48e1-a9db-3e35fb5801db",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/metrics/:basin?set=read-ops&start=<integer>&end=<integer>&interval=day",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "metrics",
+                        ":basin"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Metric set to return.",
+                          "key": "set",
+                          "value": "read-ops"
+                        },
+                        {
+                          "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
+                          "key": "start",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "End timestamp as Unix epoch seconds, if applicable for the metric set.",
+                          "key": "end",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Interval to aggregate over for timeseries metric sets.",
+                          "key": "interval",
+                          "value": "day"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Request Timeout",
+                  "code": 408,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:19:11.000Z",
+                  "updatedAt": "2026-10-21T21:19:11.000Z",
+                  "uid": "35240-9e5728db-4933-48e1-a9db-3e35fb5801db"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:11.000Z",
+              "updatedAt": "2026-10-21T21:19:11.000Z",
+              "uid": "35240-162955b3-da15-434e-9ef9-3d89b7da86e7"
+            }
+          ],
+          "id": "96a13a67-3ea8-4da4-b442-655c9c5850d4",
+          "createdAt": "2026-10-21T21:19:11.000Z",
+          "updatedAt": "2026-10-21T21:19:11.000Z",
+          "uid": "35240-96a13a67-3ea8-4da4-b442-655c9c5850d4"
+        },
+        {
+          "name": "Account-level metrics",
+          "id": "ebd1c154-1092-451a-823b-3a09cfa3c7ac",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Account-level metrics.",
-            "description": {},
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/metrics?set=account-ops&start=<integer>&end=<integer>&interval=day",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "metrics"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Metric set to return.",
                   "key": "set",
-                  "value": "<string>",
-                  "description": "(Required) Metric set to return."
+                  "value": "account-ops"
                 },
                 {
-                  "disabled": false,
+                  "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
                   "key": "start",
-                  "value": "<integer>",
-                  "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set."
+                  "value": "<integer>"
                 },
                 {
-                  "disabled": false,
+                  "description": "End timestamp as Unix epoch seconds, if applicable for the metric set.",
                   "key": "end",
-                  "value": "<integer>",
-                  "description": "End timestamp as Unix epoch seconds, if applicable for the metric set."
+                  "value": "<integer>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Interval to aggregate over for timeseries metric sets.",
                   "key": "interval",
-                  "value": "<string>",
-                  "description": "Interval to aggregate over for timeseries metric sets."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d86db637-e34f-48e9-8102-46a17c8b867b",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "set",
-                      "value": "account-ops"
-                    },
-                    {
-                      "key": "start",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "end",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "interval",
-                      "value": "day"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"values\": [\n    {\n      \"scalar\": {\n        \"name\": \"string\",\n        \"unit\": \"bytes\",\n        \"value\": 8609.714514378262\n      }\n    },\n    {\n      \"scalar\": {\n        \"name\": \"string\",\n        \"unit\": \"bytes\",\n        \"value\": 3667.031094397821\n      }\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1be4e419-9050-4f71-a1dc-f6f49a5f1fc2",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "set",
-                      "value": "account-ops"
-                    },
-                    {
-                      "key": "start",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "end",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "interval",
-                      "value": "day"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ef6c6682-c882-4e2d-b084-5d61a7fcf10a",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "set",
-                      "value": "account-ops"
-                    },
-                    {
-                      "key": "start",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "end",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "interval",
-                      "value": "day"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "62a54818-b473-4548-839a-ac8c2971203f",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "set",
-                      "value": "account-ops"
-                    },
-                    {
-                      "key": "start",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "end",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "interval",
-                      "value": "day"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a6d4eca9-8647-4f4b-89c5-7fbf23fb8513",
-          "name": "Basin-level metrics.",
-          "request": {
-            "name": "Basin-level metrics.",
-            "description": {},
-            "url": {
-              "path": [
-                "metrics",
-                ":basin"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "set",
-                  "value": "<string>",
-                  "description": "(Required) Metric set to return."
-                },
-                {
-                  "disabled": false,
-                  "key": "start",
-                  "value": "<integer>",
-                  "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set."
-                },
-                {
-                  "disabled": false,
-                  "key": "end",
-                  "value": "<integer>",
-                  "description": "End timestamp as Unix epoch seconds, if applicable for the metric set."
-                },
-                {
-                  "disabled": false,
-                  "key": "interval",
-                  "value": "<string>",
-                  "description": "Interval to aggregate over for timeseries metric sets."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "basin",
-                  "description": "(Required) Basin name."
+                  "value": "day"
                 }
               ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            }
           },
           "response": [
             {
-              "id": "83f62143-729a-453e-acad-7c3b767d9e03",
+              "id": "8132effd-faad-4034-8074-88b25c581374",
+              "name": "New Response",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "metrics",
-                    ":basin"
-                  ],
+                  "raw": "{{baseUrl}}/metrics?set=account-ops&start=<integer>&end=<integer>&interval=day",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "metrics"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) Metric set to return.",
                       "key": "set",
-                      "value": "storage"
+                      "value": "account-ops"
                     },
                     {
+                      "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
                       "key": "start",
                       "value": "<integer>"
                     },
                     {
+                      "description": "End timestamp as Unix epoch seconds, if applicable for the metric set.",
                       "key": "end",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Interval to aggregate over for timeseries metric sets.",
                       "key": "interval",
                       "value": "day"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"values\": [\n    {\n      \"scalar\": {\n        \"name\": \"string\",\n        \"unit\": \"bytes\",\n        \"value\": 8609.714514378262\n      }\n    },\n    {\n      \"scalar\": {\n        \"name\": \"string\",\n        \"unit\": \"bytes\",\n        \"value\": 3667.031094397821\n      }\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"values\": [\n    {\n      \"scalar\": {\n        \"name\": \"<string>\",\n        \"unit\": \"operations\",\n        \"value\": \"<double>\"\n      }\n    },\n    {\n      \"scalar\": {\n        \"name\": \"<string>\",\n        \"unit\": \"bytes\",\n        \"value\": \"<double>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T21:19:11.000Z",
+              "updatedAt": "2026-10-21T21:19:11.000Z",
+              "uid": "35240-8132effd-faad-4034-8074-88b25c581374"
             },
             {
-              "id": "f49c6e8a-3814-4e85-8551-aa34c0fb9977",
+              "id": "f69552b2-6044-4349-908f-e67d82bdfbb8",
+              "name": "New Response",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "metrics",
-                    ":basin"
-                  ],
+                  "raw": "{{baseUrl}}/metrics?set=account-ops&start=<integer>&end=<integer>&interval=day",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "metrics"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) Metric set to return.",
                       "key": "set",
-                      "value": "storage"
+                      "value": "account-ops"
                     },
                     {
+                      "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
                       "key": "start",
                       "value": "<integer>"
                     },
                     {
+                      "description": "End timestamp as Unix epoch seconds, if applicable for the metric set.",
                       "key": "end",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Interval to aggregate over for timeseries metric sets.",
                       "key": "interval",
                       "value": "day"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:11.000Z",
+              "updatedAt": "2026-10-21T21:19:11.000Z",
+              "uid": "35240-f69552b2-6044-4349-908f-e67d82bdfbb8"
             },
             {
-              "id": "c1b81d17-ecd6-46ae-b0e8-9dbe857dd96c",
+              "id": "dc9f18b5-b03e-4ff3-b435-e177ffee1adc",
+              "name": "New Response",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "metrics",
-                    ":basin"
-                  ],
+                  "raw": "{{baseUrl}}/metrics?set=account-ops&start=<integer>&end=<integer>&interval=day",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "metrics"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) Metric set to return.",
                       "key": "set",
-                      "value": "storage"
+                      "value": "account-ops"
                     },
                     {
+                      "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
                       "key": "start",
                       "value": "<integer>"
                     },
                     {
+                      "description": "End timestamp as Unix epoch seconds, if applicable for the metric set.",
                       "key": "end",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Interval to aggregate over for timeseries metric sets.",
                       "key": "interval",
                       "value": "day"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "Forbidden",
               "code": 403,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:11.000Z",
+              "updatedAt": "2026-10-21T21:19:11.000Z",
+              "uid": "35240-dc9f18b5-b03e-4ff3-b435-e177ffee1adc"
             },
             {
-              "id": "ac69d581-9c1f-4e56-bdc9-dd9c5c26231d",
+              "id": "00b09c42-0209-44cd-8849-86d7cbff581d",
+              "name": "New Response",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "metrics",
-                    ":basin"
-                  ],
+                  "raw": "{{baseUrl}}/metrics?set=account-ops&start=<integer>&end=<integer>&interval=day",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "metrics"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) Metric set to return.",
                       "key": "set",
-                      "value": "storage"
+                      "value": "account-ops"
                     },
                     {
+                      "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set.",
                       "key": "start",
                       "value": "<integer>"
                     },
                     {
+                      "description": "End timestamp as Unix epoch seconds, if applicable for the metric set.",
                       "key": "end",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Interval to aggregate over for timeseries metric sets.",
                       "key": "interval",
                       "value": "day"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "Request Timeout",
               "code": 408,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:19:11.000Z",
+              "updatedAt": "2026-10-21T21:19:11.000Z",
+              "uid": "35240-00b09c42-0209-44cd-8849-86d7cbff581d"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1a05aec2-6aeb-45f6-91c8-c2875087e665",
-          "name": "Stream-level metrics.",
-          "request": {
-            "name": "Stream-level metrics.",
-            "description": {},
-            "url": {
-              "path": [
-                "metrics",
-                ":basin",
-                ":stream"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "set",
-                  "value": "<string>",
-                  "description": "(Required) Metric set to return."
-                },
-                {
-                  "disabled": false,
-                  "key": "start",
-                  "value": "<integer>",
-                  "description": "Start timestamp as Unix epoch seconds, if applicable for the metric set."
-                },
-                {
-                  "disabled": false,
-                  "key": "end",
-                  "value": "<integer>",
-                  "description": "End timestamp as Unix epoch seconds, if applicable for metric set."
-                },
-                {
-                  "disabled": false,
-                  "key": "interval",
-                  "value": "<string>",
-                  "description": "Interval to aggregate over for timeseries metric sets."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "basin",
-                  "description": "(Required) Basin name."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "stream",
-                  "description": "(Required) Stream name."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "2ed4e255-cf06-4b4a-aa07-be86313d5c2c",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "metrics",
-                    ":basin",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "set",
-                      "value": "storage"
-                    },
-                    {
-                      "key": "start",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "end",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "interval",
-                      "value": "day"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"values\": [\n    {\n      \"scalar\": {\n        \"name\": \"string\",\n        \"unit\": \"bytes\",\n        \"value\": 8609.714514378262\n      }\n    },\n    {\n      \"scalar\": {\n        \"name\": \"string\",\n        \"unit\": \"bytes\",\n        \"value\": 3667.031094397821\n      }\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "19df1529-4c44-4149-bdf6-410c6df4831d",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "metrics",
-                    ":basin",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "set",
-                      "value": "storage"
-                    },
-                    {
-                      "key": "start",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "end",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "interval",
-                      "value": "day"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "643c8c48-bf3a-4d93-af7b-fb926f9bd2e8",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "metrics",
-                    ":basin",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "set",
-                      "value": "storage"
-                    },
-                    {
-                      "key": "start",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "end",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "interval",
-                      "value": "day"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "88429b7c-ebe3-40f8-9c31-20a940faf0c9",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "metrics",
-                    ":basin",
-                    ":stream"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "set",
-                      "value": "storage"
-                    },
-                    {
-                      "key": "start",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "end",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "interval",
-                      "value": "day"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "stream",
-                      "description": "(Required) Stream name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:19:11.000Z",
+          "updatedAt": "2026-10-21T21:19:11.000Z",
+          "uid": "35240-ebd1c154-1092-451a-823b-3a09cfa3c7ac"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://a.s2.dev/v1",
-      "key": "baseUrl"
+      "id": "b18385fd-98aa-41c8-8c27-18ea333ace60",
+      "createdAt": "2026-10-21T21:19:11.000Z",
+      "updatedAt": "2026-10-21T21:19:11.000Z",
+      "uid": "35240-b18385fd-98aa-41c8-8c27-18ea333ace60"
     }
   ],
   "auth": {
@@ -1034,17 +1056,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "098ac8e0-03ca-49af-84f5-b830bb496b17",
-    "name": "S2, the durable streams access-tokens metrics API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Streams as a cloud storage primitive.\n\nContact Support:\n Email: support@s2.dev",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://a.s2.dev/v1"
     }
-  }
+  ]
 }

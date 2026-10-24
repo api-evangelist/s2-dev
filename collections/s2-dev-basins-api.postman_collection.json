@@ -1,303 +1,1691 @@
 {
+  "info": {
+    "_postman_id": "26a00e92-c854-4988-b935-d7c5e8df95f4",
+    "name": "S2, the durable streams Basins API",
+    "description": "Streams as a cloud storage primitive.\n\nContact Support:\n Email: support@s2.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:18:58.000Z",
+    "updatedAt": "2026-10-21T21:18:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-26a00e92-c854-4988-b935-d7c5e8df95f4"
+  },
   "item": [
     {
-      "id": "2ac7153f-611b-4539-9db7-7db5074fcb8a",
       "name": "basins",
-      "description": {
-        "content": "Manage basins",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "ca68e4cb-857e-43b1-b326-20305c4ff2b4",
-          "name": "List basins.",
-          "request": {
-            "name": "List basins.",
-            "description": {},
-            "url": {
-              "path": [
-                "basins"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "{basin}",
+          "item": [
+            {
+              "name": "Get basin configuration",
+              "id": "4e49d3ba-1ce1-49c2-93ea-dcbb5db7dd47",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/basins/:basin",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins",
+                    ":basin"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7ca3810f-c984-4d8a-84bc-ce0d6be754b5",
+                      "key": "basin",
+                      "value": "<string>",
+                      "description": "(Required) Basin name."
+                    }
+                  ]
+                }
+              },
+              "response": [
                 {
-                  "disabled": false,
-                  "key": "prefix",
-                  "value": "",
-                  "description": "Filter to basins whose names begin with this prefix."
+                  "id": "88051fdc-1f7f-499f-a9c6-5cccf12ad33f",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"create_stream_on_append\": false,\n  \"create_stream_on_read\": false,\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-88051fdc-1f7f-499f-a9c6-5cccf12ad33f"
                 },
                 {
-                  "disabled": false,
-                  "key": "start_after",
-                  "value": "",
-                  "description": "Filter to basins whose names lexicographically start after this string."
+                  "id": "da5da4aa-8375-4fb8-9830-cd57b5e8c5d1",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-da5da4aa-8375-4fb8-9830-cd57b5e8c5d1"
                 },
                 {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "1000",
-                  "description": "Number of results, up to a maximum of 1000."
+                  "id": "7021ccd6-593c-4146-8e05-45ce997b052f",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-7021ccd6-593c-4146-8e05-45ce997b052f"
+                },
+                {
+                  "id": "15203aae-5e78-49a7-89a7-dbc6605471cb",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-15203aae-5e78-49a7-89a7-dbc6605471cb"
+                },
+                {
+                  "id": "92ed2e34-1f93-4892-9cdb-ff5a7d1d250b",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Request Timeout",
+                  "code": 408,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-92ed2e34-1f93-4892-9cdb-ff5a7d1d250b"
+                },
+                {
+                  "id": "9bc37ee2-8a32-4180-9f53-d0725945732c",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-9bc37ee2-8a32-4180-9f53-d0725945732c"
                 }
               ],
-              "variable": []
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-4e49d3ba-1ce1-49c2-93ea-dcbb5db7dd47"
             },
+            {
+              "name": "Ensure a basin",
+              "id": "5d20300d-a794-4247-b9b5-f30c75aa0600",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<null>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/basins/:basin",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins",
+                    ":basin"
+                  ],
+                  "variable": [
+                    {
+                      "id": "6bad8bfa-7dd3-414b-9ed1-1f0b2b9b1d93",
+                      "key": "basin",
+                      "value": "<string>",
+                      "description": "(Required) Basin name."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "0d8e7c5c-16ca-4a21-9467-ca9eb8caf787",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"location\": \"<null>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-0d8e7c5c-16ca-4a21-9467-ca9eb8caf787"
+                },
+                {
+                  "id": "5c2b6436-d07d-43f1-b70d-7fda2a93422f",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"location\": \"<null>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-5c2b6436-d07d-43f1-b70d-7fda2a93422f"
+                },
+                {
+                  "id": "87afb76d-85a4-43f9-8ac5-c20d68db3b55",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-87afb76d-85a4-43f9-8ac5-c20d68db3b55"
+                },
+                {
+                  "id": "28900fc6-bc12-4ba6-a6a2-e240589d2325",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Request Timeout",
+                  "code": 408,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-28900fc6-bc12-4ba6-a6a2-e240589d2325"
+                },
+                {
+                  "id": "36a251d6-e98e-45a8-afea-cd0f841d9de8",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<null>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-36a251d6-e98e-45a8-afea-cd0f841d9de8"
+                }
+              ],
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-5d20300d-a794-4247-b9b5-f30c75aa0600"
+            },
+            {
+              "name": "Delete a basin",
+              "id": "bf86c8e9-916f-4c78-ab37-474442bdd303",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/basins/:basin",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins",
+                    ":basin"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8f85aa16-1f86-4b96-9c5b-70725b36f66b",
+                      "key": "basin",
+                      "value": "<string>",
+                      "description": "(Required) Basin name."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "a2401527-901f-4358-bb33-5f3cab852a9c",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-a2401527-901f-4358-bb33-5f3cab852a9c"
+                },
+                {
+                  "id": "a6b396ab-e020-47a0-a715-47128b882c76",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-a6b396ab-e020-47a0-a715-47128b882c76"
+                },
+                {
+                  "id": "5c0624da-1a3e-41e8-8f28-a08b36e284df",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-5c0624da-1a3e-41e8-8f28-a08b36e284df"
+                },
+                {
+                  "id": "2ec57837-aef9-470c-931d-25a5b0989f2b",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-2ec57837-aef9-470c-931d-25a5b0989f2b"
+                },
+                {
+                  "id": "344a252c-44a7-48d4-af20-799d70057d1f",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Request Timeout",
+                  "code": 408,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-344a252c-44a7-48d4-af20-799d70057d1f"
+                },
+                {
+                  "id": "7893a560-01a4-4d4e-a5cf-b1d0bdafc5cd",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-7893a560-01a4-4d4e-a5cf-b1d0bdafc5cd"
+                }
+              ],
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-bf86c8e9-916f-4c78-ab37-474442bdd303"
+            },
+            {
+              "name": "Reconfigure a basin",
+              "id": "51ce8100-521c-4883-9d9f-c0e5f9b47252",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/basins/:basin",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins",
+                    ":basin"
+                  ],
+                  "variable": [
+                    {
+                      "id": "26612371-aa04-494a-bd57-071c10cb2192",
+                      "key": "basin",
+                      "value": "<string>",
+                      "description": "(Required) Basin name."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "2b6674ec-c63b-4aa8-b442-b8154ef5a3d8",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"create_stream_on_append\": false,\n  \"create_stream_on_read\": false,\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-2b6674ec-c63b-4aa8-b442-b8154ef5a3d8"
+                },
+                {
+                  "id": "4467a684-5e96-4153-a908-011d64e175d7",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-4467a684-5e96-4153-a908-011d64e175d7"
+                },
+                {
+                  "id": "16651f43-dae0-4408-9f6e-8df69fcabd2d",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-16651f43-dae0-4408-9f6e-8df69fcabd2d"
+                },
+                {
+                  "id": "19aca2ab-433a-4b17-8673-e05584c2891e",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-19aca2ab-433a-4b17-8673-e05584c2891e"
+                },
+                {
+                  "id": "7f712315-928f-4dd0-a793-8b1b0a686088",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/basins/:basin",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "basins",
+                        ":basin"
+                      ],
+                      "variable": [
+                        {
+                          "key": "basin"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Request Timeout",
+                  "code": 408,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:18:59.000Z",
+                  "updatedAt": "2026-10-21T21:18:59.000Z",
+                  "uid": "35240-7f712315-928f-4dd0-a793-8b1b0a686088"
+                }
+              ],
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-51ce8100-521c-4883-9d9f-c0e5f9b47252"
+            }
+          ],
+          "id": "d75ccf66-eb25-4d00-8046-ecb21de56930",
+          "createdAt": "2026-10-21T21:18:59.000Z",
+          "updatedAt": "2026-10-21T21:18:59.000Z",
+          "uid": "35240-d75ccf66-eb25-4d00-8046-ecb21de56930"
+        },
+        {
+          "name": "List basins",
+          "id": "b23c5586-9e00-4afa-ae13-3e21150653bf",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "e40897e5-f715-4d3e-9a59-fc0d59b13f28",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"basins\": [\n    {\n      \"name\": \"stringstring\",\n      \"created_at\": \"1999-10-16T14:02:11.988Z\",\n      \"deleted_at\": \"1985-12-14T19:51:22.574Z\",\n      \"location\": null\n    },\n    {\n      \"name\": \"stringstring\",\n      \"created_at\": \"1956-09-06T03:49:11.999Z\",\n      \"deleted_at\": \"2002-10-27T01:56:44.679Z\",\n      \"location\": null\n    }\n  ],\n  \"has_more\": true\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d05423dd-cd3f-4aa4-aa52-8f7fb709ba5f",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d6cf3406-52f3-4c07-abf1-7630f469f26e",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bf45d17e-b6eb-4b26-a4ec-3cd55f4f1d28",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "prefix",
-                      "value": ""
-                    },
-                    {
-                      "key": "start_after",
-                      "value": ""
-                    },
-                    {
-                      "key": "limit",
-                      "value": "1000"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f11f7322-381f-43fc-b524-3573fd93dcd4",
-          "name": "Create a basin.",
-          "request": {
-            "name": "Create a basin.",
-            "description": {},
             "url": {
-              "path": [
-                "basins"
-              ],
+              "raw": "{{baseUrl}}/basins?prefix=&start_after=&limit=1000",
               "host": [
                 "{{baseUrl}}"
               ],
-              "query": [],
-              "variable": []
+              "path": [
+                "basins"
+              ],
+              "query": [
+                {
+                  "description": "Filter to basins whose names begin with this prefix.",
+                  "key": "prefix",
+                  "value": ""
+                },
+                {
+                  "description": "Filter to basins whose names lexicographically start after this string.",
+                  "key": "start_after",
+                  "value": ""
+                },
+                {
+                  "description": "Number of results, up to a maximum of 1000.",
+                  "key": "limit",
+                  "value": "1000"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d6c34b2d-eb7b-4e6e-a416-dd65236b7102",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/basins?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to basins whose names begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to basins whose names lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"basins\": [\n    {\n      \"name\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"deleted_at\": \"<string,null-date-time>\",\n      \"location\": \"<null>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"deleted_at\": \"<string,null-date-time>\",\n      \"location\": \"<null>\"\n    }\n  ],\n  \"has_more\": \"<boolean>\"\n}",
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-d6c34b2d-eb7b-4e6e-a416-dd65236b7102"
             },
+            {
+              "id": "5bcc751e-1b25-4d58-9de3-5062903dc560",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/basins?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to basins whose names begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to basins whose names lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-5bcc751e-1b25-4d58-9de3-5062903dc560"
+            },
+            {
+              "id": "0737bc5c-c954-4788-8779-d955cf7c6999",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/basins?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to basins whose names begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to basins whose names lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-0737bc5c-c954-4788-8779-d955cf7c6999"
+            },
+            {
+              "id": "da0d9d89-6b6a-4f26-988d-ae34f3f99114",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/basins?prefix=&start_after=&limit=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter to basins whose names begin with this prefix.",
+                      "key": "prefix",
+                      "value": ""
+                    },
+                    {
+                      "description": "Filter to basins whose names lexicographically start after this string.",
+                      "key": "start_after",
+                      "value": ""
+                    },
+                    {
+                      "description": "Number of results, up to a maximum of 1000.",
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-da0d9d89-6b6a-4f26-988d-ae34f3f99114"
+            }
+          ],
+          "createdAt": "2026-10-21T21:18:59.000Z",
+          "updatedAt": "2026-10-21T21:18:59.000Z",
+          "uid": "35240-b23c5586-9e00-4afa-ae13-3e21150653bf"
+        },
+        {
+          "name": "Create a basin",
+          "id": "f5afc360-0c15-4014-a960-c0916d88a218",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
             "header": [
               {
-                "disabled": false,
                 "description": "Client-specified request token for idempotent retries.",
                 "key": "s2-request-token",
                 "value": "<string>"
@@ -311,1759 +1699,403 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"basin\": \"<string>\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/basins",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "basins"
+              ]
             }
           },
           "response": [
             {
-              "id": "6b528a96-474b-4b37-a837-4d509af4c43d",
+              "id": "6a2c0139-a3ce-421b-9028-54548dbc2485",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "Client-specified request token for idempotent retries.",
                     "key": "s2-request-token",
-                    "value": "string"
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"basin\": \"stringstring\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
+                  "raw": "{\n  \"basin\": \"<string>\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/basins",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins"
+                  ]
                 }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"name\": \"stringstring\",\n  \"created_at\": \"1985-02-08T10:33:17.493Z\",\n  \"deleted_at\": \"2000-09-16T11:35:09.713Z\",\n  \"location\": null\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"location\": \"<null>\"\n}",
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-6a2c0139-a3ce-421b-9028-54548dbc2485"
             },
             {
-              "id": "6af3b1f3-23e8-4a59-a428-11a1b6646771",
+              "id": "d4239caa-b88a-419f-a540-930cb72fe60c",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "Client-specified request token for idempotent retries.",
                     "key": "s2-request-token",
-                    "value": "string"
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"basin\": \"stringstring\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
+                  "raw": "{\n  \"basin\": \"<string>\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/basins",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"name\": \"stringstring\",\n  \"created_at\": \"1985-02-08T10:33:17.493Z\",\n  \"deleted_at\": \"2000-09-16T11:35:09.713Z\",\n  \"location\": null\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"location\": \"<null>\"\n}",
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-d4239caa-b88a-419f-a540-930cb72fe60c"
             },
             {
-              "id": "dda4781e-df5d-46cf-999e-71de082c0268",
+              "id": "b7e6b55f-351a-4808-9b3a-20c4dce39a4a",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "Client-specified request token for idempotent retries.",
                     "key": "s2-request-token",
-                    "value": "string"
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"basin\": \"stringstring\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
+                  "raw": "{\n  \"basin\": \"<string>\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/basins",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-b7e6b55f-351a-4808-9b3a-20c4dce39a4a"
             },
             {
-              "id": "c7c50ef3-498d-45a7-bed6-f8fb3633630d",
+              "id": "52719bd1-0838-42c5-9682-ea076f2e2630",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "Client-specified request token for idempotent retries.",
                     "key": "s2-request-token",
-                    "value": "string"
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"basin\": \"stringstring\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
+                  "raw": "{\n  \"basin\": \"<string>\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/basins",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins"
+                  ]
                 }
               },
               "status": "Forbidden",
               "code": 403,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-52719bd1-0838-42c5-9682-ea076f2e2630"
             },
             {
-              "id": "6dd7c469-54b6-405c-95f1-204b52aaf36b",
+              "id": "da5bd160-1755-4e79-956e-2b8ac2cc494e",
+              "name": "New Response",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "Client-specified request token for idempotent retries.",
                     "key": "s2-request-token",
-                    "value": "string"
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"basin\": \"stringstring\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
+                  "raw": "{\n  \"basin\": \"<string>\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "827c2e77-110e-4c9e-9d56-6985c6080e97",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/basins",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "basins"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                  ]
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-da5bd160-1755-4e79-956e-2b8ac2cc494e"
+            },
+            {
+              "id": "d2d4a18d-0c8c-4c9c-bc5b-da725c0a0141",
+              "name": "New Response",
+              "originalRequest": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "Client-specified request token for idempotent retries.",
                     "key": "s2-request-token",
-                    "value": "string"
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"basin\": \"stringstring\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
+                  "raw": "{\n  \"basin\": \"<string>\",\n  \"config\": \"<null>\",\n  \"location\": \"<null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/basins",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "basins"
+                  ]
                 }
               },
               "status": "Conflict",
               "code": 409,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:18:59.000Z",
+              "updatedAt": "2026-10-21T21:18:59.000Z",
+              "uid": "35240-d2d4a18d-0c8c-4c9c-bc5b-da725c0a0141"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4b5e297c-0ab2-47db-a4cd-7e47cfe3ecf4",
-          "name": "Get basin configuration.",
-          "request": {
-            "name": "Get basin configuration.",
-            "description": {},
-            "url": {
-              "path": [
-                "basins",
-                ":basin"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "basin",
-                  "description": "(Required) Basin name."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "83ddff41-adbb-4b16-9fac-a45b5065b817",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"create_stream_on_append\": false,\n  \"create_stream_on_read\": false,\n  \"default_stream_config\": null,\n  \"stream_cipher\": null\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "55cc3e32-7eaf-46c9-ba91-8e968ebbf6b9",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "69d16007-4a06-48a6-aed5-2d263c93ec00",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f9f7b1b8-603e-4580-bcab-7dd62456e29d",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3557c6b3-af94-4479-b2d1-d2086fdb033e",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4281ac45-6563-4f5a-8bb6-d4ea2b4327cf",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "2ceed0a8-2b41-474d-833e-6567f0883861",
-          "name": "Ensure a basin.",
-          "request": {
-            "name": "Ensure a basin.",
-            "description": {},
-            "url": {
-              "path": [
-                "basins",
-                ":basin"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "basin",
-                  "description": "(Required) Basin name."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "<null>",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "50849cfe-bf55-4d38-adf7-82c93c4608ec",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"stringstring\",\n  \"created_at\": \"1985-02-08T10:33:17.493Z\",\n  \"deleted_at\": \"2000-09-16T11:35:09.713Z\",\n  \"location\": null\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9eced428-ad6c-4fc0-918b-f377a9da5e9b",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"stringstring\",\n  \"created_at\": \"1985-02-08T10:33:17.493Z\",\n  \"deleted_at\": \"2000-09-16T11:35:09.713Z\",\n  \"location\": null\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0bc11676-53a4-4039-ab3f-b1301359ee1b",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b08e5d7c-8433-4031-a262-977b768f25a5",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f1ffa2fa-35da-44d2-b3c6-7121b7c7954f",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<null>",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c73ed26c-f086-40d8-a8c6-b3b9532e16e7",
-          "name": "Delete a basin.",
-          "request": {
-            "name": "Delete a basin.",
-            "description": {},
-            "url": {
-              "path": [
-                "basins",
-                ":basin"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "basin",
-                  "description": "(Required) Basin name."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "0cfd0307-ed24-4cab-902f-f7cbc10717a8",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Accepted",
-              "code": 202,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "b3425e67-ab8e-4ff7-94de-c466e78ddbbd",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0ecf40a2-3e24-49db-9727-f71669360c84",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "14780b78-3a5d-41c8-85ad-3330b2cf8e0e",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "40807453-59fe-4061-8cf7-4346149ae1ac",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f2f961f7-8127-4e30-824c-8b8abb65be22",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "beee36ba-eeda-4101-945a-6d8048d2dc0f",
-          "name": "Reconfigure a basin.",
-          "request": {
-            "name": "Reconfigure a basin.",
-            "description": {},
-            "url": {
-              "path": [
-                "basins",
-                ":basin"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "basin",
-                  "description": "(Required) Basin name."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "0c0decf7-72b2-4402-b7fe-de5f6da49709",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"create_stream_on_append\": false,\n  \"create_stream_on_read\": false,\n  \"default_stream_config\": null,\n  \"stream_cipher\": null\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2768cbf0-234d-44f7-aa1f-0aa518b261db",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1f66030b-d7a9-4e3b-9f99-e79c92659cb7",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "46eac4e0-080a-432f-a1c9-9e3d55995279",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3c4079db-caa4-47c7-9d0f-885d3e8b042d",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "basins",
-                    ":basin"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "basin",
-                      "description": "(Required) Basin name."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"create_stream_on_append\": \"<boolean,null>\",\n  \"create_stream_on_read\": \"<boolean,null>\",\n  \"default_stream_config\": \"<null>\",\n  \"stream_cipher\": \"<null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Request Timeout",
-              "code": 408,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:18:59.000Z",
+          "updatedAt": "2026-10-21T21:18:59.000Z",
+          "uid": "35240-f5afc360-0c15-4014-a960-c0916d88a218"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://a.s2.dev/v1",
-      "key": "baseUrl"
+      "id": "2cace17f-2731-4ad4-a247-919668dc3dc7",
+      "createdAt": "2026-10-21T21:18:59.000Z",
+      "updatedAt": "2026-10-21T21:18:59.000Z",
+      "uid": "35240-2cace17f-2731-4ad4-a247-919668dc3dc7"
     }
   ],
   "auth": {
@@ -2071,17 +2103,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "80995e98-9b3e-4b09-a269-b061ade9b8e8",
-    "name": "S2, the durable streams access-tokens basins API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Streams as a cloud storage primitive.\n\nContact Support:\n Email: support@s2.dev",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://a.s2.dev/v1"
     }
-  }
+  ]
 }
