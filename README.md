@@ -64,6 +64,140 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-S2 Dev is a company surfaced as a portfolio company of y-combinator and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+S2 ("Stream Store") is the API for unlimited, durable, real-time streams. Where object storage deals with blobs, S2 provides append-able, ordered record streams that can be tailed in real time and replayed from any retained point. Core data-plane operations are append, read, and check-tail; the control plane manages accounts, basins (stream namespaces), streams, scoped access tokens, locations, and metrics. It targets agent session logs, live views and build logs, event sourcing and sync, data feeds, resumable LLM token streaming, and observability. Access is over a REST/JSON + Protobuf HTTP API, an S2S binary protocol over HTTP/2, SSE tailing, first-party TypeScript, Python, Go, and Rust SDKs, a CLI, and a Terraform provider. S2 is a Y Combinator-backed company.
 
-Backed by: y-combinator
+**Areas:** Company · Streaming · Real-Time · Event Streaming · Durable Storage · Message Streaming · Data Feed · Observability · Developer Tools · Infrastructure
+
+## S2 Dev on APIs.io
+
+Everything profiled for S2 Dev is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/s2-dev/](https://apis.io/providers/s2-dev/)** — or go straight to one of the APIs or properties below.
+
+### APIs (6)
+
+- [S2 Dev Access Tokens API](https://apis.io/apis/s2-dev/s2-dev-access-tokens-api/) — Manage access tokens
+- [S2 Dev Basins API](https://apis.io/apis/s2-dev/s2-dev-basins-api/) — Manage basins
+- [S2 Dev Locations API](https://apis.io/apis/s2-dev/s2-dev-locations-api/) — Manage locations
+- [S2 Dev Metrics API](https://apis.io/apis/s2-dev/s2-dev-metrics-api/) — Usage metrics and data.
+- [S2 Dev Records API](https://apis.io/apis/s2-dev/s2-dev-records-api/) — Manage records
+- [S2 Dev Streams API](https://apis.io/apis/s2-dev/s2-dev-streams-api/) — Manage streams
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [s2](https://apis.io/servers/s2-dev/s2/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [S2 Dev Agentic Access](https://apis.io/agentic-access/s2-dev/s2-dev-agentic-access/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [S2, the durable streams access-tokens API](https://apis.io/collections/s2-dev/open-s2-dev-access-tokens-api/)
+- [S2, the durable streams access-tokens basins API](https://apis.io/collections/s2-dev/open-s2-dev-basins-api/)
+- [S2, the durable streams access-tokens locations API](https://apis.io/collections/s2-dev/open-s2-dev-locations-api/)
+- [S2, the durable streams access-tokens metrics API](https://apis.io/collections/s2-dev/open-s2-dev-metrics-api/)
+- [S2, the durable streams access-tokens records API](https://apis.io/collections/s2-dev/open-s2-dev-records-api/)
+- [S2, the durable access-tokens streams API](https://apis.io/collections/s2-dev/open-s2-dev-streams-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [S2 Dev Openapi Overlay](https://apis.io/overlays/s2-dev/s2-dev-openapi-overlay/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [S2 Dev Authentication](https://apis.io/security/s2-dev/s2-dev-authentication/)
+- [S2 Dev Domain Security](https://apis.io/security/s2-dev/s2-dev-domain-security/)
+- [S2 Dev Trust Center](https://apis.io/security/s2-dev/s2-dev-trust-center/)
+- [S2 Dev Vulnerability Disclosure](https://apis.io/security/s2-dev/s2-dev-vulnerability-disclosure/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [S2 Dev Rate Limits](https://apis.io/rate-limits/s2-dev/s2-dev-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.s2.dev/)
+- [Documentation](https://s2.dev/docs)
+- [Getting started](https://s2.dev/docs/quickstart)
+- [API reference](https://s2.dev/docs/api)
+- [Pricing](https://s2.dev/pricing)
+- [Sign up](https://s2.dev/dashboard)
+- [Blog](https://s2.dev/blog)
+- [Security](https://s2.dev/docs/platform/security)
+- [Compliance](https://s2.dev/docs/platform/security)
+- [Terms of service](https://s2.dev/terms)
+- [Privacy policy](https://s2.dev/privacy)
+- [GitHub](https://github.com/s2-streamstore)
+- [Status](https://status.s2.dev)
+
+## API Evangelist rating
+
+**Kin Score 61.1** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 50.2 |
+| Contract governance | 4.5 |
+| Operational transparency | 76.3 |
+| Developer ergonomics | 81.5 |
+| Access clarity | 60.5 |
+
+**Agent readiness 32.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 35.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/s2-dev/](https://apis.io/providers/s2-dev/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for S2 Dev: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/s2-dev/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
